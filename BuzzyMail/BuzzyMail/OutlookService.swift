@@ -13,11 +13,11 @@ import SwiftyJSON
 class OutlookService {
     // Configure the OAuth2 framework for Azure
     private static let oauth2Settings = [
-        "client_id" : "4325e18d-7164-46f3-8c72-60cdcae321f4",
+        "client_id" : "9c5cb613-91a2-4807-bd5d-f4ced63a862d",
         "authorize_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
         "token_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-        "scope": "openid profile offline_access User.Read Mail.Read",
-        "redirect_uris": ["swift-tutorial://oauth2/callback"],
+        "scope": "openid profile offline_access User.Read Mail.Read Calendars.Read",
+        "redirect_uris": ["buzzy-mail://oauth2/callback"],
         "verbose": true,
         ] as OAuth2JSON
     
@@ -141,6 +141,19 @@ class OutlookService {
         ]
         
         makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func getEvents(callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$select": "subject,start,end",
+            "$orderby": "start/dateTime ASC",
+            "$top": "10"
+        ]
+        
+        makeApiCall(api: "/v1.0/me/events", params: apiParams) {
             result in
             callback(result)
         }

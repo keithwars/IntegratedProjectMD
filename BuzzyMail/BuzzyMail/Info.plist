@@ -56,7 +56,7 @@
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>swift-tutorial</string>
+                <string>buzzy-mail</string>
             </array>
         </dict>
     </array>

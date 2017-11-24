@@ -18,6 +18,8 @@
 		3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27611FC839EC00049443 /* LoginViewController.swift */; };
 		3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27631FC83C2D00049443 /* ContactsViewController.swift */; };
 		3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27651FC83D5300049443 /* OutlookService.swift */; };
+		566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141A1FC85C3800C074C4 /* Formatter.swift */; };
+		566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141C1FC85DB000C074C4 /* EventCell.swift */; };
 		CEA0861A0E535CA814B7CCB8 /* Pods_BuzzyMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		3F0E27631FC83C2D00049443 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		3F0E27651FC83D5300049443 /* OutlookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookService.swift; sourceTree = "<group>"; };
 		4DBD452035A0C8E67B017707 /* Pods-BuzzyMailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		566B141A1FC85C3800C074C4 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		566B141C1FC85DB000C074C4 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		6F3F3653ADAE360DBC6D0E06 /* Pods-BuzzyMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.debug.xcconfig"; sourceTree = "<group>"; };
 		A62C9FE2F7DE7DBBBFCFD7E1 /* Pods-BuzzyMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.release.xcconfig"; sourceTree = "<group>"; };
 		E1FD6AF08A3DD0942473EF7F /* Pods-BuzzyMailTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
 				3F0E274D1FC8373300049443 /* Info.plist */,
 				3F0E27651FC83D5300049443 /* OutlookService.swift */,
+				566B141A1FC85C3800C074C4 /* Formatter.swift */,
+				566B141C1FC85DB000C074C4 /* EventCell.swift */,
 			);
 			path = BuzzyMail;
 			sourceTree = "<group>";
@@ -356,6 +362,8 @@
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
+				566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */,
+				566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */,
 				3F0E27421FC8373300049443 /* MailViewController.swift in Sources */,
 				3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */,
 				3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */,
