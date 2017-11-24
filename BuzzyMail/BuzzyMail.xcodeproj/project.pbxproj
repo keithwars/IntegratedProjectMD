@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E273F1FC8373300049443 /* AppDelegate.swift */; };
+		3F0E27421FC8373300049443 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27411FC8373300049443 /* FirstViewController.swift */; };
+		3F0E27441FC8373300049443 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27431FC8373300049443 /* SecondViewController.swift */; };
+		3F0E27471FC8373300049443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E27451FC8373300049443 /* Main.storyboard */; };
+		3F0E27491FC8373300049443 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E27481FC8373300049443 /* Assets.xcassets */; };
+		3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */; };
+		3F0E27571FC8373300049443 /* BuzzyMailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27561FC8373300049443 /* BuzzyMailTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F0E27531FC8373300049443 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F0E27341FC8373300049443 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F0E273B1FC8373300049443;
+			remoteInfo = BuzzyMail;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3F0E273C1FC8373300049443 /* BuzzyMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuzzyMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F0E273F1FC8373300049443 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F0E27411FC8373300049443 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		3F0E27431FC8373300049443 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		3F0E27461FC8373300049443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3F0E27481FC8373300049443 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F0E274B1FC8373300049443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3F0E274D1FC8373300049443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F0E27521FC8373300049443 /* BuzzyMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuzzyMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F0E27561FC8373300049443 /* BuzzyMailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuzzyMailTests.swift; sourceTree = "<group>"; };
+		3F0E27581FC8373300049443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F0E27391FC8373300049443 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F0E274F1FC8373300049443 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F0E27331FC8373300049443 = {
+			isa = PBXGroup;
+			children = (
+				3F0E273E1FC8373300049443 /* BuzzyMail */,
+				3F0E27551FC8373300049443 /* BuzzyMailTests */,
+				3F0E273D1FC8373300049443 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F0E273D1FC8373300049443 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E273C1FC8373300049443 /* BuzzyMail.app */,
+				3F0E27521FC8373300049443 /* BuzzyMailTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F0E273E1FC8373300049443 /* BuzzyMail */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
+				3F0E27411FC8373300049443 /* FirstViewController.swift */,
+				3F0E27431FC8373300049443 /* SecondViewController.swift */,
+				3F0E27451FC8373300049443 /* Main.storyboard */,
+				3F0E27481FC8373300049443 /* Assets.xcassets */,
+				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
+				3F0E274D1FC8373300049443 /* Info.plist */,
+			);
+			path = BuzzyMail;
+			sourceTree = "<group>";
+		};
+		3F0E27551FC8373300049443 /* BuzzyMailTests */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E27561FC8373300049443 /* BuzzyMailTests.swift */,
+				3F0E27581FC8373300049443 /* Info.plist */,
+			);
+			path = BuzzyMailTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F0E273B1FC8373300049443 /* BuzzyMail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F0E275B1FC8373300049443 /* Build configuration list for PBXNativeTarget "BuzzyMail" */;
+			buildPhases = (
+				3F0E27381FC8373300049443 /* Sources */,
+				3F0E27391FC8373300049443 /* Frameworks */,
+				3F0E273A1FC8373300049443 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BuzzyMail;
+			productName = BuzzyMail;
+			productReference = 3F0E273C1FC8373300049443 /* BuzzyMail.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3F0E27511FC8373300049443 /* BuzzyMailTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F0E275E1FC8373300049443 /* Build configuration list for PBXNativeTarget "BuzzyMailTests" */;
+			buildPhases = (
+				3F0E274E1FC8373300049443 /* Sources */,
+				3F0E274F1FC8373300049443 /* Frameworks */,
+				3F0E27501FC8373300049443 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F0E27541FC8373300049443 /* PBXTargetDependency */,
+			);
+			name = BuzzyMailTests;
+			productName = BuzzyMailTests;
+			productReference = 3F0E27521FC8373300049443 /* BuzzyMailTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F0E27341FC8373300049443 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Jérémy Keusters";
+				TargetAttributes = {
+					3F0E273B1FC8373300049443 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					3F0E27511FC8373300049443 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3F0E273B1FC8373300049443;
+					};
+				};
+			};
+			buildConfigurationList = 3F0E27371FC8373300049443 /* Build configuration list for PBXProject "BuzzyMail" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F0E27331FC8373300049443;
+			productRefGroup = 3F0E273D1FC8373300049443 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F0E273B1FC8373300049443 /* BuzzyMail */,
+				3F0E27511FC8373300049443 /* BuzzyMailTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F0E273A1FC8373300049443 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */,
+				3F0E27491FC8373300049443 /* Assets.xcassets in Resources */,
+				3F0E27471FC8373300049443 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F0E27501FC8373300049443 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F0E27381FC8373300049443 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F0E27441FC8373300049443 /* SecondViewController.swift in Sources */,
+				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
+				3F0E27421FC8373300049443 /* FirstViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F0E274E1FC8373300049443 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F0E27571FC8373300049443 /* BuzzyMailTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F0E27541FC8373300049443 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F0E273B1FC8373300049443 /* BuzzyMail */;
+			targetProxy = 3F0E27531FC8373300049443 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3F0E27451FC8373300049443 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0E27461FC8373300049443 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0E274B1FC8373300049443 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3F0E27591FC8373300049443 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3F0E275A1FC8373300049443 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3F0E275C1FC8373300049443 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MJKLC6UF2T;
+				INFOPLIST_FILE = BuzzyMail/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ap.be.BuzzyMail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F0E275D1FC8373300049443 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MJKLC6UF2T;
+				INFOPLIST_FILE = BuzzyMail/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ap.be.BuzzyMail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3F0E275F1FC8373300049443 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MJKLC6UF2T;
+				INFOPLIST_FILE = BuzzyMailTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ap.be.BuzzyMailTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuzzyMail.app/BuzzyMail";
+			};
+			name = Debug;
+		};
+		3F0E27601FC8373300049443 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MJKLC6UF2T;
+				INFOPLIST_FILE = BuzzyMailTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ap.be.BuzzyMailTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuzzyMail.app/BuzzyMail";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F0E27371FC8373300049443 /* Build configuration list for PBXProject "BuzzyMail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F0E27591FC8373300049443 /* Debug */,
+				3F0E275A1FC8373300049443 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F0E275B1FC8373300049443 /* Build configuration list for PBXNativeTarget "BuzzyMail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F0E275C1FC8373300049443 /* Debug */,
+				3F0E275D1FC8373300049443 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F0E275E1FC8373300049443 /* Build configuration list for PBXNativeTarget "BuzzyMailTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F0E275F1FC8373300049443 /* Debug */,
+				3F0E27601FC8373300049443 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3F0E27341FC8373300049443 /* Project object */;
+}
