@@ -1,0 +1,6 @@
+framework module Pods_BuzzyMail {
+  umbrella header "Pods-BuzzyMail-umbrella.h"
+
+  export *
+  module * { export * }
+}
