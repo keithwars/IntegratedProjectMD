@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        if url.scheme == "swift-tutorial" {
+        if url.scheme == "buzzy-mail" {
             let service = OutlookService.shared()
             service.handleOAuthCallback(url: url)
             return true
