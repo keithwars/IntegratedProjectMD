@@ -23,6 +23,13 @@ class MailViewController: UIViewController {
             loadUserData()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMailContent" {
+            _ = segue.destination as! MailContentViewController
+            
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,7 +54,8 @@ class MailViewController: UIViewController {
             }
         }
     }
-
+    
+    
 
 }
 

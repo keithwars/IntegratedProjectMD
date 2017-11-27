@@ -37,6 +37,7 @@ class MessageCell: UITableViewCell {
             subjectLabel.text = subject
         }
     }
+    
 }
 
 class MessagesDataSource: NSObject {
@@ -51,6 +52,7 @@ class MessagesDataSource: NSObject {
                     from: message["from"]["emailAddress"]["name"].stringValue,
                     received: Formatter.dateToString(date: message["receivedDateTime"]),
                     subject: message["subject"].stringValue)
+                   
                 
                 msgArray.append(newMsg)
             }

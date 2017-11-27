@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1059B58C43A6AE2BB0916545 /* Pods_BuzzyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */; };
+		2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */; };
 		2BBBC0C11FC8693900870223 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBBC0C01FC8693900870223 /* MessageCell.swift */; };
 		2BBBC0C31FC86A4600870223 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBBC0C21FC86A4600870223 /* Formatter.swift */; };
 		3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E273F1FC8373300049443 /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentViewController.swift; sourceTree = "<group>"; };
 		2BBBC0C01FC8693900870223 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		2BBBC0C21FC86A4600870223 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 			children = (
 				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
 				3F0E27411FC8373300049443 /* MailViewController.swift */,
+				2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */,
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
 				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
 				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
@@ -362,6 +365,7 @@
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
+				2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */,
 				3F0E27421FC8373300049443 /* MailViewController.swift in Sources */,
 				3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */,
 				3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */,
