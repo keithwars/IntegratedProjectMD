@@ -10,9 +10,9 @@ import UIKit
 import SwiftyJSON
 
 struct Event {
-    let subject: String
-    let start: String
-    let end: String
+    let subject: String?
+    let start: String?
+    let end: String?
 }
 
 class EventCell: UITableViewCell {
@@ -64,15 +64,6 @@ extension EventsDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("\(events.count)")
-        NSLog(events[0].subject)
-        NSLog(events[1].subject)
-        NSLog(events[2].subject)
-        NSLog(events[0].start)
-        NSLog(events[1].start)
-        NSLog(events[2].start)
-        NSLog(events[0].end)
-        NSLog(events[1].end)
-        NSLog(events[2].end)
 
         return events.count
     }
