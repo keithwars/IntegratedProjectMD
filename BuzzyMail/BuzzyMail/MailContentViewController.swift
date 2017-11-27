@@ -15,12 +15,16 @@ class MailContentViewController: UIViewController {
     
     @IBOutlet weak var fromLabel: UILabel!
     
+    @IBOutlet weak var subjectLabel: UILabel!
+    
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
         NSLog(email!.from)
         
+        
         fromLabel.text = email!.from
+        subjectLabel.text = email!.subject
     }
     
     override func didReceiveMemoryWarning() {

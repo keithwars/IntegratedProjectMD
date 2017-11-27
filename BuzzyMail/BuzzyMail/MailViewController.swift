@@ -20,6 +20,7 @@ class MailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = 80;
+        
         // Do any additional setup after loading the view, typically from a nib.
         if(service.isLoggedIn) {
             loadUserData()
