@@ -63,7 +63,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="72" id="Uq6-Wc-vct" customClass="EventCell" customModule="BuzzyMail" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uq6-Wc-vct" id="S2T-um-ZWJ" customClass="EventCell">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uq6-Wc-vct" id="S2T-um-ZWJ" customClass="UITableViewCell">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -94,11 +94,16 @@
                                                 <constraint firstItem="bxa-TF-iwa" firstAttribute="leading" secondItem="cOl-pt-U8l" secondAttribute="trailing" constant="85" id="UXh-hj-LnR"/>
                                                 <constraint firstItem="YXX-oU-RjQ" firstAttribute="top" secondItem="S2T-um-ZWJ" secondAttribute="top" id="Zu9-if-gHd"/>
                                             </constraints>
+                                            <connections>
+                                                <outlet property="endLabel" destination="bxa-TF-iwa" id="Cif-Ov-Q9e"/>
+                                                <outlet property="startLabel" destination="cOl-pt-U8l" id="uOX-TO-1V8"/>
+                                                <outlet property="subjectLabel" destination="YXX-oU-RjQ" id="clT-aN-7K5"/>
+                                            </connections>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="endLabel" destination="bxa-TF-iwa" id="fjm-4u-nv7"/>
-                                            <outlet property="startLabel" destination="cOl-pt-U8l" id="q2N-A0-WpX"/>
-                                            <outlet property="subjectLabel" destination="YXX-oU-RjQ" id="dgJ-af-z2e"/>
+                                            <outlet property="endLabel" destination="bxa-TF-iwa" id="W64-zB-1bY"/>
+                                            <outlet property="startLabel" destination="cOl-pt-U8l" id="ady-NE-0oV"/>
+                                            <outlet property="subjectLabel" destination="YXX-oU-RjQ" id="iqD-ge-zfN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -115,7 +120,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Calendar" id="bml-mU-u7k"/>
                     <connections>
-                        <outlet property="tableView" destination="9Ej-Xm-HDZ" id="fRu-1Z-1wq"/>
+                        <outlet property="tableView" destination="9Ej-Xm-HDZ" id="90c-qh-lWX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -224,7 +229,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="k17-RL-AOI"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="K7d-k7-fSu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frf-s3-xMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
