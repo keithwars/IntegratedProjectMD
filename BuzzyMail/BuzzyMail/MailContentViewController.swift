@@ -10,13 +10,17 @@ import UIKit
 
 class MailContentViewController: UIViewController {
     
-    var email:NSObject?
+    var email:Message?
     let service = OutlookService.shared()
     
+    @IBOutlet weak var fromLabel: UILabel!
     
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
+        NSLog(email!.from)
+        
+        fromLabel.text = email!.from
     }
     
     override func didReceiveMemoryWarning() {

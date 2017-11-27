@@ -60,6 +60,10 @@ class MessagesDataSource: NSObject {
         
         self.messages = msgArray
     }
+    
+    func getMessagesArray() -> [Message]{
+        return messages
+    }
 }
 
 extension MessagesDataSource: UITableViewDataSource {

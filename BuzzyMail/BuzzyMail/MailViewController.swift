@@ -12,6 +12,8 @@ class MailViewController: UIViewController {
 
     let service = OutlookService.shared()
     
+    var messagesList:[Message]?
+    
     @IBOutlet weak var tableView: UITableView!
     var dataSource: MessagesDataSource?
     
@@ -25,11 +27,21 @@ class MailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let row = self.tableView.indexPathForSelectedRow
+        let rowint = Int(row![1])
+        
+        messagesList = dataSource?.getMessagesArray()
+        
+        NSLog(messagesList![rowint].subject)
+                
         if segue.identifier == "showMailContent" {
-            _ = segue.destination as! MailContentViewController
-            
+            if let destination = segue.destination as? MailContentViewController {
+                destination.email = messagesList![rowint]
+            }
         }
     }
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
