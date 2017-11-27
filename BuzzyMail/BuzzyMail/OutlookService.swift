@@ -137,7 +137,7 @@ class OutlookService {
         let apiParams = [
             "$select": "subject,receivedDateTime,from,body",
             "$orderby": "receivedDateTime DESC",
-            "$top": "20"
+            "$top": "50"
         ]
         
         makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", params: apiParams) {
