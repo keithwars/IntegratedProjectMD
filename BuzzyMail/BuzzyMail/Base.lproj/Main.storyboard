@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -252,7 +251,7 @@
         <!--Mail Content View Controller-->
         <scene sceneID="h36-ja-UhH">
             <objects>
-                <viewController storyboardIdentifier="MailContent" id="BC4-VU-rc1" customClass="MailContentViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MailContent" modalTransitionStyle="flipHorizontal" hidesBottomBarWhenPushed="YES" id="BC4-VU-rc1" customClass="MailContentViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nah-A9-V6O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,11 +278,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wle-AM-Tvf">
-                                <rect key="frame" x="62" y="205" width="297" height="20.5"/>
+                                <rect key="frame" x="62" y="205" width="297" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3n6-Vt-svq">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="QOa-lq-4yf"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bz2-4w-tH5"/>
+                                    <barButtonItem systemItem="organize" id="5m7-mK-rwf"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FIs-0m-xGL"/>
+                                    <barButtonItem systemItem="reply" id="oUt-Pt-WTT"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="S0H-JE-PRE"/>
+                                    <barButtonItem systemItem="trash" id="g3X-Aw-Ltx"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -292,8 +303,11 @@
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="trailing" secondItem="aSU-9d-yCX" secondAttribute="trailing" id="9Dq-yz-oH6"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" id="FOD-pJ-vUf"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="trailing" secondItem="3fN-Du-Z5B" secondAttribute="trailing" id="OfD-B8-HUv"/>
+                            <constraint firstItem="3n6-Vt-svq" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" id="WRb-bv-CIp"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="top" secondItem="3fN-Du-Z5B" secondAttribute="top" id="YYb-pO-1HP"/>
+                            <constraint firstItem="3n6-Vt-svq" firstAttribute="trailing" secondItem="3fN-Du-Z5B" secondAttribute="trailing" id="a6A-hx-LTg"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" constant="62" id="b8r-jm-iib"/>
+                            <constraint firstItem="3n6-Vt-svq" firstAttribute="bottom" secondItem="3fN-Du-Z5B" secondAttribute="bottom" id="f9f-pS-YwE"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aSU-9d-yCX" secondAttribute="bottomMargin" id="hky-13-NO5"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="top" secondItem="aSU-9d-yCX" secondAttribute="bottom" constant="9" id="qhf-Gh-FqN"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="centerY" secondItem="wle-AM-Tvf" secondAttribute="centerY" id="r1O-Fj-rl9"/>
@@ -302,6 +316,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3fN-Du-Z5B"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="fromLabel" destination="wle-AM-Tvf" id="4qd-x1-jFG"/>
                         <outlet property="subjectLabel" destination="aSU-9d-yCX" id="jbT-l4-0aq"/>
