@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class MailContentViewController: UIViewController {
     
@@ -32,6 +33,30 @@ class MailContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func replyButtonPressed(_ sender: Any) {
+        
+        let replyActionHandler = { (action:UIAlertAction!) -> Void in
+            NSLog("Called!")
+            let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
+            let navigationController = UINavigationController(rootViewController: popup)
+            navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+    
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
+        alertController.addAction(replyAction)
+        let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: nil)
+        alertController.addAction(replyAllAction)
+        let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: nil)
+        alertController.addAction(forwardAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
     
     
 }
