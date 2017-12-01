@@ -72,8 +72,8 @@ extension EventsDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EventCell.self)) as! EventCell
         let event = events[indexPath.row]
         cell.subject = event.subject
-        cell.start = event.start
-        cell.end = event.end
+        cell.start = "Starts on: \(event.start!)"
+        cell.end = "Ends on: \(event.end!)"
         return cell
     }
 }

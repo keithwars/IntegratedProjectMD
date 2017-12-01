@@ -36,9 +36,10 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 90;
         // Do any additional setup after loading the view, typically from a nib.
         tableView.estimatedRowHeight = 90;
-        tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.rowHeight = UITableViewAutomaticDimension
         
         if (service.isLoggedIn) {
             loadUserData()
