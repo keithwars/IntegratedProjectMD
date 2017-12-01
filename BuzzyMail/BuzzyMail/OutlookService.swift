@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class OutlookService {
     // Configure the OAuth2 framework for Azure
+    
     private static let oauth2Settings = [
         "client_id" : "9c5cb613-91a2-4807-bd5d-f4ced63a862d",
         "authorize_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",

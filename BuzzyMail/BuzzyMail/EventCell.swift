@@ -13,12 +13,14 @@ struct Event {
     let subject: String?
     let start: String?
     let end: String?
+    let startTime: String?
 }
 
 class EventCell: UITableViewCell {
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
+    @IBOutlet weak var startTimeLabel: UILabel!
     
     var subject: String? {
         didSet {
@@ -37,6 +39,12 @@ class EventCell: UITableViewCell {
             endLabel.text = end
         }
     }
+    
+    var startTime: String? {
+        didSet {
+            startTimeLabel.text = startTime
+        }
+    }
 }
 
 class EventsDataSource: NSObject {
@@ -50,7 +58,8 @@ class EventsDataSource: NSObject {
                 let newEvent = Event(
                     subject: event["subject"].stringValue,
                     start: Formatter.dateTimeTimeZoneToString(date: event["start"]),
-                    end: Formatter.dateTimeTimeZoneToString(date: event["end"]))
+                    end: Formatter.dateTimeToTime(date: event["end"]),
+                    startTime: Formatter.timeToHourAndMin(date: event["start"]));
                 
                 evtArray.append(newEvent)
             }
@@ -64,6 +73,9 @@ extension EventsDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("\(events.count)")
+        NSLog("hmmmmm: \(events[2].start!)")
+        NSLog("hmmmmm: \(events[2].end!)")
+        NSLog(Formatter.deduceTime(start: events[2].start!, end: events[2].end!))
 
         return events.count
     }
@@ -72,8 +84,9 @@ extension EventsDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EventCell.self)) as! EventCell
         let event = events[indexPath.row]
         cell.subject = event.subject
-        cell.start = "Starts on: \(event.start!)"
-        cell.end = "Ends on: \(event.end!)"
+        cell.start = event.start
+        cell.end = "Ends at: \(event.end!)"
+        cell.startTime = event.startTime
         return cell
     }
 }
