@@ -9,6 +9,8 @@
 import UIKit
 import SwiftyJSON
 
+let currentDate = Date()
+
 struct Event {
     let subject: String?
     let start: String?
@@ -55,6 +57,8 @@ class EventsDataSource: NSObject {
         
         if let unwrappedEvents = events {
             for (event) in unwrappedEvents {
+                //print("formatted:" + Formatter.deduceTime(start: currentDate))
+                
                 let newEvent = Event(
                     subject: event["subject"].stringValue,
                     start: Formatter.dateTimeTimeZoneToString(date: event["start"]),
@@ -62,6 +66,7 @@ class EventsDataSource: NSObject {
                     startTime: Formatter.timeToHourAndMin(date: event["start"]));
                 
                 evtArray.append(newEvent)
+                
             }
         }
         
@@ -70,12 +75,9 @@ class EventsDataSource: NSObject {
 }
 
 extension EventsDataSource: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("\(events.count)")
-        NSLog("hmmmmm: \(events[2].start!)")
-        NSLog("hmmmmm: \(events[2].end!)")
-        NSLog(Formatter.deduceTime(start: events[2].start!, end: events[2].end!))
 
         return events.count
     }
@@ -83,10 +85,13 @@ extension EventsDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EventCell.self)) as! EventCell
         let event = events[indexPath.row]
+        
         cell.subject = event.subject
         cell.start = event.start
         cell.end = "Ends at: \(event.end!)"
         cell.startTime = event.startTime
+        
         return cell
+        
     }
 }

@@ -102,21 +102,5 @@ class Formatter {
         
         return toStringFormatter.string(from: dateObj!)
     }
-    
-    class func deduceTime(start: String, end: String) -> String {
-       
-        let toDateFormatter = DateFormatter()
-        let isoFormatter = ISO8601DateFormatter()
-        toDateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSZ"
-        let startDate = ""
-        
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = [.month, .day, .hour, .minute, .second]
-        formatter.maximumUnitCount = 2   // often, you don't care about seconds if the elapsed time is in months, so you'll set max unit to whatever is appropriate in your case
-        
-        
-        return ""
-    }
    
 }
