@@ -13,6 +13,8 @@ struct Message {
     let from: String
     let received: String
     let subject: String
+    let messageId: String
+    let bodyContent: String
 }
 
 class MessageCell: UITableViewCell {
@@ -51,8 +53,9 @@ class MessagesDataSource: NSObject {
                 let newMsg = Message(
                     from: message["from"]["emailAddress"]["name"].stringValue,
                     received: Formatter.dateToString(date: message["receivedDateTime"]),
-                    subject: message["subject"].stringValue)
-                   
+                    subject: message["subject"].stringValue,
+                    messageId: message["id"].stringValue,
+                    bodyContent: message["body"]["content"].stringValue)
                 
                 msgArray.append(newMsg)
             }

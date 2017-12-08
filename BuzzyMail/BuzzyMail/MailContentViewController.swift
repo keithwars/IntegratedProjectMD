@@ -40,6 +40,7 @@ class MailContentViewController: UIViewController {
             let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
             let navigationController = UINavigationController(rootViewController: popup)
             navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+            popup.replyToEmail = self.email
             self.present(navigationController, animated: true, completion: nil)
         }
         
@@ -57,7 +58,6 @@ class MailContentViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
     
 }
 
