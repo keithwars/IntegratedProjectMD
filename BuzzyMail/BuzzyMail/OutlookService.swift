@@ -17,7 +17,7 @@ class OutlookService {
         "client_id" : "9c5cb613-91a2-4807-bd5d-f4ced63a862d",
         "authorize_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
         "token_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-        "scope": "openid profile offline_access User.Read Mail.Read Calendars.Read",
+        "scope": "openid profile offline_access User.Read Mail.Read Calendars.ReadWrite",
         "redirect_uris": ["buzzy-mail://oauth2/callback"],
         "verbose": true,
         ] as OAuth2JSON
@@ -66,7 +66,7 @@ class OutlookService {
         }
     }
     
-    func makeApiCall(api: String, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
+    func makeApiCall(api: String, postRequest: Bool, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
         // Build the request URL
         var urlBuilder = URLComponents(string: "https://graph.microsoft.com")!
         urlBuilder.path = api
@@ -85,6 +85,13 @@ class OutlookService {
         
         var req = oauth2.request(forURL: apiUrl)
         req.addValue("application/json", forHTTPHeaderField: "Accept")
+        if (postRequest) {
+            req.httpMethod = "POST"
+            req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        /*else {
+         req.addValue("application/json", forHTTPHeaderField: "Accept")
+         }*/
         if (!userEmail.isEmpty) {
             // Add X-AnchorMailbox header to optimize
             // API routing
@@ -119,7 +126,7 @@ class OutlookService {
         // If we don't have the user's email, get it from
         // the API
         if (userEmail.isEmpty) {
-            makeApiCall(api: "/v1.0/me") {
+            makeApiCall(api: "/v1.0/me", postRequest: false) {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
@@ -141,7 +148,7 @@ class OutlookService {
             "$top": "20"
         ]
         
-        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", params: apiParams) {
+        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", postRequest: false, params: apiParams) {
             result in
             callback(result)
         }
@@ -166,7 +173,15 @@ class OutlookService {
             "$top": "10"
         ]
     
-        makeApiCall(api: "/v1.0/me/calendar/calendarView", params: apiParams) {
+        makeApiCall(api: "/v1.0/me/calendar/calendarView", postRequest: false, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func postEvent(callback: @escaping (JSON?) -> Void) -> Void {
+        
+        makeApiCall(api: "v1.0/me/calendar/events", postRequest: true){
             result in
             callback(result)
         }

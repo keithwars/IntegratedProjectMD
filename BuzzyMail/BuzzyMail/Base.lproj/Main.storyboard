@@ -133,7 +133,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Calendar" id="bml-mU-u7k"/>
+                    <navigationItem key="navigationItem" title="Calendar" id="bml-mU-u7k">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="9ou-8U-B6H">
+                            <connections>
+                                <segue destination="Hwe-Op-79u" kind="show" id="ytR-4V-gyt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="9Ej-Xm-HDZ" id="90c-qh-lWX"/>
                     </connections>
@@ -141,6 +147,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1728.8" y="-0.44977511244377816"/>
+        </scene>
+        <!--Add event-->
+        <scene sceneID="mTl-eV-8YG">
+            <objects>
+                <viewController title="Add event" hidesBottomBarWhenPushed="YES" id="Hwe-Op-79u" customClass="CalendarAddEventViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BBH-gX-EKX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="tWz-cl-TcR"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QIQ-iA-Y80" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2508" y="0.0"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="Tyb-9Q-WW5">
