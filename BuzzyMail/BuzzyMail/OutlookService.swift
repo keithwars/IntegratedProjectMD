@@ -66,10 +66,12 @@ class OutlookService {
         }
     }
     
-    func makeApiCall(api: String, postRequest: Bool, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
+    func makeApiCall(api: String, postRequest: Bool, json: [String: Any]? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
         // Build the request URL
         var urlBuilder = URLComponents(string: "https://graph.microsoft.com")!
         urlBuilder.path = api
+        
+        //let json = ["title": "ABC", "dict": ["1": "first", "2": "second"]] as [String: Any]
         
         if let unwrappedParams = params {
             // Add query parameters to URL
@@ -86,8 +88,20 @@ class OutlookService {
         var req = oauth2.request(forURL: apiUrl)
         req.addValue("application/json", forHTTPHeaderField: "Accept")
         if (postRequest) {
-            req.httpMethod = "POST"
+            req.httpMethod = OAuth2HTTPMethod.POST.rawValue
             req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let jsonDate = try? JSONSerialization.data(withJSONObject: json!)
+            //let decoded = try? JSONSerialization.jsonObject(with: jsonDate!, options: [])
+            // here "decoded" is of type `Any`, decoded from JSON data
+            
+            // you can now cast it with the right type
+            //if (decoded as? [String:String]) != nil {
+               //   req.httpBody = jsonDate
+            //}
+            req.httpBody = jsonDate
+          
+            
         }
         /*else {
          req.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -102,7 +116,7 @@ class OutlookService {
         
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-        //loader.logger = OAuth2DebugLogger(.trace)
+        loader.logger = OAuth2DebugLogger(.trace)
         
         loader.perform(request: req) {
             response in
@@ -148,7 +162,7 @@ class OutlookService {
             "$top": "20"
         ]
         
-        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", postRequest: false, params: apiParams) {
+        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", postRequest: false, json: nil, params: apiParams) {
             result in
             callback(result)
         }
@@ -179,11 +193,12 @@ class OutlookService {
         }
     }
     
-    func postEvent(callback: @escaping (JSON?) -> Void) -> Void {
+    func postEvent(json: [String: Any], callback: @escaping ([String: Any]?) -> Void) -> Void {
         
-        makeApiCall(api: "v1.0/me/calendar/events", postRequest: true){
+        makeApiCall(api: "/v1.0/me/calendar/events", postRequest: true, json: json) {
             result in
-            callback(result)
+            callback(result?.dictionary)
+            dump(json)
         }
     }
     

@@ -13,47 +13,39 @@ class CalendarAddEventViewController: UIViewController {
     let service = OutlookService.shared()
     
     let calendarEvent = [
-        "event": [
             "subject": "Let's go for lunch",
             "body": [
-                [
+                
                     "contentType": "HTML",
                     "content": "Does late morning work for you?",
-                    ],
+                    
             ],
             "start": [
-                [
-                    "dateTime":"2017-12-07T12:55:00",
+                
+                    "dateTime":"2017-12-10T12:55:00",
                     "timeZone": "W. Europe Standard Time"
-                    ],
+                    
             ],
             "end": [
-                [
-                    "dateTime": "2017-12-07T14:00:00",
+                
+                    "dateTime": "2017-12-10T14:00:00",
                     "timeZone": "W. Europe Standard Time"
-                ],
+                
             ],
             "location": [
-                [
+                
                     "displayName": "Antwerpen"
-                    ],
+                
             ],
-            "attendees": [
-                [
-                    [
-                        "emailAddress": [
-                            "address":"Jeremy.keusters@student.ap.be",
-                            "name": "Jampot"
-                            
-                        ],
-                        "type": "required" ]],
-            ],
-        ],
-    ]
+            "attendees": [],
+    ] as [String: Any]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.service.postEvent(json: calendarEvent) {_ in
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
