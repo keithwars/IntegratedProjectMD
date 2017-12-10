@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class CalendarAddEventViewController: UIViewController {
+class CalendarAddEventViewController: UIViewController, UITextFieldDelegate {
     
     let service = OutlookService.shared()
     @IBOutlet weak var textfieldSubject: UITextField!
@@ -29,6 +29,10 @@ class CalendarAddEventViewController: UIViewController {
     var content : String = ""
     var location : String = ""
     var subject : String = ""
+    
+    @objc func donePressed() {
+        self.view.endEditing(true)
+    }
 
     @IBAction func textfieldSubjectEditor(_ sender: UITextField) {
         subject = textfieldSubject.text!
@@ -54,7 +58,6 @@ class CalendarAddEventViewController: UIViewController {
         datePickerView.datePickerMode = .time
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(handleDatePickerStartTime(sender:)), for: .valueChanged)
-        
     }
     
     @objc func handleDatePickerStartDay(sender: UIDatePicker) {
@@ -127,7 +130,21 @@ class CalendarAddEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textfieldContent.borderStyle = UITextBorderStyle.roundedRect;
-
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        
+        textfieldSubject.inputAccessoryView = toolbar
+        textfieldLocation.inputAccessoryView = toolbar
+        textfieldContent.inputAccessoryView = toolbar
+        textfieldStart.inputAccessoryView = toolbar
+        textfieldStartTime.inputAccessoryView = toolbar
+        textfieldEnd.inputAccessoryView = toolbar
+        textfieldEndTime.inputAccessoryView = toolbar
         // Do any additional setup after loading the view, typically from a nib.
         
     }
@@ -138,6 +155,7 @@ class CalendarAddEventViewController: UIViewController {
     }
     
     @IBAction func onButtonPressed(_ sender: Any) {
+        
         let start : String = "\(self.startDate)" + "T" + "\(self.startTime)" + ":00"
         let end = "\(self.endDate)" + "T" + "\(self.endTime)" + ":00"
         
