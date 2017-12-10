@@ -66,7 +66,7 @@ class OutlookService {
         }
     }
     
-    func makeApiCall(api: String, postRequest: Bool, json: [String: Any]? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
+    func makeApiCall(api: String, postRequest: Bool, json: [String:Any]? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
         // Build the request URL
         var urlBuilder = URLComponents(string: "https://graph.microsoft.com")!
         urlBuilder.path = api
@@ -193,7 +193,7 @@ class OutlookService {
         }
     }
     
-    func postEvent(json: [String: Any], callback: @escaping ([String: Any]?) -> Void) -> Void {
+    func postEvent(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
         
         makeApiCall(api: "/v1.0/me/calendar/events", postRequest: true, json: json) {
             result in
