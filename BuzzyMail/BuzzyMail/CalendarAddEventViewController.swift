@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class CalendarAddEventViewController: UIViewController, UITextFieldDelegate {
+class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate {
     
     let service = OutlookService.shared()
     @IBOutlet weak var textfieldSubject: UITextField!
@@ -36,6 +36,7 @@ class CalendarAddEventViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func textfieldSubjectEditor(_ sender: UITextField) {
         subject = textfieldSubject.text!
+        print("subject init test: " + "\(subject)")
     }
     
     @IBAction func textfieldLocationEditor(_ sender: UITextField) {
@@ -129,7 +130,9 @@ class CalendarAddEventViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textfieldContent.borderStyle = UITextBorderStyle.roundedRect;
+        
+//        tableView.estimatedRowHeight = 30
+//        tableView.rowHeight = UITableViewAutomaticDimension
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -152,6 +155,10 @@ class CalendarAddEventViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onCancelPressed(_ sender: Any){
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onButtonPressed(_ sender: Any) {
@@ -178,6 +185,8 @@ class CalendarAddEventViewController: UIViewController, UITextFieldDelegate {
                 
             }
         }
+        
+        dismiss(animated: true, completion: nil)
         
     }
     

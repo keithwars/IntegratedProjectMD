@@ -34,8 +34,9 @@ class CalendarViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
         tableView.rowHeight = 90;
         // Do any additional setup after loading the view, typically from a nib.
         tableView.estimatedRowHeight = 90;
@@ -45,7 +46,7 @@ class CalendarViewController: UIViewController {
             loadUserData()
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
