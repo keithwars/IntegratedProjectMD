@@ -15,6 +15,7 @@ class CalendarViewController: UIViewController {
     var dataSource:EventsDataSource?
     
     let service = OutlookService.shared()
+    var eventsList: [Event] = []
     
     func loadUserData() {
         service.getUserEmail() {

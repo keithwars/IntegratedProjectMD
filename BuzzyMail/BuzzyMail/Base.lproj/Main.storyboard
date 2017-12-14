@@ -97,6 +97,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCD-at-WmX">
+                                                    <rect key="frame" x="318" y="50" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Odd-0g-ChD" firstAttribute="centerY" secondItem="5Ut-P7-T7n" secondAttribute="centerY" id="Czo-3u-J9e"/>
@@ -116,6 +123,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="endLabel" destination="bxa-TF-iwa" id="Mrr-7I-J7N"/>
+                                            <outlet property="idLabel" destination="GCD-at-WmX" id="kAF-JK-UpD"/>
                                             <outlet property="startLabel" destination="cOl-pt-U8l" id="67U-8b-m91"/>
                                             <outlet property="startTimeLabel" destination="Odd-0g-ChD" id="ss4-VV-1nr"/>
                                             <outlet property="subjectLabel" destination="5Ut-P7-T7n" id="5XG-Vz-Lo2"/>

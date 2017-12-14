@@ -10,6 +10,14 @@ import Foundation
 import p2_OAuth2
 import SwiftyJSON
 
+enum RequestTypes {
+    case get
+    case post
+    case put
+    case patch
+    case delete
+}
+
 class OutlookService {
     // Configure the OAuth2 framework for Azure
     
@@ -66,7 +74,7 @@ class OutlookService {
         }
     }
     
-    func makeApiCall(api: String, postRequest: Bool, json: [String:Any]? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
+    func makeApiCall(api: String, requestType: RequestTypes, json: [String:Any]? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
         // Build the request URL
         var urlBuilder = URLComponents(string: "https://graph.microsoft.com")!
         urlBuilder.path = api
@@ -87,22 +95,30 @@ class OutlookService {
         
         var req = oauth2.request(forURL: apiUrl)
         req.addValue("application/json", forHTTPHeaderField: "Accept")
-        if (postRequest) {
-            req.httpMethod = OAuth2HTTPMethod.POST.rawValue
+        
+        switch requestType {
+        case .get:
+            NSLog("Get request received")
+        case .post:
+            NSLog("Post request received")
+            req.httpMethod = "POST"
+            req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            let jsonDate = try? JSONSerialization.data(withJSONObject: json!)
+            req.httpBody = jsonDate
+        case .put:
+            NSLog("Put request received")
+        case .patch:
+            NSLog("Patch request received")
+            req.httpMethod = "PATCH"
             req.addValue("application/json", forHTTPHeaderField: "Content-Type")
             
-            let jsonDate = try? JSONSerialization.data(withJSONObject: json!)
-            //let decoded = try? JSONSerialization.jsonObject(with: jsonDate!, options: [])
-            // here "decoded" is of type `Any`, decoded from JSON data
-            
-            // you can now cast it with the right type
-            //if (decoded as? [String:String]) != nil {
-               //   req.httpBody = jsonDate
-            //}
-            req.httpBody = jsonDate
-          
-            
+            let jsonEmail = try? JSONSerialization.data(withJSONObject: json!)
+            req.httpBody = jsonEmail
+        case .delete:
+            req.httpMethod = "DELETE"
+            NSLog("Delete request received")
         }
+        
         /*else {
          req.addValue("application/json", forHTTPHeaderField: "Accept")
          }*/
@@ -140,7 +156,7 @@ class OutlookService {
         // If we don't have the user's email, get it from
         // the API
         if (userEmail.isEmpty) {
-            makeApiCall(api: "/v1.0/me", postRequest: false) {
+            makeApiCall(api: "/v1.0/me", requestType: RequestTypes.get) {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
@@ -162,7 +178,7 @@ class OutlookService {
             "$top": "20"
         ]
         
-        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", postRequest: false, json: nil, params: apiParams) {
+        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", requestType: RequestTypes.get, json: nil, params: apiParams) {
             result in
             callback(result)
         }
@@ -187,7 +203,7 @@ class OutlookService {
             "$top": "10"
         ]
     
-        makeApiCall(api: "/v1.0/me/calendar/calendarView", postRequest: false, params: apiParams) {
+        makeApiCall(api: "/v1.0/me/calendar/calendarView", requestType: RequestTypes.get, params: apiParams) {
             result in
             callback(result)
         }
@@ -195,10 +211,18 @@ class OutlookService {
     
     func postEvent(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
         
-        makeApiCall(api: "/v1.0/me/calendar/events", postRequest: true, json: json) {
+        makeApiCall(api: "/v1.0/me/calendar/events", requestType: RequestTypes.post, json: json) {
             result in
             callback(result?.dictionary)
             dump(json)
+        }
+    }
+    
+    func deleteEvent(id: String, callback: @escaping (String?) -> Void) -> Void {
+
+        makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.delete, json: id as Any as? [String : Any]) {
+            result in
+            callback(result?.string)
         }
     }
     
