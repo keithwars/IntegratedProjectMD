@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import MessageUI
 import WebKit
 
 var messageHtml: Message?
@@ -49,7 +51,8 @@ class MailContentViewController: UIViewController {
         
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
-        
+        fromLabel.text = email!.from.name
+
         let htmlText = email!.body
         
         let htmlTextWithStyle = htmlText + ("<style type='text/css'> *{font-size: 17px;}html,body {font-size:\(24.0); font-family: '\(UIFont.systemFont(ofSize: 30.0))'; margin: 0;padding: 0;width: 100%;height: 100%;}html {display: table;}body {display: table-cell;vertical-align: top;padding: 20px;text-align: left;-webkit-text-size-adjust: none;}</style>")
@@ -85,7 +88,6 @@ class MailContentViewController: UIViewController {
         
         //contentWebKitView.loadFileURL(mailData, allowingReadAccessTo: <#T##URL#>)
         
-        fromLabel.text = email!.from
         subjectLabel.text = email!.subject
     }
     
@@ -94,6 +96,35 @@ class MailContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
    
     }
+
+    @IBAction func replyButtonPressed(_ sender: Any) {
+        
+        let replyActionHandler = { (action:UIAlertAction!) -> Void in
+            let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
+            let navigationController = UINavigationController(rootViewController: popup)
+            navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+            popup.replyToEmail = self.email
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+    
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
+        alertController.addAction(replyAction)
+        let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: nil)
+        alertController.addAction(replyAllAction)
+        let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: nil)
+        alertController.addAction(forwardAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) {
+    }
+
 }
 
 
