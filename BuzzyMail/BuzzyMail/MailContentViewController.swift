@@ -21,10 +21,7 @@ class MailContentViewController: UIViewController {
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
-        NSLog(email!.from)
-        
-        
-        fromLabel.text = email!.from
+        fromLabel.text = email!.from.name
         subjectLabel.text = email!.subject
     }
     
@@ -36,7 +33,6 @@ class MailContentViewController: UIViewController {
     @IBAction func replyButtonPressed(_ sender: Any) {
         
         let replyActionHandler = { (action:UIAlertAction!) -> Void in
-            NSLog("Called!")
             let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
             let navigationController = UINavigationController(rootViewController: popup)
             navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
@@ -59,6 +55,8 @@ class MailContentViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) {
+    }
 }
 
 

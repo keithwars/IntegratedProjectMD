@@ -57,7 +57,68 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
     private var editorView: WKWebView!
     private let placeholderLabel = UILabel()
     
-    public override init(frame: CGRect = .zero) {
+//    public override init(frame: CGRect = .zero) {
+//
+//        placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.65)
+//
+//        guard let bundlePath = Bundle(for: type(of: self)).path(forResource: "Resources", ofType: "bundle"),
+//            let bundle = Bundle(path: bundlePath),
+//            let scriptPath = bundle.path(forResource: "RichTextEditor", ofType: "js"),
+//            let scriptContent = try? String(contentsOfFile: scriptPath, encoding: String.Encoding.utf8),
+//            let htmlPath = bundle.path(forResource: "RichTextEditor", ofType: "html"),
+//            let html = try? String(contentsOfFile: htmlPath, encoding: String.Encoding.utf8)
+//            else { fatalError("Unable to find javscript/html for text editor") }
+//
+//        let configuration = WKWebViewConfiguration()
+//        configuration.userContentController.addUserScript(
+//            WKUserScript(source: scriptContent,
+//                         injectionTime: .atDocumentEnd,
+//                         forMainFrameOnly: true
+//            )
+//        )
+//
+//        editorView = WKWebView(frame: .zero, configuration: configuration)
+//
+//
+//        super.init(frame: frame)
+//
+//        [RichTextEditor.textDidChange, RichTextEditor.heightDidChange].forEach {
+//            configuration.userContentController.add(WeakScriptMessageHandler(delegate: self), name: $0)
+//        }
+//
+//        editorView.navigationDelegate = self
+//        editorView.isOpaque = false
+//        editorView.backgroundColor = .clear
+//        editorView.scrollView.isScrollEnabled = false
+//        editorView.scrollView.showsHorizontalScrollIndicator = false
+//        editorView.scrollView.showsVerticalScrollIndicator = false
+//        editorView.scrollView.bounces = false
+//        editorView.scrollView.isScrollEnabled = false
+//        editorView.scrollView.delegate = self
+//
+//        addSubview(placeholderLabel)
+//        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+//            placeholderLabel.topAnchor.constraint(equalTo: topAnchor),
+//            placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//            placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            ])
+//
+//        addSubview(editorView)
+//        editorView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            editorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+//            editorView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+//            editorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+//            editorView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            ])
+//
+//        editorView.loadHTMLString(html, baseURL: nil)
+//    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
         placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.65)
         
@@ -79,8 +140,8 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
         
         editorView = WKWebView(frame: .zero, configuration: configuration)
         
-
-        super.init(frame: frame)
+        
+        //super.init(frame: frame)
         
         [RichTextEditor.textDidChange, RichTextEditor.heightDidChange].forEach {
             configuration.userContentController.add(WeakScriptMessageHandler(delegate: self), name: $0)
@@ -89,11 +150,10 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
         editorView.navigationDelegate = self
         editorView.isOpaque = false
         editorView.backgroundColor = .clear
-        editorView.scrollView.isScrollEnabled = false
+        editorView.scrollView.isScrollEnabled = true
         editorView.scrollView.showsHorizontalScrollIndicator = false
-        editorView.scrollView.showsVerticalScrollIndicator = false
+        editorView.scrollView.showsVerticalScrollIndicator = true
         editorView.scrollView.bounces = false
-        editorView.scrollView.isScrollEnabled = false
         editorView.scrollView.delegate = self
         
         addSubview(placeholderLabel)
@@ -116,11 +176,7 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
         
         editorView.loadHTMLString(html, baseURL: nil)
     }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
+
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
         case RichTextEditor.textDidChange:

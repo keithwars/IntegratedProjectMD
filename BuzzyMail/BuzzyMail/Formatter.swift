@@ -10,10 +10,6 @@ class Formatter {
         
         let toDateFormatter = DateFormatter()
         
-        
-        NSLog("-------------------");
-        NSLog(graphDateString)
-        
         toDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         
         let dateObj = toDateFormatter.date(from: graphDateString)
