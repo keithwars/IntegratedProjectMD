@@ -38,6 +38,8 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var receivedLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var bodyPreviewLabel: UILabel!
+    @IBOutlet weak var attachmentImageView: UIImageView!
     
     var from: String? {
         didSet {
@@ -46,17 +48,33 @@ class MessageCell: UITableViewCell {
     }
     
     var received: String? {
+    
         didSet {
             receivedLabel.text = received
         }
     }
+
     
     var subject: String? {
         didSet {
             subjectLabel.text = subject
         }
     }
-    
+    var bodyPreview: String? {
+        didSet {
+            bodyPreviewLabel.text = bodyPreview
+        }
+    }
+    var hasAttachments: Bool? {
+        didSet {
+            attachmentImageView.isHidden = false
+        }
+    }
+    var isRead: Bool? {
+        didSet {
+            
+        }
+    }
 }
 
 class MessagesDataSource: NSObject {
@@ -67,6 +85,7 @@ class MessagesDataSource: NSObject {
         
         if let unwrappedMessages = messages {
             for (message) in unwrappedMessages {
+              
                 NSLog("Testing")
                 
 //                for emailAddress in message["toRecipients"] {
@@ -130,6 +149,7 @@ class MessagesDataSource: NSObject {
 //                print(newMsg.ccRecipients)
 //                print(newMsg.bccRecipients)
 //                print("-----------------------------------------------------------")
+
             }
         }
         
@@ -148,11 +168,35 @@ extension MessagesDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MessageCell.self)) as! MessageCell
         let message = messages[indexPath.row]
+
         cell.from = message.from.name
         cell.received = message.receivedDateTime
+
+        // @KEITH: REWORK THIS
+        //
+        //if (message.hasAttachments == true){
+        //    cell.attachmentImageView.isHidden = false
+        //}else{
+        //    cell.attachmentImageView.isHidden = true
+        //}
+        //
+        //
+        //
+        //cell.from = message.from
+        //cell.received = message.received
+      
         cell.subject = message.subject
+        cell.bodyPreview = (message.bodyPreview)
+        
+        if (message.isRead == false){
+            print("read Yes")
+            cell.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+        }
+        
         return cell
+        
     }
 }

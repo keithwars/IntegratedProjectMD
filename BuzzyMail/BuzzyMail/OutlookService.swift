@@ -127,7 +127,7 @@ class OutlookService {
         
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-        //loader.logger = OAuth2DebugLogger(.trace)
+//        loader.logger = OAuth2DebugLogger(.trace)
         
         loader.perform(request: req) {
             response in
