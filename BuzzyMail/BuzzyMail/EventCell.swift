@@ -120,69 +120,88 @@ extension EventsDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
-            // delete from outlook as well
-            
-            //            let row = indexPath
-            //            let rowint = Int(row[0])
-            
-            let rowint = Int(indexPath[1])
-            NSLog("TEST: " + "\(String (rowint))")
-            
-            NSLog("TEST2: " + "\(events.count)")
-            NSLog("KEK GEDELETETE ID: " + "\(events[rowint].id!)")
-            
-            let eventToDelete = events[rowint].id!
-            
-            // delete from events
-            events.remove(at: indexPath.row)
-            
-            // delete the table view row
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            service.deleteEvent(id: eventToDelete) {_ in
-                
-            }
 
-            tableView.reloadData()
+            let alertController = UIAlertController(title: "Warning!", message: "Are you sure you want to delete this event?", preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print(action)
+            }
+            alertController.addAction(cancelAction)
+            
+            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+                let rowint = Int(indexPath[1])
+                //            NSLog("TEST: " + "\(String (rowint))")
+                //
+                //            NSLog("TEST2: " + "\(events.count)")
+                //            NSLog("KEK GEDELETETE ID: " + "\(events[rowint].id!)")
+                
+                let eventToDelete = self.events[rowint].id!
+                //confirmDelete(event: eventToDelete)
+                // delete from events
+                self.events.remove(at: indexPath.row)
+                
+                // delete the table view row
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                service.deleteEvent(id: eventToDelete) {_ in
+                    
+                }
+                
+                tableView.reloadData()
+            }
+            alertController.addAction(destroyAction)
+            
+            let vc = getVisibleViewController(UIApplication.shared.keyWindow?.rootViewController)
+            
+            vc?.present(alertController, animated: true) {
+                print("Run ik hier wel?")
+            }
             
         } else if editingStyle == .insert {
             // Not used in our example, but if you were adding a new row, this is where you would do it.
         }
-
+        
     }
     
-//    // method to run when table view cell is tapped
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("You tapped cell number \(indexPath.row).")
-//    }
-//    
-//    // this method handles row deletion
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//    func confirmDelete(event: String) {
+//        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure you want to permanently delete this event?", preferredStyle: .actionSheet)
 //
-//        if editingStyle == .delete {
-//            
-//            // delete from events
-//            events.remove(at: indexPath.row)
-//            
-//            // delete the table view row
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//            
-//            // delete from outlook as well
-//            events = getEventsArray()
-//            
-//            let row = indexPath
-//            let rowint = Int(row[0])
-//            NSLog(String (rowint))
-//            
-//            NSLog("KEK GEDELETETE ID: " + "\(events[rowint].id!)")
-//            
-////            service.deleteEvent(id: cellID as! [String : Any]) {_ in
-////
-////            }
-//            
-//        } else if editingStyle == .insert {
-//            // Not used in our example, but if you were adding a new row, this is where you would do it.
-//        }
-//        
+//        //let DeleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteEvent)
+//        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteEvent)
+//
+//        //alert.addAction(DeleteAction)
+//        alert.addAction(CancelAction)
+//
+//        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
 //    }
+//
+//    func cancelDeleteEvent(alertAction: UIAlertAction!) {
+//        print("cancel clicked")
+//    }
+    
+    func getVisibleViewController(_ rootViewController: UIViewController?) -> UIViewController? {
+        
+        var rootVC = rootViewController
+        if rootVC == nil {
+            rootVC = UIApplication.shared.keyWindow?.rootViewController
+        }
+        
+        if rootVC?.presentedViewController == nil {
+            return rootVC
+        }
+        
+        if let presented = rootVC?.presentedViewController {
+            if presented.isKind(of: UINavigationController.self) {
+                let navigationController = presented as! UINavigationController
+                return navigationController.viewControllers.last!
+            }
+            
+            if presented.isKind(of: UITabBarController.self) {
+                let tabBarController = presented as! UITabBarController
+                return tabBarController.selectedViewController!
+            }
+            
+            return getVisibleViewController(presented)
+        }
+        return nil
+    }
 }
