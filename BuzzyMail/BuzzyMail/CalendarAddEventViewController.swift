@@ -131,9 +131,6 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.estimatedRowHeight = 30
-//        tableView.rowHeight = UITableViewAutomaticDimension
-        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -184,10 +181,9 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
             self.service.postEvent(json: jsonString) {_ in
                 
             }
+                    
         }
-        
-        dismiss(animated: true, completion: nil)
-        
+        dismiss(animated: true, completion: nil)        
     }
     
     struct CalendarEvent : Codable {

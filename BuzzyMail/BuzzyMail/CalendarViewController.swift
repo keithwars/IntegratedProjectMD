@@ -36,8 +36,12 @@ class CalendarViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        tableView.beginUpdates()
         tableView.reloadData()
+        tableView.endUpdates()
+        
+        super.viewWillAppear(true)
+
         tableView.rowHeight = 90;
         // Do any additional setup after loading the view, typically from a nib.
         tableView.estimatedRowHeight = 90;
@@ -45,6 +49,7 @@ class CalendarViewController: UIViewController {
         
         if (service.isLoggedIn) {
             loadUserData()
+            tableView.reloadData()
         }
     }
 
