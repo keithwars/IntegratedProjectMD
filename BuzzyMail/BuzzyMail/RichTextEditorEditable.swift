@@ -1,5 +1,5 @@
 //
-//  RichTextEditor.swift
+//  RichTextEditorEditable.swift
 //  BuzzyMail
 //
 //  Created by Jérémy Keusters on 8/12/17.
@@ -9,7 +9,7 @@
 import Foundation
 import WebKit
 
-public protocol RichTextEditorDelegate: class {
+public protocol RichTextEditorEditableDelegate: class {
     func textDidChange(text: String)
     func heightDidChange()
 }
@@ -26,14 +26,14 @@ fileprivate class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
     }
 }
 
-public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate {
+public class RichTextEditorEditable: UIView, WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate {
     
     private static let textDidChange = "textDidChange"
     private static let heightDidChange = "heightDidChange"
     private static let defaultHeight: CGFloat = 60
     
-    public weak var delegate: RichTextEditorDelegate?
-    public var height: CGFloat = RichTextEditor.defaultHeight
+    public weak var delegate: RichTextEditorEditableDelegate?
+    public var height: CGFloat = RichTextEditorEditable.defaultHeight
     
     public var placeholder: String? {
         didSet {
@@ -126,7 +126,7 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
             let bundle = Bundle(path: bundlePath),
             let scriptPath = bundle.path(forResource: "RichTextEditor", ofType: "js"),
             let scriptContent = try? String(contentsOfFile: scriptPath, encoding: String.Encoding.utf8),
-            let htmlPath = bundle.path(forResource: "RichTextEditor", ofType: "html"),
+            let htmlPath = bundle.path(forResource: "RichTextEditorEditable", ofType: "html"),
             let html = try? String(contentsOfFile: htmlPath, encoding: String.Encoding.utf8)
             else { fatalError("Unable to find javscript/html for text editor") }
         
@@ -143,7 +143,7 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
         
         //super.init(frame: frame)
         
-        [RichTextEditor.textDidChange, RichTextEditor.heightDidChange].forEach {
+        [RichTextEditorEditable.textDidChange, RichTextEditorEditable.heightDidChange].forEach {
             configuration.userContentController.add(WeakScriptMessageHandler(delegate: self), name: $0)
         }
         
@@ -179,13 +179,13 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
-        case RichTextEditor.textDidChange:
+        case RichTextEditorEditable.textDidChange:
             guard let body = message.body as? String else { return }
             placeholderLabel.isHidden = !body.htmlToPlainText.isEmpty
             delegate?.textDidChange(text: body)
-        case RichTextEditor.heightDidChange:
+        case RichTextEditorEditable.heightDidChange:
             guard let height = message.body as? CGFloat else { return }
-            self.height = height > RichTextEditor.defaultHeight ? height + 30 : RichTextEditor.defaultHeight
+            self.height = height > RichTextEditorEditable.defaultHeight ? height + 30 : RichTextEditorEditable.defaultHeight
             delegate?.heightDidChange()
         default:
             break

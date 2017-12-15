@@ -45,6 +45,7 @@ class MailContentViewController: UIViewController {
 
     @IBOutlet weak var contentWebView: WKWebView!
     
+    @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
     
     
     override func viewDidLoad() {
@@ -53,13 +54,14 @@ class MailContentViewController: UIViewController {
         super.viewDidLoad()
         fromLabel.text = email!.from.name
 
-        let htmlText = email!.body
+        //let htmlText = email!.body
         
-        let htmlTextWithStyle = htmlText + ("<style type='text/css'> *{font-size: 17px;}html,body {font-size:\(24.0); font-family: '\(UIFont.systemFont(ofSize: 30.0))'; margin: 0;padding: 0;width: 100%;height: 100%;}html {display: table;}body {display: table-cell;vertical-align: top;padding: 20px;text-align: left;-webkit-text-size-adjust: none;}</style>")
+        /*let htmlTextWithStyle = htmlText + ("<style type='text/css'> *{font-size: 17px;}html,body {font-size:\(24.0); font-family: '\(UIFont.systemFont(ofSize: 30.0))'; margin: 0;padding: 0;width: 100%;height: 100%;}html {display: table;}body {display: table-cell;vertical-align: top;padding: 20px;text-align: left;-webkit-text-size-adjust: none;}</style>")
     
-        print(htmlTextWithStyle)
+        print(htmlTextWithStyle)*/
         NSLog("--------------------------------++++++")
-        print(htmlText)
+        //print(htmlText)
+        richTextEditorNonEditable.text = email!.body.content
         
 //        let source = "var meta = document.createElement('meta');" +
 //            "meta.name = 'viewport';" +
@@ -76,7 +78,7 @@ class MailContentViewController: UIViewController {
 //        configuration.userContentController = userContentController
 //        
 //        contentWebView = WKWebView(frame: CGRect.infinite, configuration: configuration)
-        contentWebView.loadHTMLString(htmlTextWithStyle, baseURL: nil)
+        //contentWebView.loadHTMLString(htmlTextWithStyle, baseURL: nil)
        
         
     

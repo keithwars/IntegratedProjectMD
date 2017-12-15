@@ -12,7 +12,7 @@ import WebKit
 
 class MailContentTableViewController: UITableViewController {
 
-    @IBOutlet var richTextEditor: RichTextEditor!
+    @IBOutlet var richTextEditor: RichTextEditorEditable!
     
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var ccTextField: UITextField!
