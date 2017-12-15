@@ -94,7 +94,7 @@ class OutlookService {
         
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-        //loader.logger = OAuth2DebugLogger(.trace)
+//        loader.logger = OAuth2DebugLogger(.trace)
         
         loader.perform(request: req) {
             response in
@@ -135,7 +135,7 @@ class OutlookService {
     
     func getInboxMessages(callback: @escaping (JSON?) -> Void) -> Void {
         let apiParams = [
-            "$select": "subject,receivedDateTime,from,body",
+            "$select": "subject,receivedDateTime,hasAttachments,from,body,bodyPreview,isRead",
             "$orderby": "receivedDateTime DESC",
             "$top": "50"
         ]
