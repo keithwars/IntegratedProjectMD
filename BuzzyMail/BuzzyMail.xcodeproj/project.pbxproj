@@ -21,6 +21,7 @@
 		566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141A1FC85C3800C074C4 /* Formatter.swift */; };
 		566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141C1FC85DB000C074C4 /* EventCell.swift */; };
 		56B2823B1FD9793900329BEB /* CalendarAddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */; };
+		56D7C0E21FE40F1B005DDDA3 /* CalendarContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */; };
 		CEA0861A0E535CA814B7CCB8 /* Pods_BuzzyMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		566B141A1FC85C3800C074C4 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		566B141C1FC85DB000C074C4 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddEventViewController.swift; sourceTree = "<group>"; };
+		56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarContentViewController.swift; sourceTree = "<group>"; };
 		6F3F3653ADAE360DBC6D0E06 /* Pods-BuzzyMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.debug.xcconfig"; sourceTree = "<group>"; };
 		A62C9FE2F7DE7DBBBFCFD7E1 /* Pods-BuzzyMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.release.xcconfig"; sourceTree = "<group>"; };
 		E1FD6AF08A3DD0942473EF7F /* Pods-BuzzyMailTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				566B141A1FC85C3800C074C4 /* Formatter.swift */,
 				566B141C1FC85DB000C074C4 /* EventCell.swift */,
 				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
+				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
 			);
 			path = BuzzyMail;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			files = (
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
+				56D7C0E21FE40F1B005DDDA3 /* CalendarContentViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
 				566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */,
 				566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */,

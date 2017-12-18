@@ -60,11 +60,11 @@
                                 <rect key="frame" x="10" y="114" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" rowHeight="72" id="Uq6-Wc-vct" customClass="EventCell" customModule="BuzzyMail" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" rowHeight="72" id="Uq6-Wc-vct" customClass="EventCell" customModule="BuzzyMail" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uq6-Wc-vct" id="S2T-um-ZWJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-pt-U8l">
@@ -127,6 +127,7 @@
                                             <outlet property="startLabel" destination="cOl-pt-U8l" id="67U-8b-m91"/>
                                             <outlet property="startTimeLabel" destination="Odd-0g-ChD" id="ss4-VV-1nr"/>
                                             <outlet property="subjectLabel" destination="5Ut-P7-T7n" id="5XG-Vz-Lo2"/>
+                                            <segue destination="K1Z-6e-xJk" kind="showDetail" action="showViewController:sender:" id="HUn-1t-9hZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -453,6 +454,28 @@
             </objects>
             <point key="canvasLocation" x="945" y="788"/>
         </scene>
+        <!--Event Content-->
+        <scene sceneID="plV-xy-Rbw">
+            <objects>
+                <viewController title="Event Content" id="gat-Kl-qe6" customClass="CalendarContentViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TMH-E7-IUI" customClass="CalenderContent">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="YHM-dO-PdR"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Bgz-IY-nAX">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="Z2l-j8-wlI">
+                            <connections>
+                                <action selector="onCancelPressed:" destination="gat-Kl-qe6" id="LfB-mJ-2Ma"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hSY-vq-XSL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3524" y="-701"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="1q7-Oo-wK1">
             <objects>
@@ -470,6 +493,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQm-15-EZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2682" y="0.0"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dwE-bu-sFZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K1Z-6e-xJk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5lP-aD-CHc">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gat-Kl-qe6" kind="relationship" relationship="rootViewController" id="oRv-Vs-G6R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eoE-5W-UT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2680" y="-700.74962518740631"/>
         </scene>
     </scenes>
     <resources>

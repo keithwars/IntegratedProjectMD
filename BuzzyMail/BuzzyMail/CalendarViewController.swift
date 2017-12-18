@@ -35,13 +35,32 @@ class CalendarViewController: UIViewController {
         }
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let row = self.tableView.indexPathForSelectedRow
+//        let rowint = Int(row![1])
+//
+//        eventsList = (dataSource?.getEventsArray())!
+//
+//        NSLog(eventsList[rowint].id!)
+//
+//        if segue.identifier == "showMailContent" {
+//            if let destination = segue.destination as? CalendarContentViewController {
+//                destination.event = eventsList[rowint]
+//            }
+//        }
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         tableView.beginUpdates()
         tableView.reloadData()
         tableView.endUpdates()
         
         super.viewWillAppear(true)
-
+        
+        if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
+        }
+        
         tableView.rowHeight = 90;
         // Do any additional setup after loading the view, typically from a nib.
         tableView.estimatedRowHeight = 90;
@@ -51,6 +70,7 @@ class CalendarViewController: UIViewController {
             loadUserData()
             tableView.reloadData()
         }
+
     }
 
     override func didReceiveMemoryWarning() {
