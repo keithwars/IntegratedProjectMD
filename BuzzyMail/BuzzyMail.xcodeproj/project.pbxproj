@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1059B58C43A6AE2BB0916545 /* Pods_BuzzyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */; };
+		2B96B8B91FD9448B0077EB08 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B8B81FD9448B0077EB08 /* MessageCell.swift */; };
+		2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */; };
+		2BBBC0C31FC86A4600870223 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBBC0C21FC86A4600870223 /* Formatter.swift */; };
 		3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E273F1FC8373300049443 /* AppDelegate.swift */; };
 		3F0E27421FC8373300049443 /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27411FC8373300049443 /* MailViewController.swift */; };
 		3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27431FC8373300049443 /* CalendarViewController.swift */; };
@@ -18,6 +21,11 @@
 		3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27611FC839EC00049443 /* LoginViewController.swift */; };
 		3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27631FC83C2D00049443 /* ContactsViewController.swift */; };
 		3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27651FC83D5300049443 /* OutlookService.swift */; };
+		3F196DA51FD980AB0002287C /* MailContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F196DA41FD980AB0002287C /* MailContentTableViewController.swift */; };
+		3F44F64A1FDAA729005D095F /* RichTextEditorEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F44F6491FDAA729005D095F /* RichTextEditorEditable.swift */; };
+		3F663C1F1FD171F300FA9D66 /* ReplyMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F663C1E1FD171F300FA9D66 /* ReplyMailViewController.swift */; };
+		3FF0F38F1FE405D90055B34C /* RichTextEditorNonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF0F38E1FE405D90055B34C /* RichTextEditorNonEditable.swift */; };
+		3FF0F3931FE407560055B34C /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FF0F3921FE407560055B34C /* Resources.bundle */; };
 		CEA0861A0E535CA814B7CCB8 /* Pods_BuzzyMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B96B8B81FD9448B0077EB08 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentViewController.swift; sourceTree = "<group>"; };
+		2BBBC0C21FC86A4600870223 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0E273C1FC8373300049443 /* BuzzyMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuzzyMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0E273F1FC8373300049443 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +59,13 @@
 		3F0E27611FC839EC00049443 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3F0E27631FC83C2D00049443 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		3F0E27651FC83D5300049443 /* OutlookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookService.swift; sourceTree = "<group>"; };
+		3F196DA41FD980AB0002287C /* MailContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentTableViewController.swift; sourceTree = "<group>"; };
+		3F44F6451FDAA6A2005D095F /* RichTextEditor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = RichTextEditor.html; sourceTree = "<group>"; };
+		3F44F6471FDAA704005D095F /* RichTextEditor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RichTextEditor.js; sourceTree = "<group>"; };
+		3F44F6491FDAA729005D095F /* RichTextEditorEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorEditable.swift; sourceTree = "<group>"; };
+		3F663C1E1FD171F300FA9D66 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
+		3FF0F38E1FE405D90055B34C /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
+		3FF0F3921FE407560055B34C /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		4DBD452035A0C8E67B017707 /* Pods-BuzzyMailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6F3F3653ADAE360DBC6D0E06 /* Pods-BuzzyMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.debug.xcconfig"; sourceTree = "<group>"; };
 		A62C9FE2F7DE7DBBBFCFD7E1 /* Pods-BuzzyMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +104,7 @@
 		3F0E27331FC8373300049443 = {
 			isa = PBXGroup;
 			children = (
+				3FF0F3921FE407560055B34C /* Resources.bundle */,
 				3F0E273E1FC8373300049443 /* BuzzyMail */,
 				3F0E27551FC8373300049443 /* BuzzyMailTests */,
 				3F0E273D1FC8373300049443 /* Products */,
@@ -106,8 +125,10 @@
 		3F0E273E1FC8373300049443 /* BuzzyMail */ = {
 			isa = PBXGroup;
 			children = (
+				2B96B8B81FD9448B0077EB08 /* MessageCell.swift */,
 				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
 				3F0E27411FC8373300049443 /* MailViewController.swift */,
+				2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */,
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
 				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
 				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
@@ -116,6 +137,11 @@
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
 				3F0E274D1FC8373300049443 /* Info.plist */,
 				3F0E27651FC83D5300049443 /* OutlookService.swift */,
+				2BBBC0C21FC86A4600870223 /* Formatter.swift */,
+				3F663C1E1FD171F300FA9D66 /* ReplyMailViewController.swift */,
+				3F196DA41FD980AB0002287C /* MailContentTableViewController.swift */,
+				3F44F6491FDAA729005D095F /* RichTextEditorEditable.swift */,
+				3FF0F38E1FE405D90055B34C /* RichTextEditorNonEditable.swift */,
 			);
 			path = BuzzyMail;
 			sourceTree = "<group>";
@@ -123,10 +149,21 @@
 		3F0E27551FC8373300049443 /* BuzzyMailTests */ = {
 			isa = PBXGroup;
 			children = (
+				3F44F64B1FDAB239005D095F /* Resources */,
 				3F0E27561FC8373300049443 /* BuzzyMailTests.swift */,
 				3F0E27581FC8373300049443 /* Info.plist */,
 			);
 			path = BuzzyMailTests;
+			sourceTree = "<group>";
+		};
+		3F44F64B1FDAB239005D095F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F44F6451FDAA6A2005D095F /* RichTextEditor.html */,
+				3F44F6471FDAA704005D095F /* RichTextEditor.js */,
+			);
+			name = Resources;
+			path = ../Resources;
 			sourceTree = "<group>";
 		};
 		FDF4E7DAEAF30437AA7DEB9D /* Pods */ = {
@@ -232,6 +269,7 @@
 				3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */,
 				3F0E27491FC8373300049443 /* Assets.xcassets in Resources */,
 				3F0E27471FC8373300049443 /* Main.storyboard in Resources */,
+				3FF0F3931FE407560055B34C /* Resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,9 +394,16 @@
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
+				2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */,
+				3F196DA51FD980AB0002287C /* MailContentTableViewController.swift in Sources */,
 				3F0E27421FC8373300049443 /* MailViewController.swift in Sources */,
 				3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */,
+				3F663C1F1FD171F300FA9D66 /* ReplyMailViewController.swift in Sources */,
 				3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */,
+				3F44F64A1FDAA729005D095F /* RichTextEditorEditable.swift in Sources */,
+				2BBBC0C31FC86A4600870223 /* Formatter.swift in Sources */,
+				2B96B8B91FD9448B0077EB08 /* MessageCell.swift in Sources */,
+				3FF0F38F1FE405D90055B34C /* RichTextEditorNonEditable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MJKLC6UF2T;
 				INFOPLIST_FILE = BuzzyMail/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.ap.be.BuzzyMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -531,6 +577,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MJKLC6UF2T;
 				INFOPLIST_FILE = BuzzyMail/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.ap.be.BuzzyMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";

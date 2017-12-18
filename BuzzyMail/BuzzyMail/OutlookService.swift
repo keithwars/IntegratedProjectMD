@@ -10,14 +10,22 @@ import Foundation
 import p2_OAuth2
 import SwiftyJSON
 
+enum RequestTypes {
+    case get
+    case post
+    case put
+    case patch
+    case delete
+}
+
 class OutlookService {
     // Configure the OAuth2 framework for Azure
     private static let oauth2Settings = [
-        "client_id" : "4325e18d-7164-46f3-8c72-60cdcae321f4",
+        "client_id" : "9c5cb613-91a2-4807-bd5d-f4ced63a862d",
         "authorize_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
         "token_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-        "scope": "openid profile offline_access User.Read Mail.Read",
-        "redirect_uris": ["swift-tutorial://oauth2/callback"],
+        "scope": "openid profile offline_access User.Read Mail.Read Mail.ReadWrite Mail.Send",
+        "redirect_uris": ["buzzy-mail://oauth2/callback"],
         "verbose": true,
         ] as OAuth2JSON
     
@@ -65,7 +73,7 @@ class OutlookService {
         }
     }
     
-    func makeApiCall(api: String, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
+    func makeApiCall(api: String, requestType : RequestTypes, body: Message? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
         // Build the request URL
         var urlBuilder = URLComponents(string: "https://graph.microsoft.com")!
         urlBuilder.path = api
@@ -84,6 +92,31 @@ class OutlookService {
         
         var req = oauth2.request(forURL: apiUrl)
         req.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        switch requestType {
+        case .get:
+            NSLog("Get request received")
+        case .post:
+            NSLog("Post request received")
+            req.httpMethod = "POST"
+            req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        case .put:
+            NSLog("Put request received")
+        case .patch:
+            NSLog("Patch request received")
+            req.httpMethod = "PATCH"
+            req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let jsonEmail = try? JSONSerialization.data(withJSONObject: body!)
+            req.httpBody = jsonEmail
+        case .delete:
+            NSLog("Delete request received")
+        }
+        
+//        else {
+//            req.addValue("application/json", forHTTPHeaderField: "Accept")
+//        }
+        
         if (!userEmail.isEmpty) {
             // Add X-AnchorMailbox header to optimize
             // API routing
@@ -94,7 +127,7 @@ class OutlookService {
         
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-        //loader.logger = OAuth2DebugLogger(.trace)
+//        loader.logger = OAuth2DebugLogger(.trace)
         
         loader.perform(request: req) {
             response in
@@ -118,7 +151,7 @@ class OutlookService {
         // If we don't have the user's email, get it from
         // the API
         if (userEmail.isEmpty) {
-            makeApiCall(api: "/v1.0/me") {
+            makeApiCall(api: "/v1.0/me", requestType: RequestTypes.get) {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
@@ -135,12 +168,32 @@ class OutlookService {
     
     func getInboxMessages(callback: @escaping (JSON?) -> Void) -> Void {
         let apiParams = [
-            "$select": "subject,receivedDateTime,from,body",
             "$orderby": "receivedDateTime DESC",
-            "$top": "20"
+            "$top": "50"
         ]
         
-        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", params: apiParams) {
+        makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func sendReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/reply", requestType: RequestTypes.post) {
+            result in
+            callback(result)
+        }
+    }
+
+    func updateReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
             result in
             callback(result)
         }
@@ -149,5 +202,6 @@ class OutlookService {
     func logout() -> Void {
         oauth2.forgetTokens()
     }
+
 }
 
