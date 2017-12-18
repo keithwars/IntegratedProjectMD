@@ -15,7 +15,7 @@ class CalendarViewController: UIViewController {
     var dataSource:EventsDataSource?
     
     let service = OutlookService.shared()
-    var eventsList: [Event] = []
+    var eventsList: [Event]?
     
     func loadUserData() {
         service.getUserEmail() {
@@ -34,22 +34,7 @@ class CalendarViewController: UIViewController {
             }
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let row = self.tableView.indexPathForSelectedRow
-//        let rowint = Int(row![1])
-//
-//        eventsList = (dataSource?.getEventsArray())!
-//
-//        NSLog(eventsList[rowint].id!)
-//
-//        if segue.identifier == "showMailContent" {
-//            if let destination = segue.destination as? CalendarContentViewController {
-//                destination.event = eventsList[rowint]
-//            }
-//        }
-//    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         tableView.beginUpdates()
         tableView.reloadData()
