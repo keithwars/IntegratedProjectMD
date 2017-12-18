@@ -87,11 +87,6 @@ class MessagesDataSource: NSObject {
             for (message) in unwrappedMessages {
               
                 NSLog("Testing")
-                
-//                for emailAddress in message["toRecipients"] {
-//                    NSLog("testje: " + emailAddress.0)
-//                }
-                
                 NSLog("DEBUG003: " + String(message["toRecipients"].arrayValue.count))
                 
                 var toRecipientsList = [EmailAddress]()
@@ -129,27 +124,6 @@ class MessagesDataSource: NSObject {
                     bccRecipients: bccRecipientsList)
                 
                 msgArray.append(newMsg)
-                
-                // Debugging
-//                print("-----------------------------------------------------------")
-//                print("DEBUG001")
-//                print("-----------------------------------------------------------")
-//                print(newMsg.id)
-//                print(newMsg.receivedDateTime)
-//                print(newMsg.hasAttachments)
-//                print(newMsg.subject)
-//                print("BODYPREVIEW: " + newMsg.bodyPreview)
-//                print(newMsg.isRead)
-//                print(newMsg.isDraft)
-//                //print(newMsg.body.content)
-//                print(newMsg.body.contentType)
-//                print(newMsg.from.name)
-//                print(newMsg.from.address)
-//                print(newMsg.toRecipients)
-//                print(newMsg.ccRecipients)
-//                print(newMsg.bccRecipients)
-//                print("-----------------------------------------------------------")
-
             }
         }
         
@@ -174,19 +148,13 @@ extension MessagesDataSource: UITableViewDataSource {
 
         cell.from = message.from.name
         cell.received = message.receivedDateTime
-
-        // @KEITH: REWORK THIS
-        //
-        //if (message.hasAttachments == true){
-        //    cell.attachmentImageView.isHidden = false
-        //}else{
-        //    cell.attachmentImageView.isHidden = true
-        //}
-        //
-        //
-        //
-        //cell.from = message.from
-        //cell.received = message.received
+        
+        if (message.hasAttachments == true){
+            cell.attachmentImageView = false
+        }
+        else{
+            cell.attachmentImageView = true
+        }
       
         cell.subject = message.subject
         cell.bodyPreview = (message.bodyPreview)
