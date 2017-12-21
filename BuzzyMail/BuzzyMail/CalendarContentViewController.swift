@@ -19,9 +19,9 @@ class CalendarContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        creatorLabel.text = event?.author
+        creatorLabel.text = event?.organizer?.emailAddress?.name
         print("creatorlabel:" + "\(String(describing: creatorLabel.text))")
-        print("event subject:" + "\(String(describing: event?.id))")
+        print("event subject:" + "\(String(describing: event?.organizer?.emailAddress?.name))")
         
 //        var selectedEvent = self.service.getEvent(id: creatorLabel.text!) {_ in
 //        }

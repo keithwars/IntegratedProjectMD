@@ -198,7 +198,6 @@ class OutlookService {
         let apiParams = [
             "startDateTime": "\(iso8601String)",
             "endDateTime": "\(test)",
-            "$select": "subject,start,end",
             "$orderby": "start/dateTime ASC",
             "$top": "10"
         ]

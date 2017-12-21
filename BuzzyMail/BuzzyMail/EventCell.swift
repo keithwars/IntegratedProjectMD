@@ -18,6 +18,16 @@ struct Event {
     let end: String?
     let startTime: String?
     let id: String?
+    let organizer: Organizer?
+}
+
+struct Organizer : Codable {
+    var emailAddress : EmailAddress?
+}
+
+struct EmailAddress : Codable {
+    var name : String?
+    var address : String?
 }
 
 class EventCell: UITableViewCell {
@@ -74,7 +84,8 @@ class EventsDataSource: NSObject {
                     start: Formatter.dateTimeTimeZoneToString(date: event["start"]),
                     end: Formatter.dateTimeToTime(date: event["end"]),
                     startTime: Formatter.timeToHourAndMin(date: event["start"]),
-                    id: event["id"].stringValue
+                    id: event["id"].stringValue,
+                    organizer: Organizer(emailAddress: EmailAddress(name: event["organizer"]["emailAddress"]["name"].stringValue, address: event["organizer"]["emailAddress"]["address"].stringValue))
                 )
                 
                 evtArray.append(newEvent)
@@ -104,6 +115,8 @@ extension EventsDataSource: UITableViewDataSource {
         cell.startTime = event.startTime
         cell.id = event.id
         
+        print("Organizer name: " + "\(event.organizer?.emailAddress?.address)")
+        
         return cell
         
     }
@@ -131,10 +144,6 @@ extension EventsDataSource: UITableViewDataSource {
             
             let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
                 let rowint = Int(indexPath[1])
-                //            NSLog("TEST: " + "\(String (rowint))")
-                //
-                //            NSLog("TEST2: " + "\(events.count)")
-                //            NSLog("KEK GEDELETETE ID: " + "\(events[rowint].id!)")
                 
                 let eventToDelete = self.events[rowint].id!
                 //confirmDelete(event: eventToDelete)
