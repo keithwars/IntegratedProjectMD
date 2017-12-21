@@ -19,10 +19,13 @@ class CalendarContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        creatorLabel.text = event?.subject
-        print("creatorlabel:" + "\(creatorLabel.text)")
-        print("event subject:" + "\(event?.subject)")
-
+        creatorLabel.text = event?.author
+        print("creatorlabel:" + "\(String(describing: creatorLabel.text))")
+        print("event subject:" + "\(String(describing: event?.id))")
+        
+//        var selectedEvent = self.service.getEvent(id: creatorLabel.text!) {_ in
+//        }
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -126,7 +126,7 @@
                                             <outlet property="startLabel" destination="cOl-pt-U8l" id="67U-8b-m91"/>
                                             <outlet property="startTimeLabel" destination="Odd-0g-ChD" id="ss4-VV-1nr"/>
                                             <outlet property="subjectLabel" destination="5Ut-P7-T7n" id="5XG-Vz-Lo2"/>
-                                            <segue destination="K1Z-6e-xJk" kind="showDetail" action="showViewController:sender:" id="HUn-1t-9hZ"/>
+                                            <segue destination="LtG-la-YuF" kind="show" identifier="showEventContent" action="showDetailViewController:sender:" id="8C2-ON-mfD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -155,6 +155,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1728.8" y="-0.44977511244377816"/>
+        </scene>
+        <!--Event details-->
+        <scene sceneID="PUE-hw-akX">
+            <objects>
+                <viewController id="uRc-Va-mPz" customClass="CalendarContentViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7mU-gA-Njv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gebeurtenis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f70-nW-v9y">
+                                <rect key="frame" x="16" y="75" width="343" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tay-gj-JzE">
+                                <rect key="frame" x="16" y="119" width="308" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="2bM-dz-4i3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Event details" id="N16-lp-Z6n">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="gBF-gt-y1L">
+                            <connections>
+                                <action selector="onCancelPressed:" destination="uRc-Va-mPz" id="Cj4-Fd-Srm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="creatorLabel" destination="tay-gj-JzE" id="R5l-cG-Nt3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNf-f3-V9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3548" y="-711.09445277361328"/>
         </scene>
         <!--Add Event-->
         <scene sceneID="dgb-fZ-92r">
@@ -453,47 +494,6 @@
             </objects>
             <point key="canvasLocation" x="945" y="788"/>
         </scene>
-        <!--Event Content-->
-        <scene sceneID="plV-xy-Rbw">
-            <objects>
-                <viewController title="Event Content" id="gat-Kl-qe6" customClass="CalendarContentViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TMH-E7-IUI" customClass="CalenderContent">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gebeurtenis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBu-Pl-hba">
-                                <rect key="frame" x="16" y="64" width="343" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <color key="textColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="highlightedColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-ng-QCn">
-                                <rect key="frame" x="16" y="106" width="343" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="YHM-dO-PdR"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Bgz-IY-nAX">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="Z2l-j8-wlI">
-                            <connections>
-                                <action selector="onCancelPressed:" destination="gat-Kl-qe6" id="LfB-mJ-2Ma"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="creatorLabel" destination="Ujm-ng-QCn" id="V8M-MI-286"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hSY-vq-XSL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3524" y="-701.19940029985014"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="1q7-Oo-wK1">
             <objects>
@@ -513,22 +513,22 @@
             <point key="canvasLocation" x="2682" y="0.0"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="dwE-bu-sFZ">
+        <scene sceneID="hK3-MA-4vy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K1Z-6e-xJk" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LtG-la-YuF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5lP-aD-CHc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="96a-mH-rZV">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="gat-Kl-qe6" kind="relationship" relationship="rootViewController" id="oRv-Vs-G6R"/>
+                        <segue destination="uRc-Va-mPz" kind="relationship" relationship="rootViewController" id="VJd-O5-kEk"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eoE-5W-UT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="isi-z3-j13" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2680" y="-700.74962518740631"/>
+            <point key="canvasLocation" x="2680" y="-710.64467766116945"/>
         </scene>
     </scenes>
     <resources>

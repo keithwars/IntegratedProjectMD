@@ -226,6 +226,13 @@ class OutlookService {
         }
     }
     
+    func getEvent(id: String, callback: @escaping (String?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.get, json: id as Any as? [String : Any]) {
+            result in
+            callback(result?.string)
+        }
+    }
+    
     func logout() -> Void {
         oauth2.forgetTokens()
     }

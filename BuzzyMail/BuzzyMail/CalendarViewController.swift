@@ -34,6 +34,28 @@ class CalendarViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showEventContent" {
+            let row = self.tableView.indexPathForSelectedRow
+            let rowint = Int(row![1])
+            
+            eventsList = dataSource?.getEventsArray()
+            
+            print("subject in CVC: " + eventsList![rowint].subject!)
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? CalendarContentViewController {
+                        chidVC.event = eventsList![rowint]
+                }
+                
+            }
+//            if let destination = segue.destination as? CalendarContentViewController {
+//                destination.event = eventsList![rowint]
+//            }
+        }
+    }
         
     override func viewWillAppear(_ animated: Bool) {
         tableView.beginUpdates()

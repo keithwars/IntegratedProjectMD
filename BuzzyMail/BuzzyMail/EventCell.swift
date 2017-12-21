@@ -74,7 +74,8 @@ class EventsDataSource: NSObject {
                     start: Formatter.dateTimeTimeZoneToString(date: event["start"]),
                     end: Formatter.dateTimeToTime(date: event["end"]),
                     startTime: Formatter.timeToHourAndMin(date: event["start"]),
-                    id: event["id"].stringValue)
+                    id: event["id"].stringValue
+                )
                 
                 evtArray.append(newEvent)
                 
