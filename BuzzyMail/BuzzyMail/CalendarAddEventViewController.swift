@@ -41,6 +41,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     
     @IBAction func textfieldLocationEditor(_ sender: UITextField) {
         location = textfieldLocation.text!
+        print("Wat is de location? " + location)
     }
     
     @IBAction func textfieldContentEditor(_ sender: UITextField) {
@@ -167,6 +168,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         testEvent.end.dateTime = end
         testEvent.subject = subject
         testEvent.location.displayName = location
+        print("WAT IS HIER MIUJN FUCKING LOCATION???" + testEvent.location.displayName)
         testEvent.body.content = content
         
         let jsonEncoder = JSONEncoder()

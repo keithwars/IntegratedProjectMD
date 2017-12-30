@@ -242,7 +242,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="textfieldLocationEditor:" destination="Pei-hT-PLz" eventType="editingDidBegin" id="6AE-MN-5jg"/>
+                                                        <action selector="textfieldLocationEditor:" destination="Pei-hT-PLz" eventType="editingChanged" id="hjC-kE-9o5"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -356,7 +356,7 @@
                         <outlet property="textfieldContent" destination="Qz6-ch-Erw" id="DWH-yI-SMG"/>
                         <outlet property="textfieldEnd" destination="5TT-Yt-etX" id="Cyx-7F-cSV"/>
                         <outlet property="textfieldEndTime" destination="vx2-iq-SNd" id="gxz-c9-H4u"/>
-                        <outlet property="textfieldLocation" destination="bsu-l8-hjn" id="cCD-4X-NoF"/>
+                        <outlet property="textfieldLocation" destination="bsu-l8-hjn" id="DCq-FC-96a"/>
                         <outlet property="textfieldStart" destination="uQl-nq-Gda" id="gik-rN-n9G"/>
                         <outlet property="textfieldStartTime" destination="2CV-vn-Z8a" id="bMd-Ec-g7q"/>
                         <outlet property="textfieldSubject" destination="pdi-tB-KYy" id="MFL-Wg-Vo8"/>
