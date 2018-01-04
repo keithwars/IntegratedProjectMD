@@ -45,6 +45,7 @@ public class RichTextEditorEditable: UIView, WKScriptMessageHandler, WKNavigatio
     public var text: String? {
         didSet {
             guard let text = text else { return }
+            updatedText = text
             if editorView.isLoading {
                 textToLoad = text
             } else {
