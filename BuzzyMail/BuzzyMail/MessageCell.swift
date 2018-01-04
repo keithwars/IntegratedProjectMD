@@ -18,10 +18,10 @@ struct Message: Codable {
     var isRead: Bool
     var isDraft: Bool
     var body: Body
-    var from: EmailAddress
-    var toRecipients: [EmailAddress]?
-    var ccRecipients: [EmailAddress]?
-    var bccRecipients: [EmailAddress]?
+    var from: EmailAddresses
+    var toRecipients: [EmailAddresses]?
+    var ccRecipients: [EmailAddresses]?
+    var bccRecipients: [EmailAddresses]?
 }
 
 struct Body: Codable {
@@ -29,6 +29,9 @@ struct Body: Codable {
     var content: String
 }
 
+struct EmailAddresses: Codable {
+    var emailAddress: EmailAddress
+}
 struct EmailAddress: Codable {
     var name: String
     var address: String
@@ -89,27 +92,28 @@ class MessagesDataSource: NSObject {
                 NSLog("Testing")
                 NSLog("DEBUG003: " + String(message["toRecipients"].arrayValue.count))
                 
-                var toRecipientsList = [EmailAddress]()
+                var toRecipientsList = [EmailAddresses]()
                 for row in message["toRecipients"].arrayValue {
-                    toRecipientsList.append(EmailAddress(name: row["emailAddress"]["name"].stringValue,
-                                                         address: row["emailAddress"]["address"].stringValue))
+                    toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                         address: row["emailAddress"]["address"].stringValue)))
                 }
                 
-                var ccRecipientsList = [EmailAddress]()
+                var ccRecipientsList = [EmailAddresses]()
                 for row in message["ccRecipients"].arrayValue {
-                    ccRecipientsList.append(EmailAddress(name: row["emailAddress"]["name"].stringValue,
-                                                         address: row["emailAddress"]["address"].stringValue))
+                    ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                         address: row["emailAddress"]["address"].stringValue)))
                 }
                 
-                var bccRecipientsList = [EmailAddress]()
+                var bccRecipientsList = [EmailAddresses]()
                 for row in message["bccRecipients"].arrayValue {
-                    bccRecipientsList.append(EmailAddress(name: row["emailAddress"]["name"].stringValue,
-                                                          address: row["emailAddress"]["address"].stringValue))
+                    bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                          address: row["emailAddress"]["address"].stringValue)))
                 }
                 
+                //receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
                 let newMsg = Message(
                     id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
+                    receivedDateTime: message["receivedDateTime"].stringValue,
                     hasAttachments: message["hasAttachments"].boolValue,
                     subject: message["subject"].stringValue,
                     bodyPreview: message["bodyPreview"].stringValue,
@@ -117,13 +121,14 @@ class MessagesDataSource: NSObject {
                     isDraft: message["isDraft"].boolValue,
                     body: Body(contentType: message["body"]["contentType"].stringValue,
                                content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
+                    from: EmailAddresses(emailAddress: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+                                       address: message["from"]["emailAddress"]["address"].stringValue)),
                     toRecipients: toRecipientsList,
                     ccRecipients: ccRecipientsList,
                     bccRecipients: bccRecipientsList)
                 
                 msgArray.append(newMsg)
+                NSLog("DEBUG202" + newMsg.receivedDateTime)
             }
         }
         
@@ -146,15 +151,15 @@ extension MessagesDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MessageCell.self)) as! MessageCell
         let message = messages[indexPath.row]
 
-        cell.from = message.from.name
+        cell.from = message.from.emailAddress.name
         cell.received = message.receivedDateTime
         
-        if (message.hasAttachments == true){
+        /*if (message.hasAttachments == true){
             cell.attachmentImageView = false
         }
         else{
             cell.attachmentImageView = true
-        }
+        }*/
       
         cell.subject = message.subject
         cell.bodyPreview = (message.bodyPreview)

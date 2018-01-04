@@ -14,118 +14,111 @@ class ReplyMailViewController: UIViewController {
     let service = OutlookService.shared()
     var replyToEmail:Message?
     var newEmail:Message?
+    var updatedEmail:Message?
     var container: MailContentTableViewController?
+    
+    let dispatchGroup = DispatchGroup()
     
     weak var embeddedMailContentTableViewController:MailContentTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //NSLog("DEBUG2: " + replyToEmail!.subject)
-        createNewReply()
     }
     
     @IBAction func sendButtonPressed(_ sender: Any) {
-        updateReply()
+        
+        NSLog("DEBUG001")
+        self.dispatchGroup.enter()
+        if let richTextEditor = container?.richTextEditor {
+            NSLog("-----------------------------------------------------------------")
+            var testText = ""
+            richTextEditor.delegate?.textDidChange(text: testText)
+            NSLog("DEBUG701")
+            NSLog(testText)
+            NSLog(richTextEditor.text!)
+            NSLog(container!.subjectTextField.text!)
+            NSLog("-----------------------------------------------------------------\n\n")
+            self.newEmail?.body.content = richTextEditor.text!
+            self.newEmail?.subject = container!.subjectTextField.text!
+//                NSLog("DEBUG002")
+//                self.updatedEmail = Message(
+//                    id: newEmail.id,
+//                    receivedDateTime: newEmail.receivedDateTime,
+//                    hasAttachments: newEmail.hasAttachments,
+//                    subject: (container?.subjectTextField.text)!,
+//                    bodyPreview: newEmail.bodyPreview,
+//                    isRead: newEmail.isRead,
+//                    isDraft: newEmail.isDraft,
+//                    body: Body(contentType: newEmail.body.contentType,
+//                               content: (richTextEditor.text)!),
+//                    from: EmailAddresses(emailAddress: EmailAddress(name: newEmail.from.emailAddress.name,
+//                                                                    address: newEmail.from.emailAddress.address)),
+//                    toRecipients: newEmail.toRecipients,
+//                    ccRecipients: newEmail.ccRecipients,
+//                    bccRecipients: newEmail.bccRecipients)
+//                NSLog("DEBUG003")
+            self.dispatchGroup.leave()
+        }
+        NSLog("DEBUG004")
+        self.dispatchGroup.notify(queue: .main) {
+            self.updateReply()
+        }
         //sendReply()
     }
+
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embeddedSegue") {
-            //let secondViewController = segue.destination  as! MailContentTableViewController
             let childViewController = segue.destination as! MailContentTableViewController
-            childViewController.email = replyToEmail
+            childViewController.email = self.newEmail
             self.container = (segue.destination as! MailContentTableViewController)
         }
     }
     
-    func createNewReply() {
-        NSLog("createNewReply called")
-        service.createReply(message: replyToEmail!) {
-            message in
-            if let message = message {
-                let newMsg = Message(
-                    id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-                    hasAttachments: message["hasAttachments"].boolValue,
-                    subject: message["subject"].stringValue,
-                    bodyPreview: message["bodyPreview"].stringValue,
-                    isRead: message["isRead"].boolValue,
-                    isDraft: message["isDraft"].boolValue,
-                    body: Body(contentType: message["body"]["contentType"].stringValue,
-                               content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
-                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
-//                NSLog("RESULT: " + newMsg.bodyContent)
-            } else {
-                NSLog("Fail")
-            }
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        
+        let deleteDraftActionHandler = { (action:UIAlertAction!) -> Void in
+            self.performSegue(withIdentifier: "cancelDraft", sender: action) //executing the segue on cancel
         }
+        
+        let saveDraftActionHandler = { (action:UIAlertAction!) -> Void in
+            self.performSegue(withIdentifier: "cancelDraft", sender: action) //executing the segue on cancel
+        }
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let deleteDraftAction = UIAlertAction(title: "Delete Draft", style: .destructive, handler: deleteDraftActionHandler)
+        alertController.addAction(deleteDraftAction)
+        let saveDraftAction = UIAlertAction(title: "Save Draft", style: .default, handler: saveDraftActionHandler)
+        alertController.addAction(saveDraftAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
+
+
     
     func sendReply() {
         NSLog("sendReply called")
-        service.sendReply(message: replyToEmail!) {
+        service.sendReply(message: newEmail!) {
             message in
             if let message = message {
-                let newMsg = Message(
-                    id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-                    hasAttachments: message["hasAttachments"].boolValue,
-                    subject: message["subject"].stringValue,
-                    bodyPreview: message["bodyPreview"].stringValue,
-                    isRead: message["isRead"].boolValue,
-                    isDraft: message["isDraft"].boolValue,
-                    body: Body(contentType: message["body"]["contentType"].stringValue,
-                               content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
-                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
-//                NSLog("RESULT: " + newMsg.bodyContent)
-                
+                NSLog("Send Reply Success")
             } else {
-                NSLog("Fail")
+                NSLog("Send Reply Fail")
             }
         }
     }
     
     func updateReply() {
-//        replyToEmail?.bodyContent = (container?.richTextEditor.text)!
-        service.updateReply(message: replyToEmail!) {
+        service.updateReply(message: newEmail!) {
             message in
             if let message = message {
-                let newMsg = Message(
-                    id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-                    hasAttachments: message["hasAttachments"].boolValue,
-                    subject: message["subject"].stringValue,
-                    bodyPreview: message["bodyPreview"].stringValue,
-                    isRead: message["isRead"].boolValue,
-                    isDraft: message["isDraft"].boolValue,
-                    body: Body(contentType: message["body"]["contentType"].stringValue,
-                               content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
-                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                               address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
-//                NSLog("RESULT: " + newMsg.bodyContent)
-                
+                NSLog("Update Reply Success")
             } else {
-                NSLog("Fail")
+                NSLog("Update Reply Fail")
             }
         }
     }

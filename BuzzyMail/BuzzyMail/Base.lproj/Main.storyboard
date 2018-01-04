@@ -376,7 +376,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fG-iw-VdA">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <segue destination="Zfn-ex-ZLt" kind="embed" identifier="embeddedSegue" id="8HY-ZV-c0T"/>
                                 </connections>
@@ -394,7 +394,7 @@
                     <navigationItem key="navigationItem" id="Xhg-nw-wfz">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="eaL-kq-H5x">
                             <connections>
-                                <segue destination="lVO-vz-3Xa" kind="unwind" unwindAction="cancelToMailContentViewController:" id="5av-Os-faA"/>
+                                <action selector="cancelButtonPressed:" destination="KVH-nB-TOC" id="L13-Lf-sSF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Send" id="xnq-ay-abH">
@@ -403,6 +403,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="lVO-vz-3Xa" kind="unwind" identifier="cancelDraft" unwindAction="cancelToMailContentViewController:" id="YqZ-tK-lvG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l3-Sd-KOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lVO-vz-3Xa" userLabel="Exit" sceneMemberID="exit"/>
@@ -414,7 +417,7 @@
             <objects>
                 <tableViewController id="Zfn-ex-ZLt" customClass="MailContentTableViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YSw-Dz-Aa3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -616,6 +619,6 @@
         <image name="third" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zh0-ri-91Z"/>
+        <segue reference="a1D-Uf-zQr"/>
     </inferredMetricsTieBreakers>
 </document>

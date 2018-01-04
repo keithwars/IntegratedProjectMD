@@ -26,8 +26,32 @@ class MailContentTableViewController: UITableViewController {
         if let unwrappedEmail = email {
             richTextEditor.text = unwrappedEmail.body.content
             subjectTextField.text = unwrappedEmail.subject
+            
+            for emailAddress in unwrappedEmail.toRecipients! {
+                if (toTextField.text != "") {
+                    toTextField.text?.append(", ")
+                }
+                toTextField.text?.append(contentsOf: emailAddress.emailAddress.address)
+            }
+            
+            for emailAddress in unwrappedEmail.ccRecipients! {
+                if (ccTextField.text != "") {
+                    ccTextField.text?.append(", ")
+                }
+                ccTextField.text?.append(contentsOf: emailAddress.emailAddress.address)
+            }
+            
         }
+        
+        var helloWorldTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(MailContentTableViewController.sayHello), userInfo: nil, repeats: true)
+        
+        helloWorldTimer.fire()
 
+    }
+    
+    @objc func sayHello()
+    {
+        NSLog(richTextEditor.text!)
     }
 
     
