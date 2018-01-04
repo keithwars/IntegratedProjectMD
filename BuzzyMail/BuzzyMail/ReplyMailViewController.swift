@@ -12,16 +12,12 @@ import UIKit
 class ReplyMailViewController: UIViewController {
 
     let service = OutlookService.shared()
-    var replyToEmail:Message?
     var newEmail:Message?
-    var updatedEmail:Message?
     var container: MailContentTableViewController?
     
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
-    
-    weak var embeddedMailContentTableViewController:MailContentTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,28 +87,12 @@ class ReplyMailViewController: UIViewController {
     
     func sendReply() {
         NSLog("sendReply called")
-        service.sendMessage(message: newEmail!) {
-            message in
-            if let message = message {
-                NSLog("Send Reply Success")
-            } else {
-                NSLog("Send Reply Fail")
-            }
-        }
+        service.sendMessage(message: newEmail!) {_ in }
     }
     
     func updateReply() {
         NSLog("updateReply called")
-        service.updateReply(message: newEmail!) {
-            message in
-            if let message = message {
-                NSLog("Update Reply Success")
-                self.dispatchGroup2.leave()
-            } else {
-                NSLog("Update Reply Fail")
-                self.dispatchGroup2.leave()
-            }
-        }
+        service.updateReply(message: newEmail!) {_ in }
     }
 
     

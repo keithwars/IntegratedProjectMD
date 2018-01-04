@@ -58,15 +58,12 @@ class MailViewController: UIViewController {
     func loadUserData() {
         service.getUserEmail() {
             email in
-            if let unwrappedEmail = email {
-                
-                self.service.getInboxMessages() {
-                    messages in
-                    if let unwrappedMessages = messages {
-                        self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
-                        self.tableView.dataSource = self.dataSource
-                        self.tableView.reloadData()
-                    }
+            self.service.getInboxMessages() {
+                messages in
+                if let unwrappedMessages = messages {
+                    self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
+                    self.tableView.dataSource = self.dataSource
+                    self.tableView.reloadData()
                 }
             }
         }

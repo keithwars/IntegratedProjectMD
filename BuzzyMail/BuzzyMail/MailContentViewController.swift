@@ -50,7 +50,7 @@ class MailContentViewController: UIViewController {
 
         let replyActionHandler = { (action:UIAlertAction!) -> Void in
             self.dispatchGroup.enter()
-            self.createNewReply()
+            self.createMessage()
             self.dispatchGroup.notify(queue: .main) {
                 let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
                 let navigationController = UINavigationController(rootViewController: popup)
@@ -80,8 +80,8 @@ class MailContentViewController: UIViewController {
     }
 
     
-    func createNewReply() {
-        NSLog("createNewReply called")
+    func createMessage() {
+        NSLog("createMessage called")
         service.createMessage(message: email!) {
             message in
             if let message = message {
