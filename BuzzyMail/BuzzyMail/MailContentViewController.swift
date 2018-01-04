@@ -82,7 +82,7 @@ class MailContentViewController: UIViewController {
     
     func createNewReply() {
         NSLog("createNewReply called")
-        service.createReply(message: email!) {
+        service.createMessage(message: email!) {
             message in
             if let message = message {
                 var toRecipientsList = [EmailAddresses]()

@@ -45,10 +45,4 @@ class MailContentTableViewController: UITableViewController {
 
     }
     
-    @objc func sayHello()
-    {
-        NSLog(richTextEditor.text!)
-    }
-
-    
 }

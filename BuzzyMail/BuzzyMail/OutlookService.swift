@@ -88,39 +88,30 @@ class OutlookService {
         }
         
         let apiUrl = urlBuilder.url!
-        NSLog("Making request to \(apiUrl)")
+        NSLog("Making \(requestType) request to \(apiUrl)")
         
         var req = oauth2.request(forURL: apiUrl)
         req.addValue("application/json", forHTTPHeaderField: "Accept")
 
         switch requestType {
         case .get:
-            NSLog("Get request received")
+            req.httpMethod = "GET"
         case .post:
-            NSLog("Post request received")
             req.httpMethod = "POST"
             req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         case .put:
-            NSLog("Put request received")
+            req.httpMethod = "PUT"
         case .patch:
             NSLog("Patch request received")
             req.httpMethod = "PATCH"
             req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            
             let jsonEncoder = JSONEncoder()
-
             let jsonData = try! jsonEncoder.encode(body)
             req.httpBody = jsonData
-            NSLog("DEBUG103")
-            
         case .delete:
-            NSLog("Delete request received")
+            req.httpMethod = "DELETE"
         }
-        
-//        else {
-//            req.addValue("application/json", forHTTPHeaderField: "Accept")
-//        }
-        
+
         if (!userEmail.isEmpty) {
             // Add X-AnchorMailbox header to optimize
             // API routing
@@ -131,12 +122,11 @@ class OutlookService {
         
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-        loader.logger = OAuth2DebugLogger(.trace)
+        //loader.logger = OAuth2DebugLogger(.trace)
         
         loader.perform(request: req) {
             response in
             do {
-                NSLog("DEBUG405")
                 let dict = try response.responseJSON()
                 DispatchQueue.main.async {
                     let result = JSON(dict)
@@ -160,7 +150,6 @@ class OutlookService {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
-                    NSLog("DEBUG407 " + email)
                     self.userEmail = email
                     callback(email)
                 } else {
@@ -184,7 +173,7 @@ class OutlookService {
         }
     }
     
-    func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+    func createMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {
             result in
             if let unwrappedResult = result {
@@ -203,9 +192,14 @@ class OutlookService {
     }
 
     func updateReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        NSLog("DEBUG401")
-        NSLog(message.body.content)
         makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+            result in
+            callback(result)
+        }
+    }
+   
+    func deleteMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.delete, body: message) {
             result in
             callback(result)
         }

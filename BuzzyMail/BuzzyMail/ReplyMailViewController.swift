@@ -19,6 +19,7 @@ class ReplyMailViewController: UIViewController {
     
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
+    let dispatchGroup3 = DispatchGroup()
     
     weak var embeddedMailContentTableViewController:MailContentTableViewController?
     
@@ -57,11 +58,21 @@ class ReplyMailViewController: UIViewController {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         
         let deleteDraftActionHandler = { (action:UIAlertAction!) -> Void in
+            self.service.deleteMessage(message: self.newEmail!) {_ in }
             self.performSegue(withIdentifier: "closeDraft", sender: action)
         }
         
         let saveDraftActionHandler = { (action:UIAlertAction!) -> Void in
-            self.performSegue(withIdentifier: "closeDraft", sender: action)
+            self.dispatchGroup3.enter()
+            if let richTextEditor = self.container?.richTextEditor {
+                self.newEmail?.body.content = richTextEditor.updatedText!
+                self.newEmail?.subject = self.container!.subjectTextField.text!
+                self.dispatchGroup3.leave()
+            }
+            self.dispatchGroup3.notify(queue: .main) {
+                self.service.updateReply(message: self.newEmail!) {_ in }
+                self.performSegue(withIdentifier: "closeDraft", sender: action)
+            }
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

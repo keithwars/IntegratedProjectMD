@@ -32,8 +32,6 @@ class MailViewController: UIViewController {
         let rowint = Int(row![1])
         
         messagesList = dataSource?.getMessagesArray()
-        
-        NSLog(messagesList![rowint].subject)
                 
         if segue.identifier == "showMailContent" {
             if let destination = segue.destination as? MailContentViewController {
@@ -58,11 +56,9 @@ class MailViewController: UIViewController {
     }
     
     func loadUserData() {
-        NSLog("Test")
         service.getUserEmail() {
             email in
             if let unwrappedEmail = email {
-                NSLog("Hello \(unwrappedEmail)")
                 
                 self.service.getInboxMessages() {
                     messages in

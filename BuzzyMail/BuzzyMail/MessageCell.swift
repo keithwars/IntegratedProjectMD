@@ -9,34 +9,6 @@
 import UIKit
 import SwiftyJSON
 
-struct Message: Codable {
-    var id: String
-    var receivedDateTime: String
-    var hasAttachments: Bool
-    var subject: String
-    var bodyPreview: String
-    var isRead: Bool
-    var isDraft: Bool
-    var body: Body
-    var from: EmailAddresses
-    var toRecipients: [EmailAddresses]?
-    var ccRecipients: [EmailAddresses]?
-    var bccRecipients: [EmailAddresses]?
-}
-
-struct Body: Codable {
-    var contentType: String
-    var content: String
-}
-
-struct EmailAddresses: Codable {
-    var emailAddress: EmailAddress
-}
-struct EmailAddress: Codable {
-    var name: String
-    var address: String
-}
-
 class MessageCell: UITableViewCell {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var receivedLabel: UILabel!
@@ -88,9 +60,6 @@ class MessagesDataSource: NSObject {
         
         if let unwrappedMessages = messages {
             for (message) in unwrappedMessages {
-              
-                NSLog("Testing")
-                NSLog("DEBUG003: " + String(message["toRecipients"].arrayValue.count))
                 
                 var toRecipientsList = [EmailAddresses]()
                 for row in message["toRecipients"].arrayValue {
@@ -128,7 +97,6 @@ class MessagesDataSource: NSObject {
                     bccRecipients: bccRecipientsList)
                 
                 msgArray.append(newMsg)
-                NSLog("DEBUG202" + newMsg.receivedDateTime)
             }
         }
         
