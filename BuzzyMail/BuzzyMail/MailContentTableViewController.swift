@@ -42,10 +42,6 @@ class MailContentTableViewController: UITableViewController {
             }
             
         }
-        
-        var helloWorldTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(MailContentTableViewController.sayHello), userInfo: nil, repeats: true)
-        
-        helloWorldTimer.fire()
 
     }
     

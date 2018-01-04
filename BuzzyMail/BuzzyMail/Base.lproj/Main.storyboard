@@ -404,7 +404,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="lVO-vz-3Xa" kind="unwind" identifier="cancelDraft" unwindAction="cancelToMailContentViewController:" id="YqZ-tK-lvG"/>
+                        <segue destination="lVO-vz-3Xa" kind="unwind" identifier="closeDraft" unwindAction="cancelToMailContentViewController:" id="YqZ-tK-lvG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l3-Sd-KOk" userLabel="First Responder" sceneMemberID="firstResponder"/>

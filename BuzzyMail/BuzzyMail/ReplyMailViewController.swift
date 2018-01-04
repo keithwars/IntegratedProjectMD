@@ -18,6 +18,7 @@ class ReplyMailViewController: UIViewController {
     var container: MailContentTableViewController?
     
     let dispatchGroup = DispatchGroup()
+    let dispatchGroup2 = DispatchGroup()
     
     weak var embeddedMailContentTableViewController:MailContentTableViewController?
     
@@ -27,43 +28,20 @@ class ReplyMailViewController: UIViewController {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
-        NSLog("DEBUG001")
         self.dispatchGroup.enter()
         if let richTextEditor = container?.richTextEditor {
-            NSLog("-----------------------------------------------------------------")
-            var testText = ""
-            richTextEditor.delegate?.textDidChange(text: testText)
-            NSLog("DEBUG701")
-            NSLog(testText)
-            NSLog(richTextEditor.text!)
-            NSLog(container!.subjectTextField.text!)
-            NSLog("-----------------------------------------------------------------\n\n")
-            self.newEmail?.body.content = richTextEditor.text!
+            self.newEmail?.body.content = richTextEditor.updatedText!
             self.newEmail?.subject = container!.subjectTextField.text!
-//                NSLog("DEBUG002")
-//                self.updatedEmail = Message(
-//                    id: newEmail.id,
-//                    receivedDateTime: newEmail.receivedDateTime,
-//                    hasAttachments: newEmail.hasAttachments,
-//                    subject: (container?.subjectTextField.text)!,
-//                    bodyPreview: newEmail.bodyPreview,
-//                    isRead: newEmail.isRead,
-//                    isDraft: newEmail.isDraft,
-//                    body: Body(contentType: newEmail.body.contentType,
-//                               content: (richTextEditor.text)!),
-//                    from: EmailAddresses(emailAddress: EmailAddress(name: newEmail.from.emailAddress.name,
-//                                                                    address: newEmail.from.emailAddress.address)),
-//                    toRecipients: newEmail.toRecipients,
-//                    ccRecipients: newEmail.ccRecipients,
-//                    bccRecipients: newEmail.bccRecipients)
-//                NSLog("DEBUG003")
             self.dispatchGroup.leave()
         }
-        NSLog("DEBUG004")
         self.dispatchGroup.notify(queue: .main) {
+            self.dispatchGroup2.enter()
             self.updateReply()
+            self.dispatchGroup2.notify(queue: .main) {
+                self.sendReply()
+                self.performSegue(withIdentifier: "closeDraft", sender: sender)
+            }
         }
-        //sendReply()
     }
 
     
@@ -79,11 +57,11 @@ class ReplyMailViewController: UIViewController {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         
         let deleteDraftActionHandler = { (action:UIAlertAction!) -> Void in
-            self.performSegue(withIdentifier: "cancelDraft", sender: action) //executing the segue on cancel
+            self.performSegue(withIdentifier: "closeDraft", sender: action)
         }
         
         let saveDraftActionHandler = { (action:UIAlertAction!) -> Void in
-            self.performSegue(withIdentifier: "cancelDraft", sender: action) //executing the segue on cancel
+            self.performSegue(withIdentifier: "closeDraft", sender: action)
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -102,7 +80,7 @@ class ReplyMailViewController: UIViewController {
     
     func sendReply() {
         NSLog("sendReply called")
-        service.sendReply(message: newEmail!) {
+        service.sendMessage(message: newEmail!) {
             message in
             if let message = message {
                 NSLog("Send Reply Success")
@@ -113,12 +91,15 @@ class ReplyMailViewController: UIViewController {
     }
     
     func updateReply() {
+        NSLog("updateReply called")
         service.updateReply(message: newEmail!) {
             message in
             if let message = message {
                 NSLog("Update Reply Success")
+                self.dispatchGroup2.leave()
             } else {
                 NSLog("Update Reply Fail")
+                self.dispatchGroup2.leave()
             }
         }
     }

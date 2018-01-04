@@ -185,20 +185,18 @@ class OutlookService {
     }
     
     func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        NSLog("DEBUG401")
         makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {
             result in
             if let unwrappedResult = result {
                 callback(unwrappedResult)
             } else {
-                NSLog("DEBUG403")
                 callback(nil)
             }
         }
     }
     
-    func sendReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/reply", requestType: RequestTypes.post) {
+    func sendMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/send", requestType: RequestTypes.post) {
             result in
             callback(result)
         }

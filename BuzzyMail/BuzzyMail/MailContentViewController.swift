@@ -37,7 +37,7 @@ class MailContentViewController: UIViewController {
         
         fromLabel.text = email!.from.emailAddress.name
         subjectLabel.text = email!.subject
-        richTextEditorNonEditable.text = email!.body.content
+        richTextEditorNonEditable.text = email!.body.content        
     }
     
     override func didReceiveMemoryWarning() {
