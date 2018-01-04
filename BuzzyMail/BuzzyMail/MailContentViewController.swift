@@ -29,6 +29,7 @@ class MailContentViewController: UIViewController {
     var newEmail:Message?
     
     let dispatchGroup = DispatchGroup()
+    let dispatchGroup2 = DispatchGroup()
     
     
     override func viewDidLoad() {
@@ -50,8 +51,20 @@ class MailContentViewController: UIViewController {
 
         let replyActionHandler = { (action:UIAlertAction!) -> Void in
             self.dispatchGroup.enter()
-            self.createMessage()
+            self.createReply()
             self.dispatchGroup.notify(queue: .main) {
+                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
+                let navigationController = UINavigationController(rootViewController: popup)
+                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+                popup.newEmail = self.newEmail
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
+        
+        let forwardActionHandler = { (action:UIAlertAction!) -> Void in
+            self.dispatchGroup2.enter()
+            self.createForward()
+            self.dispatchGroup2.notify(queue: .main) {
                 let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
                 let navigationController = UINavigationController(rootViewController: popup)
                 navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
@@ -67,7 +80,7 @@ class MailContentViewController: UIViewController {
         alertController.addAction(replyAction)
         let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: nil)
         alertController.addAction(replyAllAction)
-        let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: nil)
+        let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: forwardActionHandler)
         alertController.addAction(forwardAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
@@ -80,9 +93,9 @@ class MailContentViewController: UIViewController {
     }
 
     
-    func createMessage() {
+    func createReply() {
         NSLog("createMessage called")
-        service.createMessage(message: email!) {
+        service.createReply(message: email!) {
             message in
             if let message = message {
                 var toRecipientsList = [EmailAddresses]()
@@ -119,6 +132,51 @@ class MailContentViewController: UIViewController {
                     ccRecipients: ccRecipientsList,
                     bccRecipients: bccRecipientsList)
                 self.dispatchGroup.leave()
+            } else {
+                NSLog("Fail")
+            }
+        }
+    }
+    
+    func createForward() {
+        NSLog("createForward called")
+        service.createForward(message: email!) {
+            message in
+            if let message = message {
+                var toRecipientsList = [EmailAddresses]()
+                for row in message["toRecipients"].arrayValue {
+                    toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                      address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                var ccRecipientsList = [EmailAddresses]()
+                for row in message["ccRecipients"].arrayValue {
+                    ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                      address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                var bccRecipientsList = [EmailAddresses]()
+                for row in message["bccRecipients"].arrayValue {
+                    bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                       address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                self.newEmail = Message(
+                    id: message["id"].stringValue,
+                    receivedDateTime: message["receivedDateTime"].stringValue,
+                    hasAttachments: message["hasAttachments"].boolValue,
+                    subject: message["subject"].stringValue,
+                    bodyPreview: message["bodyPreview"].stringValue,
+                    isRead: message["isRead"].boolValue,
+                    isDraft: message["isDraft"].boolValue,
+                    body: Body(contentType: message["body"]["contentType"].stringValue,
+                               content: message["body"]["content"].stringValue),
+                    from: EmailAddresses(emailAddress: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+                                                                    address: message["from"]["emailAddress"]["address"].stringValue)),
+                    toRecipients: toRecipientsList,
+                    ccRecipients: ccRecipientsList,
+                    bccRecipients: bccRecipientsList)
+                self.dispatchGroup2.leave()
             } else {
                 NSLog("Fail")
             }

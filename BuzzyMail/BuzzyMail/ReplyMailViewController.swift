@@ -29,6 +29,7 @@ class ReplyMailViewController: UIViewController {
         if let richTextEditor = container?.richTextEditor {
             self.newEmail?.body.content = richTextEditor.updatedText!
             self.newEmail?.subject = container!.subjectTextField.text!
+            self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "Test", address: container!.toTextField.text!)))
             self.dispatchGroup.leave()
         }
         self.dispatchGroup.notify(queue: .main) {
@@ -87,12 +88,28 @@ class ReplyMailViewController: UIViewController {
     
     func sendReply() {
         NSLog("sendReply called")
-        service.sendMessage(message: newEmail!) {_ in }
+        service.sendMessage(message: newEmail!) {
+            message in
+            if let message = message {
+                NSLog("Send Reply Success")
+            } else {
+                NSLog("Send Reply Fail")
+            }
+        }
     }
     
     func updateReply() {
         NSLog("updateReply called")
-        service.updateReply(message: newEmail!) {_ in }
+        service.updateReply(message: newEmail!) {
+            message in
+            if let message = message {
+                NSLog("Update Reply Success")
+                self.dispatchGroup2.leave()
+            } else {
+                NSLog("Update Reply Fail")
+                self.dispatchGroup2.leave()
+            }
+        }
     }
 
     
