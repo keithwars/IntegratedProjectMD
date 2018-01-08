@@ -70,7 +70,7 @@ class ReplyMailViewController: UIViewController {
     
     func sendReply() {
         NSLog("sendReply called")
-        service.sendReply(message: replyToEmail!) {
+        service.sendMessage(message: replyToEmail!) {
             message in
             if let message = message {
                 let newMsg = Message(

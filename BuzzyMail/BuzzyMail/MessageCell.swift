@@ -8,8 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import Foundation
 
-struct Message: Codable {
+struct Message : Codable {
     var id: String
     var receivedDateTime: String
     var hasAttachments: Bool
@@ -149,12 +150,15 @@ extension MessagesDataSource: UITableViewDataSource {
         cell.from = message.from.name
         cell.received = message.receivedDateTime
         
+        /*
         if (message.hasAttachments == true){
             cell.attachmentImageView = false
         }
         else{
             cell.attachmentImageView = true
         }
+ 
+         */
       
         cell.subject = message.subject
         cell.bodyPreview = (message.bodyPreview)
