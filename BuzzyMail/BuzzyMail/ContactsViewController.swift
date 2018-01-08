@@ -12,6 +12,17 @@ class ContactsViewController: UIViewController {
     
     let service = OutlookService.shared()
     
+    func loadUserData() {
+//        self.service.getEvents() {
+//            events in
+//            if let unwrappedEvents = events {
+//                self.dataSource = EventsDataSource(events: unwrappedEvents["value"].arrayValue)
+//                self.tableView.dataSource = self.dataSource
+//                self.tableView.reloadData()
+//            }
+//        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

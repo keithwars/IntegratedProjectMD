@@ -24,7 +24,7 @@ class OutlookService {
         "client_id" : "9c5cb613-91a2-4807-bd5d-f4ced63a862d",
         "authorize_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
         "token_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-        "scope": "openid profile offline_access User.Read Mail.Read Mail.ReadWrite Mail.Send Calendars.ReadWrite",
+        "scope": "openid profile offline_access User.Read Mail.Read Mail.ReadWrite Mail.Send Calendars.ReadWrite Contacts.ReadWrite",
         "redirect_uris": ["buzzy-mail://oauth2/callback"],
         "verbose": true,
         ] as OAuth2JSON
@@ -264,6 +264,18 @@ class OutlookService {
         makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.delete, json: id as Any as? [String : Any]) {
             result in
             callback(result?.string)
+        }
+    }
+    
+    func getContacts(callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "id, displayName, givenName, surname, emailAddresses ",
+            "$top": "10"
+        ]
+        
+        makeApiCall(api: "/v1.0/me/contacts", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
         }
     }
 
