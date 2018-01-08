@@ -421,10 +421,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nPb-ns-dP0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Mail" image="first" landscapeImage="first" selectedImage="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="rPw-DA-HwX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="rPw-DA-HwX">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.58823529411764708" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -440,6 +440,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7N-aZ-HeF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="945" y="-969"/>
+        </scene>
+        <!--Side Menu Mail View Controller-->
+        <scene sceneID="uhq-YD-9SK">
+            <objects>
+                <tableViewController id="IGo-5z-lB4" customClass="SideMenuMailViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dVG-Tw-wYS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuCell" rowHeight="50" id="uo9-b8-VPX" customClass="MenuCell" customModule="BuzzyMail" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uo9-b8-VPX" id="dou-PD-hC3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DisplayName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPI-E4-qAm">
+                                            <rect key="frame" x="16" y="14" width="107" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgq-b6-bYZ">
+                                            <rect key="frame" x="136" y="14" width="20" height="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pgq-b6-bYZ" firstAttribute="leading" secondItem="BPI-E4-qAm" secondAttribute="trailing" constant="13" id="6iT-hi-D3K"/>
+                                        <constraint firstItem="BPI-E4-qAm" firstAttribute="centerY" secondItem="dou-PD-hC3" secondAttribute="centerY" id="7PH-bI-l6m"/>
+                                        <constraint firstItem="BPI-E4-qAm" firstAttribute="top" secondItem="dou-PD-hC3" secondAttribute="topMargin" constant="3" id="Gfj-Qk-XlG"/>
+                                        <constraint firstItem="pgq-b6-bYZ" firstAttribute="baseline" secondItem="BPI-E4-qAm" secondAttribute="baseline" id="ZTk-gr-nsm"/>
+                                        <constraint firstItem="pgq-b6-bYZ" firstAttribute="top" secondItem="BPI-E4-qAm" secondAttribute="top" id="l6w-bf-oeA"/>
+                                        <constraint firstItem="BPI-E4-qAm" firstAttribute="leading" secondItem="dou-PD-hC3" secondAttribute="leadingMargin" id="z6Y-lb-o1N"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="displayNameLabel" destination="BPI-E4-qAm" id="h5w-J0-1sk"/>
+                                    <outlet property="numberUnreadMailsLabel" destination="pgq-b6-bYZ" id="VLj-Eu-L07"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="IGo-5z-lB4" id="7d2-kz-WEt"/>
+                            <outlet property="delegate" destination="IGo-5z-lB4" id="Ewh-hR-zVb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="eih-sh-ITm"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Gi-Eq-T1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2616.8000000000002" y="-1666.4167916041981"/>
+        </scene>
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="Hr9-Wa-ikg">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="tlx-6f-yla" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2tg-u7-myJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="IGo-5z-lB4" kind="relationship" relationship="rootViewController" id="Wre-6H-c7b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kpZ-Kb-abg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1666" y="-1666"/>
         </scene>
         <!--Mail-->
         <scene sceneID="9Wk-jU-K2g">
@@ -544,7 +626,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nrM-N9-lYY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Mail" id="jZL-kQ-QdT"/>
+                    <navigationItem key="navigationItem" title="Mail" id="jZL-kQ-QdT">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Pxm-hh-nIs">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="tlx-6f-yla" kind="presentation" id="5Cb-Y1-QNT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="sVJ-4r-urP" id="1te-Ep-mgZ"/>
                     </connections>
@@ -821,7 +910,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3K-aI-44h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4570" y="-969"/>
+            <point key="canvasLocation" x="4535" y="-969"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="42b-Xd-neC">

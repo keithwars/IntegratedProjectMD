@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import SideMenu
 
 class MailViewController: UIViewController {
 
     let service = OutlookService.shared()
     
     var messagesList:[Message]?
+    
+    let customSideMenuManager = SideMenuManager()
     
     @IBOutlet weak var tableView: UITableView!
     var dataSource: MessagesDataSource?
@@ -28,19 +31,20 @@ class MailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let row = self.tableView.indexPathForSelectedRow
-        let rowint = Int(row![1])
-        
-        messagesList = dataSource?.getMessagesArray()
-                
         if segue.identifier == "showMailContent" {
-            if let destination = segue.destination as? MailContentViewController {
-                destination.email = messagesList![rowint]
-            }
+            let row = self.tableView.indexPathForSelectedRow
+            let rowint = Int(row![1])
+            
+            messagesList = dataSource?.getMessagesArray()
+            
+                if let destination = segue.destination as? MailContentViewController {
+                    destination.email = messagesList![rowint]
+                }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        SideMenuManager.default.menuWidth = max(round(min((UIScreen.main.bounds.width), (UIScreen.main.bounds.height)) * 0.80), 240)
         super.viewWillAppear(animated)
         
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {

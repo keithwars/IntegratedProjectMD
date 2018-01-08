@@ -267,6 +267,16 @@ class OutlookService {
         }
     }
 
+    func getMailFolders(callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "totalItemCount DESC"
+        ]
+        makeApiCall(api: "/v1.0/me/mailfolders", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
     func logout() -> Void {
         oauth2.forgetTokens()
     }

@@ -8,6 +8,7 @@ target 'BuzzyMail' do
   # Pods for BuzzyMail
   pod 'p2.OAuth2'
   pod 'SwiftyJSON'
+  pod 'SideMenu'
 
   target 'BuzzyMailTests' do
     inherit! :search_paths
