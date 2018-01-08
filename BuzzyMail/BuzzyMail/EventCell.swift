@@ -25,10 +25,6 @@ struct Organizer : Codable {
     var emailAddress : EmailAddress?
 }
 
-struct EmailAddress : Codable {
-    var name : String?
-    var address : String?
-}
 
 class EventCell: UITableViewCell {
     @IBOutlet weak var subjectLabel: UILabel!
