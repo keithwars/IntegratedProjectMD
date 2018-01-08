@@ -14,17 +14,17 @@ class ReplyMailViewController: UIViewController {
     let service = OutlookService.shared()
     var newEmail:Message?
     var container: MailContentTableViewController?
-    
+
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     @IBAction func sendButtonPressed(_ sender: Any) {
-        
+
         self.dispatchGroup.enter()
         if let richTextEditor = container?.richTextEditor {
             self.newEmail?.body.content = richTextEditor.updatedText!
@@ -42,8 +42,8 @@ class ReplyMailViewController: UIViewController {
         }
     }
 
-    
-    
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embeddedSegue") {
             let childViewController = segue.destination as! MailContentTableViewController
@@ -51,14 +51,14 @@ class ReplyMailViewController: UIViewController {
             self.container = (segue.destination as! MailContentTableViewController)
         }
     }
-    
+
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        
+
         let deleteDraftActionHandler = { (action:UIAlertAction!) -> Void in
             self.service.deleteMessage(message: self.newEmail!) {_ in }
             self.performSegue(withIdentifier: "closeDraft", sender: action)
         }
-        
+
         let saveDraftActionHandler = { (action:UIAlertAction!) -> Void in
             self.dispatchGroup3.enter()
             if let richTextEditor = self.container?.richTextEditor {
@@ -71,9 +71,9 @@ class ReplyMailViewController: UIViewController {
                 self.performSegue(withIdentifier: "closeDraft", sender: action)
             }
         }
-        
+
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+
         let deleteDraftAction = UIAlertAction(title: "Delete Draft", style: .destructive, handler: deleteDraftActionHandler)
         alertController.addAction(deleteDraftAction)
         let saveDraftAction = UIAlertAction(title: "Save Draft", style: .default, handler: saveDraftActionHandler)
@@ -85,7 +85,7 @@ class ReplyMailViewController: UIViewController {
     }
 
 
-    
+
     func sendReply() {
         NSLog("sendReply called")
         service.sendMessage(message: newEmail!) {
@@ -97,7 +97,7 @@ class ReplyMailViewController: UIViewController {
             }
         }
     }
-    
+
     func updateReply() {
         NSLog("updateReply called")
         service.updateReply(message: newEmail!) {
@@ -112,5 +112,5 @@ class ReplyMailViewController: UIViewController {
         }
     }
 
-    
+
 }
