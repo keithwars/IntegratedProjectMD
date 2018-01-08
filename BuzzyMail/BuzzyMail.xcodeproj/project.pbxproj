@@ -21,7 +21,10 @@
 		3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27631FC83C2D00049443 /* ContactsViewController.swift */; };
 		3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27651FC83D5300049443 /* OutlookService.swift */; };
 		3FB31B0B2003A37F003E8347 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0A2003A37F003E8347 /* Message.swift */; };
-		3FB31B0D2003A395003E8347 /* RichTextEditorNonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0C2003A395003E8347 /* RichTextEditorNonEditable.swift */; };
+		3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */; };
+		3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B132003A484003E8347 /* MailContentTableViewController.swift */; };
+		3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */; };
+		3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */; };
 		3FF0F3931FE407560055B34C /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FF0F3921FE407560055B34C /* Resources.bundle */; };
 		566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141A1FC85C3800C074C4 /* Formatter.swift */; };
 		566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141C1FC85DB000C074C4 /* EventCell.swift */; };
@@ -64,12 +67,11 @@
 		3F44F6471FDAA704005D095F /* RichTextEditor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RichTextEditor.js; sourceTree = "<group>"; };
 		3F44F6491FDAA729005D095F /* RichTextEditorEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorEditable.swift; sourceTree = "<group>"; };
 		3F663C1E1FD171F300FA9D66 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
-		3F66BE3C20038207009A920A /* MailContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentTableViewController.swift; sourceTree = "<group>"; };
-		3F66BE3E2003822F009A920A /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
-		3F66BE402003823F009A920A /* RichTextEditorEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorEditable.swift; sourceTree = "<group>"; };
-		3F66BE4220038252009A920A /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
 		3FB31B0A2003A37F003E8347 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		3FB31B0C2003A395003E8347 /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
+		3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
+		3FB31B132003A484003E8347 /* MailContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentTableViewController.swift; sourceTree = "<group>"; };
+		3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorEditable.swift; sourceTree = "<group>"; };
+		3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
 		3FF0F38E1FE405D90055B34C /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
 		3FF0F3921FE407560055B34C /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		4DBD452035A0C8E67B017707 /* Pods-BuzzyMailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,25 +139,24 @@
 			isa = PBXGroup;
 			children = (
 				3FB31B0E2003A3A0003E8347 /* models */,
-				3FB31B0C2003A395003E8347 /* RichTextEditorNonEditable.swift */,
+				3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */,
 				2B96B8B81FD9448B0077EB08 /* MessageCell.swift */,
 				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
 				3F0E27411FC8373300049443 /* MailViewController.swift */,
 				2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */,
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
-				3F66BE3C20038207009A920A /* MailContentTableViewController.swift */,
 				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
 				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
-				3F66BE402003823F009A920A /* RichTextEditorEditable.swift */,
+				3FB31B132003A484003E8347 /* MailContentTableViewController.swift */,
+				3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */,
 				3F0E27451FC8373300049443 /* Main.storyboard */,
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
 				3F0E27481FC8373300049443 /* Assets.xcassets */,
 				3F0E274D1FC8373300049443 /* Info.plist */,
 				3F0E27651FC83D5300049443 /* OutlookService.swift */,
 				566B141A1FC85C3800C074C4 /* Formatter.swift */,
-				3F66BE4220038252009A920A /* RichTextEditorNonEditable.swift */,
-				3F66BE3E2003822F009A920A /* ReplyMailViewController.swift */,
 				566B141C1FC85DB000C074C4 /* EventCell.swift */,
+				3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */,
 				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
 				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
 			);
@@ -426,7 +427,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FB31B0D2003A395003E8347 /* RichTextEditorNonEditable.swift in Sources */,
+				3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */,
+				3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */,
+				3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */,
+				3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */,
 				3FB31B0B2003A37F003E8347 /* Message.swift in Sources */,
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
