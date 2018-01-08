@@ -219,47 +219,47 @@ class OutlookService {
             callback(result)
         }
     }
-    
+
     func postEvent(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
-        
+
         makeApiCall(api: "/v1.0/me/calendar/events", requestType: RequestTypes.post, json: json) {
             result in
             callback(result?.dictionary)
             dump(json)
         }
     }
-    
+
     func getEvent(id: String, callback: @escaping (String?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.get, json: id as Any as? [String : Any]) {
             result in
             callback(result?.string)
         }
     }
-    
+
     func getEvents(callback: @escaping (JSON?) -> Void) -> Void {
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let iso8601String = dateFormatter.string(from: Date())
-        
+
         let datePlus1Week = Calendar.current.date(byAdding: .month, value: 1, to: Date())
         print("Dateplus1week: " + "\(describing: datePlus1Week)")
         let test = dateFormatter.string(from: datePlus1Week!)
         print("test: " + "\(test)")
-        
+
         let apiParams = [
             "startDateTime": "\(iso8601String)",
             "endDateTime": "\(test)",
             "$orderby": "start/dateTime ASC",
             "$top": "10"
         ]
-        
+
         makeApiCall(api: "/v1.0/me/calendar/calendarView", requestType: RequestTypes.get, params: apiParams) {
             result in
             callback(result)
         }
     }
-    
+
     func deleteEvent(id: String, callback: @escaping (String?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.delete, json: id as Any as? [String : Any]) {
             result in

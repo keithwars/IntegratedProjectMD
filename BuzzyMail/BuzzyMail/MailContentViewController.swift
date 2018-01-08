@@ -13,27 +13,6 @@ import WebKit
 
 var messageHtml: Message?
 
-extension String {
-    
-//    First attempt at the HMTL parser
-    
-//    var html2AttributedString: NSAttributedString? {
-//        do {
-//            return try NSAttributedString(data:messageHtml!.body,
-//                                          options: [.documentType: NSAttributedString.DocumentType.html,
-//                                                    .characterEncoding: String.Encoding.utf8.rawValue],
-//                                          documentAttributes: nil)
-//        } catch {
-//            print("error:", error)
-//            return  nil
-//        }
-//    }
-//
-//    var html2String: String {
-//        return html2AttributedString?.string ?? ""
-//    }
-}
-
 class MailContentViewController: UIViewController {
     
     var email:Message?
@@ -47,50 +26,19 @@ class MailContentViewController: UIViewController {
     
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
     
+    var newEmail:Message?
+    
+    let dispatchGroup = DispatchGroup()
+    let dispatchGroup2 = DispatchGroup()
+    
     
     override func viewDidLoad() {
-        
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
-        fromLabel.text = email!.from.name
-
-        //let htmlText = email!.body
         
-        /*let htmlTextWithStyle = htmlText + ("<style type='text/css'> *{font-size: 17px;}html,body {font-size:\(24.0); font-family: '\(UIFont.systemFont(ofSize: 30.0))'; margin: 0;padding: 0;width: 100%;height: 100%;}html {display: table;}body {display: table-cell;vertical-align: top;padding: 20px;text-align: left;-webkit-text-size-adjust: none;}</style>")
-    
-        print(htmlTextWithStyle)*/
-        NSLog("--------------------------------++++++")
-        //print(htmlText)
-        richTextEditorNonEditable.text = email!.body.content
-        
-//        let source = "var meta = document.createElement('meta');" +
-//            "meta.name = 'viewport';" +
-//            "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
-//            "var head = document.getElementsByTagName('head')[0];" +
-//        "head.appendChild(meta);"
-//        
-//        let script = WKUserScript(source: source, injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: true)
-//        
-//        let userContentController = WKUserContentController()
-//        userContentController.addUserScript(script)
-//        
-//        let configuration = WKWebViewConfiguration()
-//        configuration.userContentController = userContentController
-//        
-//        contentWebView = WKWebView(frame: CGRect.infinite, configuration: configuration)
-        //contentWebView.loadHTMLString(htmlTextWithStyle, baseURL: nil)
-       
-        
-    
-        
-        //let mailData = Bundle.main.path(forResource: email!.body, ofType: "html")
-        //let url = URL(fileURLWithPath: mailData!)
-        //let request = URLRequest(url: url)
-        //contentWebView.load(request)
-        
-        //contentWebKitView.loadFileURL(mailData, allowingReadAccessTo: <#T##URL#>)
-        
+        fromLabel.text = email!.from.emailAddress.name
         subjectLabel.text = email!.subject
+        richTextEditorNonEditable.text = email!.body.content        
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,13 +48,29 @@ class MailContentViewController: UIViewController {
     }
 
     @IBAction func replyButtonPressed(_ sender: Any) {
-        
+
         let replyActionHandler = { (action:UIAlertAction!) -> Void in
-            let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-            let navigationController = UINavigationController(rootViewController: popup)
-            navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-            popup.replyToEmail = self.email
-            self.present(navigationController, animated: true, completion: nil)
+            self.dispatchGroup.enter()
+            self.createReply()
+            self.dispatchGroup.notify(queue: .main) {
+                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
+                let navigationController = UINavigationController(rootViewController: popup)
+                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+                popup.newEmail = self.newEmail
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
+        
+        let forwardActionHandler = { (action:UIAlertAction!) -> Void in
+            self.dispatchGroup2.enter()
+            self.createForward()
+            self.dispatchGroup2.notify(queue: .main) {
+                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
+                let navigationController = UINavigationController(rootViewController: popup)
+                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+                popup.newEmail = self.newEmail
+                self.present(navigationController, animated: true, completion: nil)
+            }
         }
         
     
@@ -116,7 +80,7 @@ class MailContentViewController: UIViewController {
         alertController.addAction(replyAction)
         let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: nil)
         alertController.addAction(replyAllAction)
-        let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: nil)
+        let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: forwardActionHandler)
         alertController.addAction(forwardAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
@@ -125,6 +89,98 @@ class MailContentViewController: UIViewController {
     }
     
     @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) {
+        
+    }
+
+    
+    func createReply() {
+        NSLog("createMessage called")
+        service.createReply(message: email!) {
+            message in
+            if let message = message {
+                var toRecipientsList = [EmailAddresses]()
+                for row in message["toRecipients"].arrayValue {
+                    toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                      address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                var ccRecipientsList = [EmailAddresses]()
+                for row in message["ccRecipients"].arrayValue {
+                    ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                      address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                var bccRecipientsList = [EmailAddresses]()
+                for row in message["bccRecipients"].arrayValue {
+                    bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                       address: row["emailAddress"]["address"].stringValue)))
+                }
+
+                self.newEmail = Message(
+                    id: message["id"].stringValue,
+                    receivedDateTime: message["receivedDateTime"].stringValue,
+                    hasAttachments: message["hasAttachments"].boolValue,
+                    subject: message["subject"].stringValue,
+                    bodyPreview: message["bodyPreview"].stringValue,
+                    isRead: message["isRead"].boolValue,
+                    isDraft: message["isDraft"].boolValue,
+                    body: Body(contentType: message["body"]["contentType"].stringValue,
+                               content: message["body"]["content"].stringValue),
+                    from: EmailAddresses(emailAddress: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+                                                                    address: message["from"]["emailAddress"]["address"].stringValue)),
+                    toRecipients: toRecipientsList,
+                    ccRecipients: ccRecipientsList,
+                    bccRecipients: bccRecipientsList)
+                self.dispatchGroup.leave()
+            } else {
+                NSLog("Fail")
+            }
+        }
+    }
+    
+    func createForward() {
+        NSLog("createForward called")
+        service.createForward(message: email!) {
+            message in
+            if let message = message {
+                var toRecipientsList = [EmailAddresses]()
+                for row in message["toRecipients"].arrayValue {
+                    toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                      address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                var ccRecipientsList = [EmailAddresses]()
+                for row in message["ccRecipients"].arrayValue {
+                    ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                      address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                var bccRecipientsList = [EmailAddresses]()
+                for row in message["bccRecipients"].arrayValue {
+                    bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                       address: row["emailAddress"]["address"].stringValue)))
+                }
+                
+                self.newEmail = Message(
+                    id: message["id"].stringValue,
+                    receivedDateTime: message["receivedDateTime"].stringValue,
+                    hasAttachments: message["hasAttachments"].boolValue,
+                    subject: message["subject"].stringValue,
+                    bodyPreview: message["bodyPreview"].stringValue,
+                    isRead: message["isRead"].boolValue,
+                    isDraft: message["isDraft"].boolValue,
+                    body: Body(contentType: message["body"]["contentType"].stringValue,
+                               content: message["body"]["content"].stringValue),
+                    from: EmailAddresses(emailAddress: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+                                                                    address: message["from"]["emailAddress"]["address"].stringValue)),
+                    toRecipients: toRecipientsList,
+                    ccRecipients: ccRecipientsList,
+                    bccRecipients: bccRecipientsList)
+                self.dispatchGroup2.leave()
+            } else {
+                NSLog("Fail")
+            }
+        }
     }
 
 }
