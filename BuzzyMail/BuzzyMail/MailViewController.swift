@@ -17,6 +17,8 @@ class MailViewController: UIViewController {
     
     let customSideMenuManager = SideMenuManager()
     
+    var currentMailFolder: MailFolder?
+    
     @IBOutlet weak var tableView: UITableView!
     var dataSource: MessagesDataSource?
     
@@ -37,9 +39,9 @@ class MailViewController: UIViewController {
             
             messagesList = dataSource?.getMessagesArray()
             
-                if let destination = segue.destination as? MailContentViewController {
-                    destination.email = messagesList![rowint]
-                }
+            if let destination = segue.destination as? MailContentViewController {
+                destination.email = messagesList![rowint]
+            }
         }
     }
     
@@ -62,16 +64,40 @@ class MailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func closeSideMenu(_ segue: UIStoryboardSegue) {
+        if let currentMailFolder = currentMailFolder {
+            NSLog("Loading New Mail Folder: " + currentMailFolder.displayName)
+            self.loadUserEmailsFolder(mailFolderId: currentMailFolder.id)
+        }
+        self.title = currentMailFolder!.displayName
+    }
+    
     func loadUserData() {
         service.getUserEmail() {
             email in
-            self.service.getInboxMessages() {
-                messages in
-                if let unwrappedMessages = messages {
-                    self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
-                    self.tableView.dataSource = self.dataSource
-                    self.tableView.reloadData()
-                }
+            self.loadUserEmails()
+            //self.loadUserEmailsFolder(mailFolderId: "AQMkADViYgA5NTc1Ni0wODFjLTRlODktYmY0Mi0yNDk0ZTk1ZGIxYTMALgAAA_mdMlZTZwFJiPpRhzdkNwsBABK9rA8i5f5PgECmCrXNdSEAAAIBCQAAAA==")
+        }
+    }
+    
+    func loadUserEmails() {
+        self.service.getInboxMessages() {
+            messages in
+            if let unwrappedMessages = messages {
+                self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
+                self.tableView.dataSource = self.dataSource
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func loadUserEmailsFolder(mailFolderId: String) {
+        self.service.getMailFolderMessages(mailFolderId: mailFolderId) {
+            messages in
+            if let unwrappedMessages = messages {
+                self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
+                self.tableView.dataSource = self.dataSource
+                self.tableView.reloadData()
             }
         }
     }

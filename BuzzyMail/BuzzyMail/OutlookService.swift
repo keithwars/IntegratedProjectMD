@@ -29,7 +29,7 @@ class OutlookService {
         "verbose": true,
         ] as OAuth2JSON
 
-    private var userEmail: String
+    public var userEmail: String
     
     public var userGivenName: String
 
@@ -177,6 +177,18 @@ class OutlookService {
         ]
 
         makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func getMailFolderMessages(mailFolderId: String, callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "receivedDateTime DESC",
+            "$top": "10"
+        ]
+        
+        makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderId + "/messages", requestType: RequestTypes.get, params: apiParams) {
             result in
             callback(result)
         }

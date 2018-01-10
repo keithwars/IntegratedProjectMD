@@ -441,7 +441,7 @@
             </objects>
             <point key="canvasLocation" x="945" y="-969"/>
         </scene>
-        <!--Hi Jérémy!-->
+        <!--Hi!-->
         <scene sceneID="uhq-YD-9SK">
             <objects>
                 <tableViewController id="IGo-5z-lB4" customClass="SideMenuMailViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
@@ -482,6 +482,7 @@
                                 <connections>
                                     <outlet property="displayNameLabel" destination="BPI-E4-qAm" id="h5w-J0-1sk"/>
                                     <outlet property="numberUnreadMailsLabel" destination="pgq-b6-bYZ" id="VLj-Eu-L07"/>
+                                    <segue destination="4qj-Om-74g" kind="unwind" identifier="closeSideMenu" unwindAction="closeSideMenu:" id="gJ3-XK-GKP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -491,13 +492,14 @@
                             <outlet property="delegate" destination="IGo-5z-lB4" id="Ewh-hR-zVb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Hi Jérémy!" id="eih-sh-ITm">
+                    <navigationItem key="navigationItem" title="Hi!" id="eih-sh-ITm">
                         <barButtonItem key="rightBarButtonItem" title="Settings" image="settings" id="eaV-pv-a0l">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Gi-Eq-T1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="4qj-Om-74g" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2616.8000000000002" y="-1666.4167916041981"/>
         </scene>

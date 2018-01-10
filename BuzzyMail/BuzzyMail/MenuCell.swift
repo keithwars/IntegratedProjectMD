@@ -33,9 +33,7 @@ class MailFoldersDataSource: NSObject {
     init(mailFolders: [JSON]?) {
         var mailFoldersArray = [MailFolder]()
         var mailFoldersArraySorted = [MailFolder]()
-        
-        NSLog("POMPERNIKKEL 3")
-        
+
         if let unwrappedMailFolders = mailFolders {
             for (mailFolder) in unwrappedMailFolders {
 
@@ -54,7 +52,7 @@ class MailFoldersDataSource: NSObject {
         self.mailFolders = mailFoldersArraySorted
     }
     
-    func getMessagesArray() -> [MailFolder]{
+    func getMailFoldersArray() -> [MailFolder]{
         return mailFolders
     }
 }

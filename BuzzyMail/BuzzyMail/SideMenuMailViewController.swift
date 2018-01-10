@@ -13,6 +13,7 @@ import SideMenu
 class SideMenuMailViewController: UITableViewController {
     
     var dataSource: MailFoldersDataSource?
+    var mailFoldersList: [MailFolder]?
     
     override func viewDidLoad() {
         loadMailFolders()
@@ -27,10 +28,23 @@ class SideMenuMailViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "closeSideMenu" {
+            let selectedIndex = self.tableView.indexPath(for: sender as! UITableViewCell)
+            if let selected = selectedIndex {
+                mailFoldersList = dataSource?.getMailFoldersArray()
+                if let destination = segue.destination as? MailViewController {
+                    destination.currentMailFolder = mailFoldersList![selected.row]
+                }
+            }
+        }
+    }
+    
     func loadMailFolders() {
         service.getMailFolders() {
             mailFolders in
             if let unwrappedMailFolders = mailFolders {
+                
                 self.dataSource = MailFoldersDataSource(mailFolders: unwrappedMailFolders["value"].arrayValue)
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()
