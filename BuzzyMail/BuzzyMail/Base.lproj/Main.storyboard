@@ -441,7 +441,7 @@
             </objects>
             <point key="canvasLocation" x="945" y="-969"/>
         </scene>
-        <!--Side Menu Mail View Controller-->
+        <!--Hi Jérémy!-->
         <scene sceneID="uhq-YD-9SK">
             <objects>
                 <tableViewController id="IGo-5z-lB4" customClass="SideMenuMailViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
@@ -491,7 +491,11 @@
                             <outlet property="delegate" destination="IGo-5z-lB4" id="Ewh-hR-zVb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eih-sh-ITm"/>
+                    <navigationItem key="navigationItem" title="Hi Jérémy!" id="eih-sh-ITm">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="settings" id="eaV-pv-a0l">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Gi-Eq-T1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -500,9 +504,9 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="Hr9-Wa-ikg">
             <objects>
-                <navigationController navigationBarHidden="YES" id="tlx-6f-yla" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2tg-u7-myJ">
+                <navigationController id="tlx-6f-yla" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="2tg-u7-myJ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -627,7 +631,7 @@
                         <viewLayoutGuide key="safeArea" id="nrM-N9-lYY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Mail" id="jZL-kQ-QdT">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Pxm-hh-nIs">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" image="menu" id="Pxm-hh-nIs">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="tlx-6f-yla" kind="presentation" id="5Cb-Y1-QNT"/>
@@ -1004,7 +1008,9 @@
     <resources>
         <image name="attachment" width="12" height="12"/>
         <image name="first" width="30" height="30"/>
+        <image name="menu" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
         <image name="third" width="30" height="30"/>
     </resources>
 </document>

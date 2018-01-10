@@ -30,6 +30,8 @@ class OutlookService {
         ] as OAuth2JSON
 
     private var userEmail: String
+    
+    public var userGivenName: String
 
     private static var sharedService: OutlookService = {
         let service = OutlookService()
@@ -42,6 +44,7 @@ class OutlookService {
         oauth2 = OAuth2CodeGrant(settings: OutlookService.oauth2Settings)
         oauth2.authConfig.authorizeEmbedded = true
         userEmail = ""
+        userGivenName = ""
     }
 
     class func shared() -> OutlookService {
@@ -154,6 +157,8 @@ class OutlookService {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
+                    //NSLog("POMPERNIKKEL5 " + unwrappedResult["givenName"].stringValue)
+                    self.userGivenName = unwrappedResult["givenName"].stringValue
                     self.userEmail = email
                     callback(email)
                 } else {

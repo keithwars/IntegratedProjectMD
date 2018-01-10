@@ -16,12 +16,11 @@ class SideMenuMailViewController: UITableViewController {
     
     override func viewDidLoad() {
         loadMailFolders()
+        setUserGivenName()
     }
     
     override func viewWillAppear(_ animated: Bool) {
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,6 +36,10 @@ class SideMenuMailViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func setUserGivenName () {
+        self.title = "Hi " + service.userGivenName
     }
     
 }
