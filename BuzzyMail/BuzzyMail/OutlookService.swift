@@ -24,40 +24,40 @@ class OutlookService {
         "client_id" : "9c5cb613-91a2-4807-bd5d-f4ced63a862d",
         "authorize_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
         "token_uri": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-        "scope": "openid profile offline_access User.Read Mail.Read Mail.ReadWrite Mail.Send",
+        "scope": "openid profile offline_access User.Read Mail.Read Mail.ReadWrite Mail.Send Calendars.ReadWrite",
         "redirect_uris": ["buzzy-mail://oauth2/callback"],
         "verbose": true,
         ] as OAuth2JSON
-    
+
     private var userEmail: String
-    
+
     private static var sharedService: OutlookService = {
         let service = OutlookService()
         return service
     }()
-    
+
     private let oauth2: OAuth2CodeGrant
-    
+
     private init() {
         oauth2 = OAuth2CodeGrant(settings: OutlookService.oauth2Settings)
         oauth2.authConfig.authorizeEmbedded = true
         userEmail = ""
     }
-    
+
     class func shared() -> OutlookService {
         return sharedService
     }
-    
+
     var isLoggedIn: Bool {
         get {
             return oauth2.hasUnexpiredAccessToken() || oauth2.refreshToken != nil
         }
     }
-    
+
     func handleOAuthCallback(url: URL) -> Void {
         oauth2.handleRedirectURL(url)
     }
-    
+
     func login(from: AnyObject, callback: @escaping (String? ) -> Void) -> Void {
         oauth2.authorizeEmbedded(from: from) {
             result, error in
@@ -72,12 +72,12 @@ class OutlookService {
             }
         }
     }
-    
-    func makeApiCall(api: String, requestType : RequestTypes, body: Message? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
+
+    func makeApiCall(api: String, requestType : RequestTypes, body: Message? = nil, json: [String:Any]? = nil, params: [String: String]? = nil, callback: @escaping (JSON?) -> Void) -> Void {
         // Build the request URL
         var urlBuilder = URLComponents(string: "https://graph.microsoft.com")!
         urlBuilder.path = api
-        
+
         if let unwrappedParams = params {
             // Add query parameters to URL
             urlBuilder.queryItems = [URLQueryItem]()
@@ -86,22 +86,25 @@ class OutlookService {
                     URLQueryItem(name: paramName, value: paramValue))
             }
         }
-        
+
         let apiUrl = urlBuilder.url!
-        NSLog("Making request to \(apiUrl)")
-        
+        NSLog("Making \(requestType) request to \(apiUrl)")
+
         var req = oauth2.request(forURL: apiUrl)
         req.addValue("application/json", forHTTPHeaderField: "Accept")
 
         switch requestType {
         case .get:
-            NSLog("Get request received")
+            req.httpMethod = "GET"
         case .post:
-            NSLog("Post request received")
             req.httpMethod = "POST"
             req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            if let unwrappedJson = json {
+                let jsonDate = try? JSONSerialization.data(withJSONObject: unwrappedJson)
+                req.httpBody = jsonDate
+            }
         case .put:
-            NSLog("Put request received")
+            req.httpMethod = "PUT"
         case .patch:
             NSLog("Patch request received")
             req.httpMethod = "PATCH"
@@ -110,25 +113,21 @@ class OutlookService {
             let jsonData = try! jsonEncoder.encode(body)
             req.httpBody = jsonData
         case .delete:
-            NSLog("Delete request received")
+            req.httpMethod = "DELETE"
         }
-        
-//        else {
-//            req.addValue("application/json", forHTTPHeaderField: "Accept")
-//        }
-        
+
         if (!userEmail.isEmpty) {
             // Add X-AnchorMailbox header to optimize
             // API routing
             req.addValue(userEmail, forHTTPHeaderField: "X-AnchorMailbox")
         }
-        
+
         let loader = OAuth2DataLoader(oauth2: oauth2)
-        
+
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
         loader.logger = OAuth2DebugLogger(.trace)
-        
+
         loader.perform(request: req) {
             response in
             do {
@@ -146,7 +145,7 @@ class OutlookService {
             }
         }
     }
-    
+
     func getUserEmail(callback: @escaping (String?) -> Void) -> Void {
         // If we don't have the user's email, get it from
         // the API
@@ -165,28 +164,43 @@ class OutlookService {
             callback(userEmail)
         }
     }
-    
+
     func getInboxMessages(callback: @escaping (JSON?) -> Void) -> Void {
         let apiParams = [
             "$orderby": "receivedDateTime DESC",
             "$top": "50"
         ]
-        
+
         makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", requestType: RequestTypes.get, params: apiParams) {
             result in
             callback(result)
         }
     }
-    
+
     func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {
             result in
-            callback(result)
+            if let unwrappedResult = result {
+                callback(unwrappedResult)
+            } else {
+                callback(nil)
+            }
         }
     }
-    
-    func sendReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/reply", requestType: RequestTypes.post) {
+
+    func createForward(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createForward", requestType: RequestTypes.post) {
+            result in
+            if let unwrappedResult = result {
+                callback(unwrappedResult)
+            } else {
+                callback(nil)
+            }
+        }
+    }
+
+    func sendMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/send", requestType: RequestTypes.post) {
             result in
             callback(result)
         }
@@ -198,14 +212,21 @@ class OutlookService {
             callback(result)
         }
     }
-    
+
     func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+          result in
+          callback(result)
+        }
+    }
+
+    func deleteMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.delete, body: message) {
             result in
             callback(result)
         }
     }
-    
+
 //    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
 //        var message2 = message
 //        message2.isRead = true
@@ -214,11 +235,58 @@ class OutlookService {
 //            callback(result)
 //        }
 //    }
-    
-    
+
+
+
+    func postEvent(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
+
+        makeApiCall(api: "/v1.0/me/calendar/events", requestType: RequestTypes.post, json: json) {
+            result in
+            callback(result?.dictionary)
+            dump(json)
+        }
+    }
+
+    func getEvent(id: String, callback: @escaping (String?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.get, json: id as Any as? [String : Any]) {
+            result in
+            callback(result?.string)
+        }
+    }
+
+    func getEvents(callback: @escaping (JSON?) -> Void) -> Void {
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let iso8601String = dateFormatter.string(from: Date())
+
+        let datePlus1Week = Calendar.current.date(byAdding: .month, value: 1, to: Date())
+        print("Dateplus1week: " + "\(describing: datePlus1Week)")
+        let test = dateFormatter.string(from: datePlus1Week!)
+        print("test: " + "\(test)")
+
+        let apiParams = [
+            "startDateTime": "\(iso8601String)",
+            "endDateTime": "\(test)",
+            "$orderby": "start/dateTime ASC",
+            "$top": "10"
+        ]
+
+        makeApiCall(api: "/v1.0/me/calendar/calendarView", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+
+    func deleteEvent(id: String, callback: @escaping (String?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/calendar/events/" + "\(id)", requestType: RequestTypes.delete, json: id as Any as? [String : Any]) {
+            result in
+            callback(result?.string)
+        }
+    }
+
     func logout() -> Void {
         oauth2.forgetTokens()
     }
 
 }
-
