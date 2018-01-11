@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1059B58C43A6AE2BB0916545 /* Pods_BuzzyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */; };
+		2B80F28E2006C12F006C6544 /* loginvideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B80F28D2006C12F006C6544 /* loginvideo.mp4 */; };
 		2B96B8B91FD9448B0077EB08 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B8B81FD9448B0077EB08 /* MessageCell.swift */; };
 		2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */; };
 		3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E273F1FC8373300049443 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B80F28D2006C12F006C6544 /* loginvideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo.mp4; sourceTree = "<group>"; };
 		2B96B8B81FD9448B0077EB08 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentViewController.swift; sourceTree = "<group>"; };
 		3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 		3F0E27331FC8373300049443 = {
 			isa = PBXGroup;
 			children = (
+				2B80F28D2006C12F006C6544 /* loginvideo.mp4 */,
 				3FF0F3921FE407560055B34C /* Resources.bundle */,
 				3F0E273E1FC8373300049443 /* BuzzyMail */,
 				3F0E27551FC8373300049443 /* BuzzyMailTests */,
@@ -302,6 +305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B80F28E2006C12F006C6544 /* loginvideo.mp4 in Resources */,
 				3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */,
 				3F0E27491FC8373300049443 /* Assets.xcassets in Resources */,
 				3F0E27471FC8373300049443 /* Main.storyboard in Resources */,
@@ -407,11 +411,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftVideoBackground/SwiftVideoBackground.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/p2.OAuth2/p2_OAuth2.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftVideoBackground.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/p2_OAuth2.framework",
 			);

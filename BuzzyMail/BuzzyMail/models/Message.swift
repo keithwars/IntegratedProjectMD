@@ -10,14 +10,14 @@ import Foundation
 
 struct Message: Codable {
     var id: String
-    var receivedDateTime: String
-    var hasAttachments: Bool
-    var subject: String
-    var bodyPreview: String
+    var receivedDateTime: String?
+    var hasAttachments: Bool?
+    var subject: String?
+    var bodyPreview: String?
     var isRead: Bool
-    var isDraft: Bool
-    var body: Body
-    var from: EmailAddresses
+    var isDraft: Bool?
+    var body: Body?
+    var from: EmailAddresses?
     var toRecipients: [EmailAddresses]?
     var ccRecipients: [EmailAddresses]?
     var bccRecipients: [EmailAddresses]?

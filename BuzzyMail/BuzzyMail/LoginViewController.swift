@@ -8,8 +8,10 @@
 
 import UIKit
 import WebKit
+import SwiftVideoBackground
 
 class LoginViewController: UIViewController {
+    private let videoBackground = VideoBackground()
 
     
     @IBOutlet var logInButton: UIButton!
@@ -19,6 +21,14 @@ class LoginViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        videoBackground.play(view: view,
+                             videoName: "loginvideo",
+                             videoType: "mp4",
+                             isMuted: false,
+                             alpha: 0.25,
+                             willLoopVideo: true)
+        
         // Do any additional setup after loading the view, typically from a nib.
         setLogInState(loggedIn: service.isLoggedIn)
     }
