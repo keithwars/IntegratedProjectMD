@@ -8,14 +8,18 @@
 
 import UIKit
 
-class MailViewController: UIViewController {
+class MailViewController: UIViewController/*, UITableViewDataSource, UITableViewDelegate*/ {
 
     let service = OutlookService.shared()
+    
+    var deletePlanetIndexPath: NSIndexPath? = nil
     
     var messagesList:[Message]?
     
     @IBOutlet weak var tableView: UITableView!
     var dataSource: MessagesDataSource?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,8 @@ class MailViewController: UIViewController {
         if(service.isLoggedIn) {
             loadUserData()
         }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,8 +39,37 @@ class MailViewController: UIViewController {
         
         messagesList = dataSource?.getMessagesArray()
         
-        NSLog(messagesList![rowint].subject)
-                
+        NSLog(messagesList![rowint].subject!)
+        
+        /*
+        func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+            if editingStyle == .delete {
+                deleteEmailIndexPath = indexPath
+                let rowsToDelete = messagesList![rowint]
+                confirmDelete(emailToDelete)
+            }
+        }
+        
+        
+        func confirmDelete(Email: String) {
+            let alert = UIAlertController(title: "Delete Email", message: "Are you sure you want to permanently delete \(Email)?", preferredStyle: .actionSheet)
+            
+            let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: )
+            let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler:)
+            
+            alert.addAction(DeleteAction)
+            alert.addAction(CancelAction)
+            
+            // Support display in iPad
+            alert.popoverPresentationController?.sourceView = self.view
+            alert.popoverPresentationController?.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+
+ */
+        
+ 
         if segue.identifier == "showMailContent" {
             if let destination = segue.destination as? MailContentViewController {
                 destination.email = messagesList![rowint]

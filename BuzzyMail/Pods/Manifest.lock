@@ -1,15 +1,18 @@
 PODS:
   - p2.OAuth2 (4.0.1)
+  - SwiftVideoBackground (2.0.0)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - p2.OAuth2
+  - SwiftVideoBackground (~> 2.0.0)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   p2.OAuth2: fdc2effef37793a8f775dd4760bc4c1ea906c956
+  SwiftVideoBackground: 41d030c232284482973e46959de6398a116c6b58
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 92e0677bd2bb94263060b8542833fe2ef840c8fd
+PODFILE CHECKSUM: cfe56e2d3c0c7a25d8458b96e6ea8b28b843fe19
 
 COCOAPODS: 1.3.1

@@ -106,9 +106,9 @@ class OutlookService {
             NSLog("Patch request received")
             req.httpMethod = "PATCH"
             req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-            let jsonEmail = try? JSONSerialization.data(withJSONObject: body!)
-            req.httpBody = jsonEmail
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try! jsonEncoder.encode(body)
+            req.httpBody = jsonData
         case .delete:
             NSLog("Delete request received")
         }
@@ -127,7 +127,7 @@ class OutlookService {
         
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-//        loader.logger = OAuth2DebugLogger(.trace)
+        loader.logger = OAuth2DebugLogger(.trace)
         
         loader.perform(request: req) {
             response in
@@ -198,6 +198,23 @@ class OutlookService {
             callback(result)
         }
     }
+    
+    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+            result in
+            callback(result)
+        }
+    }
+    
+//    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+//        var message2 = message
+//        message2.isRead = true
+//        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message2) {
+//            result in
+//            callback(result)
+//        }
+//    }
+    
     
     func logout() -> Void {
         oauth2.forgetTokens()

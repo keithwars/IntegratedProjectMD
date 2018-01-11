@@ -39,95 +39,95 @@ class ReplyMailViewController: UIViewController {
     }
     
     func createNewReply() {
-        NSLog("createNewReply called")
-        service.createReply(message: replyToEmail!) {
-            message in
-            if let message = message {
-                let newMsg = Message(
-                    id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-                    hasAttachments: message["hasAttachments"].boolValue,
-                    subject: message["subject"].stringValue,
-                    bodyPreview: message["bodyPreview"].stringValue,
-                    isRead: message["isRead"].boolValue,
-                    isDraft: message["isDraft"].boolValue,
-                    body: Body(contentType: message["body"]["contentType"].stringValue,
-                               content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
-                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
-//                NSLog("RESULT: " + newMsg.bodyContent)
-            } else {
-                NSLog("Fail")
-            }
-        }
+//        NSLog("createNewReply called")
+//        service.createReply(message: replyToEmail!) {
+//            message in
+//            if let message = message {
+//                let newMsg = Message(
+//                    id: message["id"].stringValue,
+//                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
+//                    hasAttachments: message["hasAttachments"].boolValue,
+//                    subject: message["subject"].stringValue,
+//                    bodyPreview: message["bodyPreview"].stringValue,
+//                    isRead: message["isRead"].boolValue,
+//                    isDraft: message["isDraft"].boolValue,
+//                    body: Body(contentType: message["body"]["contentType"].stringValue,
+//                               content: message["body"]["content"].stringValue),
+//                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+//                                       address: message["from"]["emailAddress"]["address"].stringValue),
+//                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
+//                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
+//                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
+////                NSLog("RESULT: " + newMsg.bodyContent)
+//            } else {
+//                NSLog("Fail")
+//            }
+//        }
     }
     
     func sendReply() {
-        NSLog("sendReply called")
-        service.sendReply(message: replyToEmail!) {
-            message in
-            if let message = message {
-                let newMsg = Message(
-                    id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-                    hasAttachments: message["hasAttachments"].boolValue,
-                    subject: message["subject"].stringValue,
-                    bodyPreview: message["bodyPreview"].stringValue,
-                    isRead: message["isRead"].boolValue,
-                    isDraft: message["isDraft"].boolValue,
-                    body: Body(contentType: message["body"]["contentType"].stringValue,
-                               content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
-                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
-//                NSLog("RESULT: " + newMsg.bodyContent)
-                
-            } else {
-                NSLog("Fail")
-            }
-        }
+//        NSLog("sendReply called")
+//        service.sendReply(message: replyToEmail!) {
+//            message in
+//            if let message = message {
+//                let newMsg = Message(
+//                    id: message["id"].stringValue,
+//                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
+//                    hasAttachments: message["hasAttachments"].boolValue,
+//                    subject: message["subject"].stringValue,
+//                    bodyPreview: message["bodyPreview"].stringValue,
+//                    isRead: message["isRead"].boolValue,
+//                    isDraft: message["isDraft"].boolValue,
+//                    body: Body(contentType: message["body"]["contentType"].stringValue,
+//                               content: message["body"]["content"].stringValue),
+//                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+//                                       address: message["from"]["emailAddress"]["address"].stringValue),
+//                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
+//                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
+//                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
+////                NSLog("RESULT: " + newMsg.bodyContent)
+//
+//            } else {
+//                NSLog("Fail")
+//            }
+//        }
     }
     
     func updateReply() {
-//        replyToEmail?.bodyContent = (container?.richTextEditor.text)!
-        service.updateReply(message: replyToEmail!) {
-            message in
-            if let message = message {
-                let newMsg = Message(
-                    id: message["id"].stringValue,
-                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-                    hasAttachments: message["hasAttachments"].boolValue,
-                    subject: message["subject"].stringValue,
-                    bodyPreview: message["bodyPreview"].stringValue,
-                    isRead: message["isRead"].boolValue,
-                    isDraft: message["isDraft"].boolValue,
-                    body: Body(contentType: message["body"]["contentType"].stringValue,
-                               content: message["body"]["content"].stringValue),
-                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                       address: message["from"]["emailAddress"]["address"].stringValue),
-                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                               address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
-                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
-                                                address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
-//                NSLog("RESULT: " + newMsg.bodyContent)
-                
-            } else {
-                NSLog("Fail")
-            }
-        }
+////        replyToEmail?.bodyContent = (container?.richTextEditor.text)!
+//        service.updateReply(message: replyToEmail!) {
+//            message in
+//            if let message = message {
+//                let newMsg = Message(
+//                    id: message["id"].stringValue,
+//                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
+//                    hasAttachments: message["hasAttachments"].boolValue,
+//                    subject: message["subject"].stringValue,
+//                    bodyPreview: message["bodyPreview"].stringValue,
+//                    isRead: message["isRead"].boolValue,
+//                    isDraft: message["isDraft"].boolValue,
+//                    body: Body(contentType: message["body"]["contentType"].stringValue,
+//                               content: message["body"]["content"].stringValue),
+//                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+//                                       address: message["from"]["emailAddress"]["address"].stringValue),
+//                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
+//                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                               address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
+//                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
+//                                                address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
+////                NSLog("RESULT: " + newMsg.bodyContent)
+//
+//            } else {
+//                NSLog("Fail")
+//            }
+//        }
     }
 
     

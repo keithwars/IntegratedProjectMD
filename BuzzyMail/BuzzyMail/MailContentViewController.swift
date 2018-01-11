@@ -14,29 +14,12 @@ import WebKit
 var messageHtml: Message?
 
 extension String {
-    
-//    First attempt at the HMTL parser
-    
-//    var html2AttributedString: NSAttributedString? {
-//        do {
-//            return try NSAttributedString(data:messageHtml!.body,
-//                                          options: [.documentType: NSAttributedString.DocumentType.html,
-//                                                    .characterEncoding: String.Encoding.utf8.rawValue],
-//                                          documentAttributes: nil)
-//        } catch {
-//            print("error:", error)
-//            return  nil
-//        }
-//    }
-//
-//    var html2String: String {
-//        return html2AttributedString?.string ?? ""
-//    }
 }
 
 class MailContentViewController: UIViewController {
     
     var email:Message?
+    
     let service = OutlookService.shared()
     
     @IBOutlet weak var fromLabel: UILabel!
@@ -47,56 +30,73 @@ class MailContentViewController: UIViewController {
     
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
     
+    var unreadEmail: Message?
     
     override func viewDidLoad() {
         
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
-        fromLabel.text = email!.from.name
-
-        //let htmlText = email!.body
-        
-        /*let htmlTextWithStyle = htmlText + ("<style type='text/css'> *{font-size: 17px;}html,body {font-size:\(24.0); font-family: '\(UIFont.systemFont(ofSize: 30.0))'; margin: 0;padding: 0;width: 100%;height: 100%;}html {display: table;}body {display: table-cell;vertical-align: top;padding: 20px;text-align: left;-webkit-text-size-adjust: none;}</style>")
-    
-        print(htmlTextWithStyle)*/
-        NSLog("--------------------------------++++++")
-        //print(htmlText)
-        richTextEditorNonEditable.text = email!.body.content
-        
-//        let source = "var meta = document.createElement('meta');" +
-//            "meta.name = 'viewport';" +
-//            "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
-//            "var head = document.getElementsByTagName('head')[0];" +
-//        "head.appendChild(meta);"
-//        
-//        let script = WKUserScript(source: source, injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: true)
-//        
-//        let userContentController = WKUserContentController()
-//        userContentController.addUserScript(script)
-//        
-//        let configuration = WKWebViewConfiguration()
-//        configuration.userContentController = userContentController
-//        
-//        contentWebView = WKWebView(frame: CGRect.infinite, configuration: configuration)
-        //contentWebView.loadHTMLString(htmlTextWithStyle, baseURL: nil)
+       
+        if (!email!.isRead){
+            email!.isRead = true
+            unreadEmail = Message(
+                    id: email!.id,
+                    receivedDateTime: nil,
+                    hasAttachments: nil,
+                    subject: nil,
+                    bodyPreview: nil,
+                    isRead: true,
+                    isDraft: nil,
+                    body: nil,
+                    from: nil,
+                    toRecipients: nil,
+                    ccRecipients:nil,
+                    bccRecipients: nil)
+            
+             updateIsReadStatusToRead(message: unreadEmail!)
+                
+            }
        
         
-    
         
-        //let mailData = Bundle.main.path(forResource: email!.body, ofType: "html")
-        //let url = URL(fileURLWithPath: mailData!)
-        //let request = URLRequest(url: url)
-        //contentWebView.load(request)
         
-        //contentWebKitView.loadFileURL(mailData, allowingReadAccessTo: <#T##URL#>)
         
+        
+//        service.updateIsReadStatus(message: email!) {
+//            message in
+//            if let message = message {
+//                NSLog("success")
+////                let newMsg = Message(
+////                    id: message["id"].stringValue,
+////                    receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
+////                    hasAttachments: message["hasAttachments"].boolValue,
+////                    subject: message["subject"].stringValue,
+////                    bodyPreview: message["bodyPreview"].stringValue,
+////                    isRead: message["isRead"].boolValue,
+////                    isDraft: message["isDraft"].boolValue,
+////                    body: Body(contentType: message["body"]["contentType"].stringValue,
+////                               content: message["body"]["content"].stringValue),
+////                    from: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+////                                       address: message["from"]["emailAddress"]["address"].stringValue),
+////                    toRecipients: [EmailAddress(name: message["toRecipients"][0]["emailAddress"]["name"].stringValue,
+////                                                address: message["toRecipients"][0]["emailAddress"]["address"].stringValue)],
+////                    ccRecipients: [EmailAddress(name: message["ccRecipients"][0]["emailAddress"]["name"].stringValue,
+////                                                address: message["ccRecipients"][0]["emailAddress"]["address"].stringValue)],
+////                    bccRecipients: [EmailAddress(name: message["bccRecipients"][0]["emailAddress"]["name"].stringValue,
+////                                                 address: message["bccRecipients"][0]["emailAddress"]["address"].stringValue)])
+////                //                NSLog("RESULT: " + newMsg.bodyContent)
+//            } else {
+//                NSLog("Fail")
+//            }
+//        }
+        
+        fromLabel.text = email!.from!.emailAddress.name
+        richTextEditorNonEditable.text = email!.body!.content
         subjectLabel.text = email!.subject
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-   
     }
 
     @IBAction func replyButtonPressed(_ sender: Any) {
@@ -126,6 +126,22 @@ class MailContentViewController: UIViewController {
     
     @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) {
     }
+    
+    func updateIsReadStatusToRead(message: Message){
+        
+        service.updateReply(message: message){
+            message in
+            if let message = message{
+                NSLog("JANNET1")
+            }else{
+                NSLog("JANNET2")
+            }
+        }
+        
+        
+    }
+    
+    
 
 }
 
