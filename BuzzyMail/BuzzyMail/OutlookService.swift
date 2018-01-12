@@ -211,6 +211,17 @@ class OutlookService {
             }
         }
     }
+    
+    func createReplyAll(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReplyAll", requestType: RequestTypes.post) {
+            result in
+            if let unwrappedResult = result {
+                callback(unwrappedResult)
+            } else {
+                callback(nil)
+            }
+        }
+    }
 
     func createForward(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createForward", requestType: RequestTypes.post) {
