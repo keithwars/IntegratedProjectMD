@@ -193,6 +193,13 @@ class OutlookService {
             callback(result)
         }
     }
+    
+    func getMailFolderByName(mailFolderName: String, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderName, requestType: RequestTypes.get) {
+            result in
+            callback(result)
+        }
+    }
 
     func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {

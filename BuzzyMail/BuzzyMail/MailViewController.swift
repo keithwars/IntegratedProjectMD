@@ -21,7 +21,7 @@ class MailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var dataSource: MessagesDataSource?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = 80;
@@ -81,6 +81,7 @@ class MailViewController: UIViewController {
     }
     
     func loadUserEmails() {
+        loadInboxMailFolderName()
         self.service.getInboxMessages() {
             messages in
             if let unwrappedMessages = messages {
@@ -98,6 +99,15 @@ class MailViewController: UIViewController {
                 self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func loadInboxMailFolderName() {
+        self.service.getMailFolderByName(mailFolderName: "inbox") {
+            mailFolder in
+            if let unwrappedMailFolder = mailFolder {
+                self.title = unwrappedMailFolder["displayName"].stringValue
             }
         }
     }
