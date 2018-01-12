@@ -8,24 +8,51 @@
 
 import UIKit
 
-class ContactsViewController: UIViewController {
+class ContactsViewController: UIViewController, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    var dataSource: ContactsDataSource?
     
     let service = OutlookService.shared()
+    var contactsList: [Contact]?
     
     func loadUserData() {
-//        self.service.getEvents() {
-//            events in
-//            if let unwrappedEvents = events {
-//                self.dataSource = EventsDataSource(events: unwrappedEvents["value"].arrayValue)
-//                self.tableView.dataSource = self.dataSource
-//                self.tableView.reloadData()
-//            }
-//        }
+        self.service.getContacts() {
+            contacts in
+            if let unwrappedContacts = contacts {
+                self.dataSource = ContactsDataSource(contacts: unwrappedContacts["value"].arrayValue)
+                self.tableView.dataSource = self.dataSource
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.beginUpdates()
+        tableView.reloadData()
+        tableView.endUpdates()
+        
+        super.viewWillAppear(true)
+        
+        if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
+        }
+        
+        tableView.rowHeight = 90;
+        // Do any additional setup after loading the view, typically from a nib.
+        tableView.estimatedRowHeight = 90;
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        
+        if (service.isLoggedIn) {
+            loadUserData()
+            tableView.reloadData()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -269,13 +269,21 @@ class OutlookService {
     
     func getContacts(callback: @escaping (JSON?) -> Void) -> Void {
         let apiParams = [
-            "$orderby": "id, displayName, givenName, surname, emailAddresses ",
+            "$select": "id, displayName, givenName, surname, emailAddresses",
+            "$orderby": "surname ASC",
             "$top": "10"
         ]
         
         makeApiCall(api: "/v1.0/me/contacts", requestType: RequestTypes.get, params: apiParams) {
             result in
             callback(result)
+        }
+    }
+    
+    func deleteContact(id: String, callback: @escaping (String?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/contacts/" + "\(id)", requestType: RequestTypes.delete, json: id as Any as? [String : Any]) {
+            result in
+            callback(result?.string)
         }
     }
 
