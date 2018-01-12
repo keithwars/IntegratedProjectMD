@@ -24,7 +24,7 @@ class MailContentTableViewController: UITableViewController {
         super.viewDidLoad()
 
         if let unwrappedEmail = email {
-            richTextEditor.text = unwrappedEmail.body.content
+            richTextEditor.text = unwrappedEmail.body!.content
             subjectTextField.text = unwrappedEmail.subject
             
             for emailAddress in unwrappedEmail.toRecipients! {

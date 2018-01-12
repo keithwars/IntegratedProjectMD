@@ -9,26 +9,36 @@
 import UIKit
 import WebKit
 import SideMenu
+import SwiftVideoBackground
 
 class LoginViewController: UIViewController {
+    private let videoBackground = VideoBackground()
 
-    
+
     @IBOutlet var logInButton: UIButton!
-    
+
     let service = OutlookService.shared()
-    
-  
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        videoBackground.play(view: view,
+                             videoName: "loginvideo",
+                             videoType: "mp4",
+                             isMuted: false,
+                             alpha: 0.25,
+                             willLoopVideo: true)
+
         // Do any additional setup after loading the view, typically from a nib.
         setLogInState(loggedIn: service.isLoggedIn)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func setLogInState(loggedIn: Bool) {
         if (loggedIn) {
             logInButton.setTitle("Log Out", for: UIControlState.normal)
@@ -37,7 +47,7 @@ class LoginViewController: UIViewController {
             logInButton.setTitle("Authenticate", for: UIControlState.normal)
         }
     }
-    
+
     @IBAction func loginButtonTapped(sender: AnyObject) {
         if (service.isLoggedIn) {
             // Logout

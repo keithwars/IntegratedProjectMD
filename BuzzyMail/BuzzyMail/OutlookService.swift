@@ -237,12 +237,30 @@ class OutlookService {
         }
     }
 
+    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+          result in
+          callback(result)
+        }
+    }
+
     func deleteMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.delete, body: message) {
             result in
             callback(result)
         }
     }
+
+//    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+//        var message2 = message
+//        message2.isRead = true
+//        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message2) {
+//            result in
+//            callback(result)
+//        }
+//    }
+
+
 
     func postEvent(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
 
