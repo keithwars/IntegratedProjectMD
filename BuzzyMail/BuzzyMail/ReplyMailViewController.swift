@@ -27,9 +27,11 @@ class ReplyMailViewController: UIViewController {
 
         self.dispatchGroup.enter()
         if let richTextEditor = container?.richTextEditor {
-            self.newEmail?.body.content = richTextEditor.updatedText!
+            self.newEmail?.body!.content = richTextEditor.updatedText!
             self.newEmail?.subject = container!.subjectTextField.text!
-            self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "Test", address: container!.toTextField.text!)))
+            if (self.newEmail?.toRecipients == nil) {
+                self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: container!.toTextField.text!)))
+            }
             self.dispatchGroup.leave()
         }
         self.dispatchGroup.notify(queue: .main) {
@@ -62,7 +64,7 @@ class ReplyMailViewController: UIViewController {
         let saveDraftActionHandler = { (action:UIAlertAction!) -> Void in
             self.dispatchGroup3.enter()
             if let richTextEditor = self.container?.richTextEditor {
-                self.newEmail?.body.content = richTextEditor.updatedText!
+                self.newEmail?.body!.content = richTextEditor.updatedText!
                 self.newEmail?.subject = self.container!.subjectTextField.text!
                 self.dispatchGroup3.leave()
             }

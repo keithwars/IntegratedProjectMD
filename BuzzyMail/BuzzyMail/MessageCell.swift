@@ -131,7 +131,26 @@ extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MessageCell.self)) as! MessageCell
         let message = messages[indexPath.row]
 
-        cell.from = message.from!.emailAddress.name
+        //var mailViewController: MailViewController = MailViewController(nibName: nil, bundle: nil)
+
+        if (message.toRecipients!.count > 0 && (message.from!.emailAddress.address == service.userEmail || message.isDraft!)) {
+            NSLog("We're in a Sent Items Folder!")
+            var fromList: String = ""
+
+                for i in 0...message.toRecipients!.count - 1 {
+                    if (i != 0) {
+                        fromList += ", "
+                    }
+                    fromList += message.toRecipients![i].emailAddress.name
+                    NSLog("ToRecipient: " + message.toRecipients![i].emailAddress.name)
+                    NSLog("From: " + message.from!.emailAddress.address)
+                }
+                cell.from = fromList
+        }
+        else {
+            cell.from = message.from!.emailAddress.name
+        }
+
         cell.received = message.receivedDateTime
 
 

@@ -21,6 +21,9 @@
 		3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27611FC839EC00049443 /* LoginViewController.swift */; };
 		3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27631FC83C2D00049443 /* ContactsViewController.swift */; };
 		3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27651FC83D5300049443 /* OutlookService.swift */; };
+		3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */; };
+		3F45553E2003E1940085BEF3 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553D2003E1940085BEF3 /* MenuCell.swift */; };
+		3F4555402003E2A00085BEF3 /* MailFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553F2003E2A00085BEF3 /* MailFolder.swift */; };
 		3FB31B0B2003A37F003E8347 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0A2003A37F003E8347 /* Message.swift */; };
 		3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */; };
 		3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B132003A484003E8347 /* MailContentTableViewController.swift */; };
@@ -68,6 +71,9 @@
 		3F44F6451FDAA6A2005D095F /* RichTextEditor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = RichTextEditor.html; sourceTree = "<group>"; };
 		3F44F6471FDAA704005D095F /* RichTextEditor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RichTextEditor.js; sourceTree = "<group>"; };
 		3F44F6491FDAA729005D095F /* RichTextEditorEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorEditable.swift; sourceTree = "<group>"; };
+		3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuMailViewController.swift; sourceTree = "<group>"; };
+		3F45553D2003E1940085BEF3 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		3F45553F2003E2A00085BEF3 /* MailFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailFolder.swift; sourceTree = "<group>"; };
 		3F663C1E1FD171F300FA9D66 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
 		3FB31B0A2003A37F003E8347 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
@@ -143,10 +149,12 @@
 			children = (
 				3FB31B0E2003A3A0003E8347 /* models */,
 				3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */,
-				2B96B8B81FD9448B0077EB08 /* MessageCell.swift */,
 				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
 				3F0E27411FC8373300049443 /* MailViewController.swift */,
 				2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */,
+				3F45553D2003E1940085BEF3 /* MenuCell.swift */,
+				2B96B8B81FD9448B0077EB08 /* MessageCell.swift */,
+				566B141C1FC85DB000C074C4 /* EventCell.swift */,
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
 				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
 				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
@@ -158,10 +166,10 @@
 				3F0E274D1FC8373300049443 /* Info.plist */,
 				3F0E27651FC83D5300049443 /* OutlookService.swift */,
 				566B141A1FC85C3800C074C4 /* Formatter.swift */,
-				566B141C1FC85DB000C074C4 /* EventCell.swift */,
 				3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */,
 				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
 				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
+				3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */,
 			);
 			path = BuzzyMail;
 			sourceTree = "<group>";
@@ -201,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				3FB31B0A2003A37F003E8347 /* Message.swift */,
+				3F45553F2003E2A00085BEF3 /* MailFolder.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -411,12 +420,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftVideoBackground/SwiftVideoBackground.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/p2.OAuth2/p2_OAuth2.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftVideoBackground.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/p2_OAuth2.framework",
@@ -435,14 +446,17 @@
 			files = (
 				3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */,
 				3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */,
+				3F4555402003E2A00085BEF3 /* MailFolder.swift in Sources */,
 				3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */,
 				3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */,
 				3FB31B0B2003A37F003E8347 /* Message.swift in Sources */,
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
+				3F45553E2003E1940085BEF3 /* MenuCell.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
 				56D7C0E21FE40F1B005DDDA3 /* CalendarContentViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
 				566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */,
+				3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */,
 				566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */,
 				2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */,
 				3F0E27421FC8373300049443 /* MailViewController.swift in Sources */,

@@ -29,7 +29,9 @@ class OutlookService {
         "verbose": true,
         ] as OAuth2JSON
 
-    private var userEmail: String
+    public var userEmail: String
+    
+    public var userGivenName: String
 
     private static var sharedService: OutlookService = {
         let service = OutlookService()
@@ -42,6 +44,7 @@ class OutlookService {
         oauth2 = OAuth2CodeGrant(settings: OutlookService.oauth2Settings)
         oauth2.authConfig.authorizeEmbedded = true
         userEmail = ""
+        userGivenName = ""
     }
 
     class func shared() -> OutlookService {
@@ -154,6 +157,8 @@ class OutlookService {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
+                    //NSLog("POMPERNIKKEL5 " + unwrappedResult["givenName"].stringValue)
+                    self.userGivenName = unwrappedResult["givenName"].stringValue
                     self.userEmail = email
                     callback(email)
                 } else {
@@ -172,6 +177,25 @@ class OutlookService {
         ]
 
         makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func getMailFolderMessages(mailFolderId: String, callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "receivedDateTime DESC",
+            "$top": "10"
+        ]
+        
+        makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderId + "/messages", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func getMailFolderByName(mailFolderName: String, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderName, requestType: RequestTypes.get) {
             result in
             callback(result)
         }
@@ -285,6 +309,16 @@ class OutlookService {
         }
     }
 
+    func getMailFolders(callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "totalItemCount DESC"
+        ]
+        makeApiCall(api: "/v1.0/me/mailfolders", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
     func logout() -> Void {
         oauth2.forgetTokens()
     }

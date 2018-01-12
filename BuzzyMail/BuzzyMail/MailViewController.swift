@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class MailViewController: UIViewController/*, UITableViewDataSource, UITableViewDelegate*/ {
 
@@ -15,11 +16,13 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
     var deletePlanetIndexPath: NSIndexPath? = nil
 
     var messagesList:[Message]?
-    
+
+    let customSideMenuManager = SideMenuManager()
+
+    var currentMailFolder: MailFolder?
+
     @IBOutlet weak var tableView: UITableView!
     var dataSource: MessagesDataSource?
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +37,6 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let row = self.tableView.indexPathForSelectedRow
-        let rowint = Int(row![1])
-
-        messagesList = dataSource?.getMessagesArray()
-
-        NSLog(messagesList![rowint].subject!)
 
         /*
         func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -69,8 +66,12 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
 
  */
 
-
         if segue.identifier == "showMailContent" {
+            let row = self.tableView.indexPathForSelectedRow
+            let rowint = Int(row![1])
+
+            messagesList = dataSource?.getMessagesArray()
+
             if let destination = segue.destination as? MailContentViewController {
                 destination.email = messagesList![rowint]
             }
@@ -78,6 +79,10 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        SideMenuManager.default.menuWidth = max(round(min((UIScreen.main.bounds.width), (UIScreen.main.bounds.height)) * 0.80), 240)
+        //SideMenuManager.default.menuFadeStatusBar = true
+        SideMenuManager.default.menuAnimationBackgroundColor = UIColor.clear
+        //SideMenuManager.default.menuAnimationBackgroundColor = UIColor(rgb: 0x0096FF)
         super.viewWillAppear(animated)
 
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
@@ -92,20 +97,51 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func closeSideMenu(_ segue: UIStoryboardSegue) {
+        if let currentMailFolder = currentMailFolder {
+            NSLog("Loading New Mail Folder: " + currentMailFolder.displayName)
+            self.loadUserEmailsFolder(mailFolderId: currentMailFolder.id)
+        }
+        self.title = currentMailFolder!.displayName
+    }
+
     func loadUserData() {
         service.getUserEmail() {
             email in
-            self.service.getInboxMessages() {
-                messages in
-                if let unwrappedMessages = messages {
-                    self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
-                    self.tableView.dataSource = self.dataSource
-                    self.tableView.reloadData()
-                }
+            self.loadUserEmails()
+            //self.loadUserEmailsFolder(mailFolderId: "AQMkADViYgA5NTc1Ni0wODFjLTRlODktYmY0Mi0yNDk0ZTk1ZGIxYTMALgAAA_mdMlZTZwFJiPpRhzdkNwsBABK9rA8i5f5PgECmCrXNdSEAAAIBCQAAAA==")
+        }
+    }
+
+    func loadUserEmails() {
+        loadInboxMailFolderName()
+        self.service.getInboxMessages() {
+            messages in
+            if let unwrappedMessages = messages {
+                self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
+                self.tableView.dataSource = self.dataSource
+                self.tableView.reloadData()
             }
         }
     }
 
+    func loadUserEmailsFolder(mailFolderId: String) {
+        self.service.getMailFolderMessages(mailFolderId: mailFolderId) {
+            messages in
+            if let unwrappedMessages = messages {
+                self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
+                self.tableView.dataSource = self.dataSource
+                self.tableView.reloadData()
+            }
+        }
+    }
 
-
+    func loadInboxMailFolderName() {
+        self.service.getMailFolderByName(mailFolderName: "inbox") {
+            mailFolder in
+            if let unwrappedMailFolder = mailFolder {
+                self.title = unwrappedMailFolder["displayName"].stringValue
+            }
+        }
+    }
 }
