@@ -29,8 +29,17 @@ class ReplyMailViewController: UIViewController {
         if let richTextEditor = container?.richTextEditor {
             self.newEmail?.body!.content = richTextEditor.updatedText!
             self.newEmail?.subject = container!.subjectTextField.text!
-            if (self.newEmail?.toRecipients == nil) {
-                self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: container!.toTextField.text!)))
+            
+            self.newEmail?.toRecipients = [EmailAddresses]()
+            let toTextFieldArray = container!.toTextField.text!.components(separatedBy: ", ")
+            for toTextField in toTextFieldArray {
+                self.newEmail?.toRecipients!.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: toTextField)))
+            }
+            
+            self.newEmail?.ccRecipients = [EmailAddresses]()
+            let ccTextFieldArray = container!.ccTextField.text!.components(separatedBy: ", ")
+            for ccTextField in ccTextFieldArray {
+                self.newEmail?.ccRecipients!.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: ccTextField)))
             }
             self.dispatchGroup.leave()
         }
