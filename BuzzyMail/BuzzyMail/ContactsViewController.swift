@@ -32,6 +32,19 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let row = self.tableView.indexPathForSelectedRow
+        let rowint = Int(row![1])
+        
+        contactsList = dataSource?.getContactsArray()
+        
+        if segue.identifier == "showContactInformation" {
+            if let destination = segue.destination as? ContactInformationViewController {
+                destination.contact = contactsList![rowint]
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         tableView.beginUpdates()
         tableView.reloadData()

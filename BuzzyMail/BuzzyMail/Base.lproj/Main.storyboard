@@ -390,6 +390,7 @@
                                         <connections>
                                             <outlet property="givenNameLabel" destination="9W7-i2-Cmv" id="Xni-9z-x2s"/>
                                             <outlet property="initialsLabel" destination="khB-r2-x5F" id="0Eu-Xp-57g"/>
+                                            <segue destination="f7V-p7-6fA" kind="show" identifier="showContactInformation" id="2gA-h8-2Q9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -412,6 +413,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NA6-fI-qCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1725.5999999999999" y="1456.8215892053975"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cWQ-GC-Bbm">
+            <objects>
+                <viewController id="f7V-p7-6fA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hRR-zG-FLw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="hah-nU-0i7"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PDg-o4-Uwb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2724" y="1457"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="mX8-RM-0X5">
