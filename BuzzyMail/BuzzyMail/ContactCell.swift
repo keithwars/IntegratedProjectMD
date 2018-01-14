@@ -19,12 +19,12 @@ struct Contact {
 }
 
 class ContactCell: UITableViewCell {
-    @IBOutlet weak var surnameLabel: UILabel!
     @IBOutlet weak var givenNameLabel: UILabel!
+    @IBOutlet weak var initialsLAbel: UILabel!
     
-    var surname: String? {
+    var initials: String? {
         didSet {
-            surnameLabel.text = surname
+           initialsLAbel.text = initials
         }
     }
     
@@ -76,6 +76,7 @@ extension ContactsDataSource: UITableViewDataSource, UITableViewDelegate {
         
         //cell.surname = contact.surname
         cell.givenName = contact.displayName
+        cell.initials = firstLetter(a: (contact.displayName)!) + "S"
         
         return cell
         
@@ -158,4 +159,8 @@ extension ContactsDataSource: UITableViewDataSource, UITableViewDelegate {
         }
         return nil
     }
+}
+
+func firstLetter(a: String) -> String {
+    return String(a[a.startIndex])
 }
