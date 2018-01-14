@@ -355,11 +355,11 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="49" id="gMn-iB-BVS" customClass="ContactCell" customModule="BuzzyMail" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="49" id="gMn-iB-BVS" customClass="ContactCell" customModule="BuzzyMail" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gMn-iB-BVS" id="jDC-NT-XHH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Givenname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W7-i2-Cmv">
@@ -389,7 +389,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="givenNameLabel" destination="9W7-i2-Cmv" id="Xni-9z-x2s"/>
-                                            <outlet property="initialsLAbel" destination="khB-r2-x5F" id="Bw8-KO-T1o"/>
+                                            <outlet property="initialsLabel" destination="khB-r2-x5F" id="0Eu-Xp-57g"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
