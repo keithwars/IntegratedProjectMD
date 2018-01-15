@@ -28,6 +28,57 @@ class Formatter {
 
       return toStringFormatter.string(from: dateObj!)
     }
+    
+    class func dateToString2(date: String) -> String {
+        let graphDateString = date
+        if (graphDateString.isEmpty) {
+            return ""
+        }
+        
+        
+        let toDateFormatter = DateFormatter()
+        
+        toDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        let dateObj = toDateFormatter.date(from: graphDateString)
+        if (dateObj == nil) {
+            return ""
+        }
+        
+        let toStringFormatter = DateFormatter()
+        
+        let sixDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())
+        let sixDaysAgoFromStart = Calendar.current.startOfDay(for: sixDaysAgo!)
+        
+        toStringFormatter.timeStyle = DateFormatter.Style.full
+        toStringFormatter.dateStyle = DateFormatter.Style.full
+        
+        if (NSCalendar.current.isDateInToday(dateObj!)) {
+            toStringFormatter.dateStyle = DateFormatter.Style.none
+            toStringFormatter.timeStyle = DateFormatter.Style.short
+            toStringFormatter.timeZone = TimeZone.current
+        }
+        else if (NSCalendar.current.isDateInYesterday(dateObj!)) {
+            toStringFormatter.dateStyle = .long
+            toStringFormatter.doesRelativeDateFormatting = true
+            toStringFormatter.timeStyle = DateFormatter.Style.none
+            toStringFormatter.timeZone = TimeZone.current
+        }
+        else if ((sixDaysAgoFromStart ... Date()).contains(dateObj!)) {
+            toStringFormatter.dateFormat = "EEEE"
+            /*toStringFormatter.dateStyle = .long
+             toStringFormatter.doesRelativeDateFormatting = true
+             toStringFormatter.timeStyle = DateFormatter.Style.none*/
+            toStringFormatter.timeZone = TimeZone.current
+        }
+        else {
+            toStringFormatter.dateStyle = DateFormatter.Style.short
+            toStringFormatter.timeStyle = DateFormatter.Style.none
+            toStringFormatter.timeZone = TimeZone.current
+        }
+        
+        return toStringFormatter.string(from: dateObj!)
+    }
 
     class func dateTimeTimeZoneToString(date: JSON) -> String {
         let graphTimeZone = date["timeZone"].stringValue
