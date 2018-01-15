@@ -10,7 +10,6 @@ import UIKit
 import SwiftyJSON
 import Foundation
 
-let service = OutlookService.shared()
 
 class MessageCell: UITableViewCell {
     @IBOutlet weak var fromLabel: UILabel!
@@ -20,6 +19,7 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var attachmentImageView: UIImageView!
     @IBOutlet weak var unReadMarker: UIImageView!
 
+    let service = OutlookService.shared()
 
     var from: String? {
         didSet {

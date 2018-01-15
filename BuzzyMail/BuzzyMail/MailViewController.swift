@@ -37,12 +37,6 @@ class MailViewController: UIViewController{
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        let row = self.tableView.indexPathForSelectedRow
-        let rowint = Int(row![1])
-        
-        messagesList = dataSource?.getMessagesArray()
-        
-
         /*
         func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
             if editingStyle == .delete {
@@ -90,7 +84,12 @@ class MailViewController: UIViewController{
         //SideMenuManager.default.menuAnimationBackgroundColor = UIColor(rgb: 0x0096FF)
         super.viewWillAppear(animated)
 
-        loadUserData()
+        if let currentMailFolder = currentMailFolder {
+            self.loadUserEmailsFolder(mailFolderId: currentMailFolder.id)
+        }
+        else {
+            loadUserData()
+        }
         // Add Refresh Control to Table View
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -136,19 +135,11 @@ class MailViewController: UIViewController{
 
 
     func loadUserData() {
+        loadInboxMailFolderName()
         service.getUserEmail() {
             email in
             if let unwrappedEmail = email {
-                NSLog("Hello \(unwrappedEmail)")
-                
-                self.service.getInboxMessages() {
-                    messages in
-                    if let unwrappedMessages = messages {
-                        self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
-                        self.tableView.dataSource = self.dataSource
-                        self.tableView.reloadData()
-                    }
-                }
+                self.loadUserEmails()
                 self.refreshControl.endRefreshing()
                 //self.activityIndicatorView.stopAnimating()
             }
@@ -179,6 +170,7 @@ class MailViewController: UIViewController{
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()
             }
+            self.refreshControl.endRefreshing()
         }
     }
 

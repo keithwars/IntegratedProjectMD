@@ -15,6 +15,8 @@ class SideMenuMailViewController: UITableViewController {
     var dataSource: MailFoldersDataSource?
     var mailFoldersList: [MailFolder]?
     
+    let service = OutlookService.shared()
+    
     override func viewDidLoad() {
         loadMailFolders()
         setUserGivenName()
