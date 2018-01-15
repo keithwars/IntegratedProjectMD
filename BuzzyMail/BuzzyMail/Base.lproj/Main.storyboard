@@ -438,7 +438,7 @@
         <!--Add Contact-->
         <scene sceneID="fwL-2X-1F2">
             <objects>
-                <tableViewController id="ETa-MH-KfA" sceneMemberID="viewController">
+                <tableViewController id="ETa-MH-KfA" customClass="ContactsAddContactViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rEY-xi-5dx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -459,6 +459,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldFirstNameEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="26m-im-ukv"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -476,6 +479,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldLastNameEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="5C3-52-Gl8"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -497,23 +503,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7HU-k4-voE">
-                                        <rect key="frame" x="0.0" y="243.5" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7HU-k4-voE" id="hK6-hZ-kV1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Display Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DL2-0Q-mxI">
-                                                    <rect key="frame" x="16" y="7" width="343" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldEmailEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="p8j-DT-wog"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -523,7 +515,7 @@
                             <tableViewSection headerTitle="Telephone Number" id="6bO-E1-N56">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cTH-WG-UmE">
-                                        <rect key="frame" x="0.0" y="343.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="299.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cTH-WG-UmE" id="LJU-yc-Ope">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -535,6 +527,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldTelephoneNumberEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="Ewk-Ic-tXF"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -548,9 +543,23 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Contact" id="CV2-Fx-MyT">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UfF-eb-1fs"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rpH-Jo-Qz2"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UfF-eb-1fs">
+                            <connections>
+                                <action selector="onCancelPressed:" destination="ETa-MH-KfA" id="3dB-28-4Im"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rpH-Jo-Qz2">
+                            <connections>
+                                <action selector="onButtonPressed:" destination="ETa-MH-KfA" id="j9w-kM-tQ5"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textfieldEmail" destination="h2b-NU-xnD" id="XUJ-3S-qR8"/>
+                        <outlet property="textfieldFirstName" destination="Mso-rx-9Bo" id="cSR-mc-MQp"/>
+                        <outlet property="textfieldLastName" destination="zO5-db-1U5" id="i0Q-Cm-j0S"/>
+                        <outlet property="textfieldTelephoneNumber" destination="4q4-0j-FX3" id="hnG-Rm-svd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0s-d0-k48" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

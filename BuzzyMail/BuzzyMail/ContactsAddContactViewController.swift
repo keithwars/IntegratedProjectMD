@@ -16,7 +16,6 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
     @IBOutlet weak var textfieldLastName: UITextField!
     
     @IBOutlet weak var textfieldEmail: UITextField!
-    @IBOutlet weak var textfieldDisplayName: UITextField!
     
     @IBOutlet weak var textfieldTelephoneNumber: UITextField!
     
@@ -44,10 +43,6 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
         email = textfieldEmail.text!
     }
     
-    @IBAction func textfieldDisplayNameEditor(_ sender: UITextField) {
-        displayName = textfieldDisplayName.text!
-    }
-    
     @IBAction func textfieldTelephoneNumberEditor(_ sender: UITextField) {
        telephoneNumber = textfieldTelephoneNumber.text!
     }
@@ -65,7 +60,6 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
         textfieldFirstName.inputAccessoryView = toolbar
         textfieldLastName.inputAccessoryView = toolbar
         textfieldEmail.inputAccessoryView = toolbar
-        textfieldDisplayName.inputAccessoryView = toolbar
         textfieldTelephoneNumber.inputAccessoryView = toolbar
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -83,11 +77,11 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
     @IBAction func onButtonPressed(_ sender: Any) {
     
         let contactToAdd = Contact(
-            firstName: firstName,
-            lastName: lastName,
-            displayName: displayName,
-            emailAddress: [EmailAddress(name: firstName + "" + lastName, address: email)],
-            telephoneNumber: telephoneNumber
+            GivenName: firstName,
+            SurName: lastName,
+            DisplayName: firstName,
+            EmailAddresses: [EmailAddress(name: firstName + "" + lastName, address: email)],
+            BusinessPhones: [telephoneNumber]
         )
         
         let jsonEncoder = JSONEncoder()
@@ -109,11 +103,11 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
     }
     
     struct Contact : Codable {
-        var firstName: String
-        var lastName: String
-        var displayName: String
-        var emailAddress: [EmailAddress]
-        var telephoneNumber: String?
+        var GivenName: String
+        var SurName: String
+        var DisplayName: String
+        var EmailAddresses: [EmailAddress]
+        var BusinessPhones: [String]?
     }
     
 }

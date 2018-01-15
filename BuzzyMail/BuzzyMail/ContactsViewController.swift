@@ -33,19 +33,14 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let row = self.tableView.indexPathForSelectedRow
-        let rowint = Int(row![1])
-        
-        contactsList = dataSource?.getContactsArray()
-        
         if segue.identifier == "showContactInformation" {
+            let row = self.tableView.indexPathForSelectedRow
+            let rowint = Int(row![1])
+            
+            contactsList = dataSource?.getContactsArray()
+            
             if let destination = segue.destination as? ContactInformationViewController {
                 destination.contact = contactsList![rowint]
-            }
-        }
-        else if segue.identifier == "addContact" {
-            if let destination = segue.destination as? ContactsAddContactViewController {
-                print(destination)
             }
         }
     }
