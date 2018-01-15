@@ -16,6 +16,8 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var bodyPreviewLabel: UILabel!
     @IBOutlet weak var attachmentImageView: UIImageView!
+    @IBOutlet weak var unReadMarker: UIImageView!
+
 
     var from: String? {
         didSet {
@@ -44,6 +46,11 @@ class MessageCell: UITableViewCell {
     var hasAttachments: Bool? {
         didSet {
             attachmentImageView.isHidden = false
+        }
+    }
+    var unRead: Bool? {
+        didSet {
+            unReadMarker.isHidden = false
         }
     }
     var isRead: Bool? {
@@ -101,6 +108,8 @@ class MessagesDataSource: NSObject {
             }
         }
 
+
+
         self.messages = msgArray
     }
 
@@ -109,7 +118,9 @@ class MessagesDataSource: NSObject {
     }
 }
 
-extension MessagesDataSource: UITableViewDataSource {
+extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
+
+
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
@@ -120,18 +131,48 @@ extension MessagesDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MessageCell.self)) as! MessageCell
         let message = messages[indexPath.row]
 
-        cell.from = message.from.emailAddress.name
+        //var mailViewController: MailViewController = MailViewController(nibName: nil, bundle: nil)
+
+        if (message.toRecipients!.count > 0 && (message.from!.emailAddress.address == service.userEmail || message.isDraft!)) {
+            NSLog("We're in a Sent Items Folder!")
+            var fromList: String = ""
+
+                for i in 0...message.toRecipients!.count - 1 {
+                    if (i != 0) {
+                        fromList += ", "
+                    }
+                    fromList += message.toRecipients![i].emailAddress.name
+                    NSLog("ToRecipient: " + message.toRecipients![i].emailAddress.name)
+                    NSLog("From: " + message.from!.emailAddress.address)
+                }
+                cell.from = fromList
+        }
+        else {
+            cell.from = message.from!.emailAddress.name
+        }
+
         cell.received = message.receivedDateTime
 
-        /*
+
         if (message.hasAttachments == true){
-            cell.attachmentImageView = false
+            cell.attachmentImageView.isHidden = false
         }
         else{
-            cell.attachmentImageView = true
+            cell.attachmentImageView.isHidden = true
         }
 
-         */
+        if (message.isRead == false){
+            cell.unReadMarker.isHidden = false
+        }
+        else{
+            cell.unReadMarker.isHidden = true
+        }
+
+
+        cell.subject = message.subject
+        cell.bodyPreview = (message.bodyPreview)
+
+        /*
 
         cell.subject = message.subject
         cell.bodyPreview = (message.bodyPreview)
@@ -140,8 +181,20 @@ extension MessagesDataSource: UITableViewDataSource {
             print("read Yes")
             cell.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
         }
-
+        */
         return cell
 
     }
+
+
+
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//            deletePlanetIndexPath = indexPath
+//            let planetToDelete = planets[indexPath.row]
+//            confirmDelete(planetToDelete)
+//        }
+//    }
+
+
 }

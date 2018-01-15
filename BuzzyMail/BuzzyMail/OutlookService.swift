@@ -29,7 +29,9 @@ class OutlookService {
         "verbose": true,
         ] as OAuth2JSON
 
-    private var userEmail: String
+    public var userEmail: String
+    
+    public var userGivenName: String
 
     private static var sharedService: OutlookService = {
         let service = OutlookService()
@@ -42,6 +44,7 @@ class OutlookService {
         oauth2 = OAuth2CodeGrant(settings: OutlookService.oauth2Settings)
         oauth2.authConfig.authorizeEmbedded = true
         userEmail = ""
+        userGivenName = ""
     }
 
     class func shared() -> OutlookService {
@@ -154,6 +157,8 @@ class OutlookService {
                 result in
                 if let unwrappedResult = result {
                     let email = unwrappedResult["mail"].stringValue
+                    //NSLog("POMPERNIKKEL5 " + unwrappedResult["givenName"].stringValue)
+                    self.userGivenName = unwrappedResult["givenName"].stringValue
                     self.userEmail = email
                     callback(email)
                 } else {
@@ -176,9 +181,39 @@ class OutlookService {
             callback(result)
         }
     }
+    
+    func getMailFolderMessages(mailFolderId: String, callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "receivedDateTime DESC",
+            "$top": "10"
+        ]
+        
+        makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderId + "/messages", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
+    func getMailFolderByName(mailFolderName: String, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderName, requestType: RequestTypes.get) {
+            result in
+            callback(result)
+        }
+    }
 
     func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {
+            result in
+            if let unwrappedResult = result {
+                callback(unwrappedResult)
+            } else {
+                callback(nil)
+            }
+        }
+    }
+    
+    func createReplyAll(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReplyAll", requestType: RequestTypes.post) {
             result in
             if let unwrappedResult = result {
                 callback(unwrappedResult)
@@ -213,12 +248,30 @@ class OutlookService {
         }
     }
 
+    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+          result in
+          callback(result)
+        }
+    }
+
     func deleteMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.delete, body: message) {
             result in
             callback(result)
         }
     }
+
+//    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+//        var message2 = message
+//        message2.isRead = true
+//        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message2) {
+//            result in
+//            callback(result)
+//        }
+//    }
+
+
 
     func postEvent(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
 
@@ -296,6 +349,16 @@ class OutlookService {
         }
     }
 
+    func getMailFolders(callback: @escaping (JSON?) -> Void) -> Void {
+        let apiParams = [
+            "$orderby": "totalItemCount DESC"
+        ]
+        makeApiCall(api: "/v1.0/me/mailfolders", requestType: RequestTypes.get, params: apiParams) {
+            result in
+            callback(result)
+        }
+    }
+    
     func logout() -> Void {
         oauth2.forgetTokens()
     }
