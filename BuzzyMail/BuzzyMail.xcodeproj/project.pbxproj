@@ -30,8 +30,11 @@
 		3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */; };
 		3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */; };
 		3FF0F3931FE407560055B34C /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FF0F3921FE407560055B34C /* Resources.bundle */; };
+		563FEEA4200BC76B000965FD /* ContactInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */; };
+		563FEEA6200BDBB7000965FD /* ContactsAddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */; };
 		566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141A1FC85C3800C074C4 /* Formatter.swift */; };
 		566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B141C1FC85DB000C074C4 /* EventCell.swift */; };
+		569B5A2C2003BED400C34193 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B5A2B2003BED400C34193 /* ContactCell.swift */; };
 		56B2823B1FD9793900329BEB /* CalendarAddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */; };
 		56D7C0E21FE40F1B005DDDA3 /* CalendarContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */; };
 		CEA0861A0E535CA814B7CCB8 /* Pods_BuzzyMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */; };
@@ -83,8 +86,11 @@
 		3FF0F38E1FE405D90055B34C /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
 		3FF0F3921FE407560055B34C /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		4DBD452035A0C8E67B017707 /* Pods-BuzzyMailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInformationViewController.swift; sourceTree = "<group>"; };
+		563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsAddContactViewController.swift; sourceTree = "<group>"; };
 		566B141A1FC85C3800C074C4 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		566B141C1FC85DB000C074C4 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		569B5A2B2003BED400C34193 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddEventViewController.swift; sourceTree = "<group>"; };
 		56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarContentViewController.swift; sourceTree = "<group>"; };
 		6F3F3653ADAE360DBC6D0E06 /* Pods-BuzzyMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMail/Pods-BuzzyMail.debug.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
 				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
 				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
+				563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */,
+				563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */,
 				3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */,
 				3F0E27451FC8373300049443 /* Main.storyboard */,
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
@@ -169,6 +177,7 @@
 				3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */,
 				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
 				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
+				569B5A2B2003BED400C34193 /* ContactCell.swift */,
 				3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */,
 			);
 			path = BuzzyMail;
@@ -444,6 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				569B5A2C2003BED400C34193 /* ContactCell.swift in Sources */,
 				3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */,
 				3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */,
 				3F4555402003E2A00085BEF3 /* MailFolder.swift in Sources */,
@@ -455,12 +465,14 @@
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
 				56D7C0E21FE40F1B005DDDA3 /* CalendarContentViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
+				563FEEA4200BC76B000965FD /* ContactInformationViewController.swift in Sources */,
 				566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */,
 				3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */,
 				566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */,
 				2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */,
 				3F0E27421FC8373300049443 /* MailViewController.swift in Sources */,
 				56B2823B1FD9793900329BEB /* CalendarAddEventViewController.swift in Sources */,
+				563FEEA6200BDBB7000965FD /* ContactsAddContactViewController.swift in Sources */,
 				3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */,
 				3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */,
 				2B96B8B91FD9448B0077EB08 /* MessageCell.swift in Sources */,
