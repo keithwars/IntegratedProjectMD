@@ -79,8 +79,8 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
         let contactToAdd = Contact(
             GivenName: firstName,
             SurName: lastName,
-            DisplayName: firstName,
-            EmailAddresses: [EmailAddress(name: firstName + "" + lastName, address: email)],
+            DisplayName: firstName + " " + lastName,
+            EmailAddresses: [EmailAddress(name: firstName + " " + lastName, address: email)],
             BusinessPhones: [telephoneNumber]
         )
         
