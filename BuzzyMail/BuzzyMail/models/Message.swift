@@ -9,12 +9,12 @@
 import Foundation
 
 struct Message: Codable {
-    var id: String
+    var id: String?
     var receivedDateTime: String?
     var hasAttachments: Bool?
     var subject: String?
     var bodyPreview: String?
-    var isRead: Bool
+    var isRead: Bool?
     var isDraft: Bool?
     var body: Body?
     var from: EmailAddresses?

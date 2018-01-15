@@ -106,6 +106,11 @@ class OutlookService {
                 let jsonDate = try? JSONSerialization.data(withJSONObject: unwrappedJson)
                 req.httpBody = jsonDate
             }
+            if let unwrappedBody = body {
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try! jsonEncoder.encode(unwrappedBody)
+                req.httpBody = jsonData
+            }
         case .put:
             req.httpMethod = "PUT"
         case .patch:
@@ -200,9 +205,20 @@ class OutlookService {
             callback(result)
         }
     }
+    
+    func createMail(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages", requestType: RequestTypes.post, body: message) {
+            result in
+            if let unwrappedResult = result {
+                callback(unwrappedResult)
+            } else {
+                callback(nil)
+            }
+        }
+    }
 
     func createReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReply", requestType: RequestTypes.post) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id! + "/createReply", requestType: RequestTypes.post) {
             result in
             if let unwrappedResult = result {
                 callback(unwrappedResult)
@@ -213,7 +229,7 @@ class OutlookService {
     }
     
     func createReplyAll(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createReplyAll", requestType: RequestTypes.post) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id! + "/createReplyAll", requestType: RequestTypes.post) {
             result in
             if let unwrappedResult = result {
                 callback(unwrappedResult)
@@ -224,7 +240,7 @@ class OutlookService {
     }
 
     func createForward(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/createForward", requestType: RequestTypes.post) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id! + "/createForward", requestType: RequestTypes.post) {
             result in
             if let unwrappedResult = result {
                 callback(unwrappedResult)
@@ -235,28 +251,28 @@ class OutlookService {
     }
 
     func sendMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id + "/send", requestType: RequestTypes.post) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id! + "/send", requestType: RequestTypes.post) {
             result in
             callback(result)
         }
     }
 
     func updateReply(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id!, requestType: RequestTypes.patch, body: message) {
             result in
             callback(result)
         }
     }
 
     func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.patch, body: message) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id!, requestType: RequestTypes.patch, body: message) {
           result in
           callback(result)
         }
     }
 
     func deleteMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
-        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.delete, body: message) {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id!, requestType: RequestTypes.delete, body: message) {
             result in
             callback(result)
         }
