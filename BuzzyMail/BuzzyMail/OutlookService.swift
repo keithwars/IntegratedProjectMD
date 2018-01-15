@@ -121,6 +121,7 @@ class OutlookService {
             let jsonData = try! jsonEncoder.encode(body)
             req.httpBody = jsonData
         case .delete:
+            NSLog("Delete request received")
             req.httpMethod = "DELETE"
         }
 

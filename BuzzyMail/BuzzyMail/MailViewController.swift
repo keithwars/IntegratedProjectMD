@@ -9,21 +9,21 @@
 import UIKit
 import SideMenu
 
-class MailViewController: UIViewController/*, UITableViewDataSource, UITableViewDelegate*/ {
+class MailViewController: UIViewController{
 
     let service = OutlookService.shared()
-
+    private let refreshControl = UIRefreshControl()
+    
     var deletePlanetIndexPath: NSIndexPath? = nil
-
     var messagesList:[Message]?
-
+    var dataSource: MessagesDataSource?
+    var currentMailFolder: MailFolder?
     let customSideMenuManager = SideMenuManager()
 
-    var currentMailFolder: MailFolder?
-
+    
     @IBOutlet weak var tableView: UITableView!
-    var dataSource: MessagesDataSource?
-
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = 80;
@@ -32,7 +32,6 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
         if(service.isLoggedIn) {
             loadUserData()
         }
-
 
     }
 
@@ -85,16 +84,45 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
         //SideMenuManager.default.menuAnimationBackgroundColor = UIColor(rgb: 0x0096FF)
         super.viewWillAppear(animated)
 
+        if let currentMailFolder = currentMailFolder {
+            self.loadUserEmailsFolder(mailFolderId: currentMailFolder.id)
+        }
+        else {
+            loadUserData()
+        }
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        
+        // Configure Refresh Control
+        
+        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        let attributedTitle = NSAttributedString(string: "Refreshing your e-mails ...", attributes: attributes)
+        
+        refreshControl.addTarget(self, action: #selector(refreshEmailData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        refreshControl.attributedTitle = attributedTitle
+
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
         }
     }
 
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func setupActivityIndicatorView() {
+        activityIndicatorView.startAnimating()
+    }
+    
+    @objc func refreshEmailData(_ sender: Any) {
+        // Fetch Email Data
+        loadUserData()
     }
 
     @IBAction func closeSideMenu(_ segue: UIStoryboardSegue) {
@@ -105,11 +133,16 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
         self.title = currentMailFolder!.displayName
     }
 
+
     func loadUserData() {
+        loadInboxMailFolderName()
         service.getUserEmail() {
             email in
-            self.loadUserEmails()
-            //self.loadUserEmailsFolder(mailFolderId: "AQMkADViYgA5NTc1Ni0wODFjLTRlODktYmY0Mi0yNDk0ZTk1ZGIxYTMALgAAA_mdMlZTZwFJiPpRhzdkNwsBABK9rA8i5f5PgECmCrXNdSEAAAIBCQAAAA==")
+            if let unwrappedEmail = email {
+                self.loadUserEmails()
+                self.refreshControl.endRefreshing()
+                //self.activityIndicatorView.stopAnimating()
+            }
         }
     }
 
@@ -137,6 +170,7 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()
             }
+            self.refreshControl.endRefreshing()
         }
     }
 

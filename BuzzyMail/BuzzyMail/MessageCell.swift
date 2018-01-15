@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import Foundation
 
+
 class MessageCell: UITableViewCell {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var receivedLabel: UILabel!
@@ -18,6 +19,7 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var attachmentImageView: UIImageView!
     @IBOutlet weak var unReadMarker: UIImageView!
 
+    let service = OutlookService.shared()
 
     var from: String? {
         didSet {
@@ -61,8 +63,9 @@ class MessageCell: UITableViewCell {
 }
 
 class MessagesDataSource: NSObject {
-    let messages: [Message]
 
+    var messages: [Message]
+   
     init(messages: [JSON]?) {
         var msgArray = [Message]()
 
@@ -108,8 +111,6 @@ class MessagesDataSource: NSObject {
             }
         }
 
-
-
         self.messages = msgArray
     }
 
@@ -119,8 +120,6 @@ class MessagesDataSource: NSObject {
 }
 
 extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
-
-
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
@@ -171,30 +170,106 @@ extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
 
         cell.subject = message.subject
         cell.bodyPreview = (message.bodyPreview)
-
-        /*
-
-        cell.subject = message.subject
-        cell.bodyPreview = (message.bodyPreview)
-
-        if (message.isRead == false){
-            print("read Yes")
-            cell.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-        }
-        */
+    
         return cell
-
+        
+        
+        
     }
-
-
-
-//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == .Delete {
-//            deletePlanetIndexPath = indexPath
-//            let planetToDelete = planets[indexPath.row]
-//            confirmDelete(planetToDelete)
-//        }
-//    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let alertController = UIAlertController(title: "Warning!", message: "Are you sure you want to delete this e-mail?", preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print(action)
+            }
+            alertController.addAction(cancelAction)
+            
+            let destroyAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+                let rowint = Int(indexPath[1])
+                
+                let emailToDelete = Message(
+                    id: self.messages[rowint].id,
+                    receivedDateTime: nil,
+                    hasAttachments: nil,
+                    subject: nil,
+                    bodyPreview: nil,
+                    isRead: true,
+                    isDraft: nil,
+                    body: nil,
+                    from: nil,
+                    toRecipients: nil,
+                    ccRecipients:nil,
+                    bccRecipients: nil)
+                
+                let messageToDelete = self.messages[rowint].id
+                //confirmDelete(event: eventToDelete)
+                // delete from events
+                self.messages.remove(at: indexPath.row)
+                
+                // delete the table view row
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+                
+                self.deleteMessageFunction(message: emailToDelete)
+                
+                tableView.reloadData()
+            }
+            
+            
+            
+            alertController.addAction(destroyAction)
+            
+            let vc = getVisibleViewController(UIApplication.shared.keyWindow?.rootViewController)
+            
+            vc?.present(alertController, animated: true) {
+                print("Run ik hier wel?")
+            }
+            
+        } else if editingStyle == .insert{
+        }
+        
+    }
+    
+    func deleteMessageFunction(message: Message){
+        service.deleteMessage(message: message) {
+            message in
+            if let message = message{
+                NSLog("")
+            }else{
+                NSLog("")
+            }
+        }
+    }
+    
+    func getVisibleViewController(_ rootViewController: UIViewController?) -> UIViewController? {
+        
+        var rootVC = rootViewController
+        if rootVC == nil {
+            rootVC = UIApplication.shared.keyWindow?.rootViewController
+        }
+        
+        if rootVC?.presentedViewController == nil {
+            return rootVC
+        }
+        
+        if let presented = rootVC?.presentedViewController {
+            if presented.isKind(of: UINavigationController.self) {
+                let navigationController = presented as! UINavigationController
+                return navigationController.viewControllers.last!
+            }
+            
+            if presented.isKind(of: UITabBarController.self) {
+                let tabBarController = presented as! UITabBarController
+                return tabBarController.selectedViewController!
+            }
+            
+            return getVisibleViewController(presented)
+        }
+        return nil
+    }
 
 
 }

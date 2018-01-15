@@ -37,6 +37,7 @@ class ContactCell: UITableViewCell {
 
 class ContactsDataSource: NSObject {
     var contacts: [Contact]
+    let service = OutlookService.shared()
     
     init(contacts: [JSON]?) {
         var contactsArray = [Contact]()
@@ -113,7 +114,7 @@ extension ContactsDataSource: UITableViewDataSource, UITableViewDelegate {
 
                 // delete the table view row
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                service.deleteContact(id: contactToDelete) {_ in
+                self.service.deleteContact(id: contactToDelete) {_ in
 
                 }
 
