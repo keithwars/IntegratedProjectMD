@@ -56,11 +56,6 @@ class MailContentViewController: UIViewController {
              updateIsReadStatusToRead(message: unreadEmail!)
                 
             }
-       
-        
-        
-        
-        
         
 //        service.updateIsReadStatus(message: email!) {
 //            message in
@@ -128,21 +123,16 @@ class MailContentViewController: UIViewController {
     }
     
     func updateIsReadStatusToRead(message: Message){
-        
         service.updateReply(message: message){
             message in
             if let message = message{
-                NSLog("JANNET1")
+                NSLog("")
             }else{
-                NSLog("JANNET2")
+                NSLog("")
             }
         }
-        
-        
     }
     
-    
-
 }
 
 

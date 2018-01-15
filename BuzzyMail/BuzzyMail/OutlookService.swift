@@ -111,6 +111,7 @@ class OutlookService {
             req.httpBody = jsonData
         case .delete:
             NSLog("Delete request received")
+            req.httpMethod = "DELETE"
         }
         
 //        else {
@@ -204,6 +205,18 @@ class OutlookService {
             result in
             callback(result)
         }
+        
+        
+    }
+    
+    
+    func deleteMessage(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id, requestType: RequestTypes.delete, body: message) {
+            result in
+            callback(result)
+        }
+        
+        
     }
     
 //    func updateIsReadStatus(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
