@@ -286,6 +286,15 @@ class OutlookService {
             callback(result?.string)
         }
     }
+    
+    func postContact(json: [String:Any], callback: @escaping ([String:Any]?) -> Void) -> Void {
+        
+        makeApiCall(api: "/v1.0/me/contacts", requestType: RequestTypes.post, json: json) {
+            result in
+            callback(result?.dictionary)
+            dump(json)
+        }
+    }
 
     func logout() -> Void {
         oauth2.forgetTokens()

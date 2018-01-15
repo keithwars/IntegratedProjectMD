@@ -81,24 +81,25 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
     }
     
     @IBAction func onButtonPressed(_ sender: Any) {
-        
-        testEvent.start.dateTime = start
-        testEvent.end.dateTime = end
-        testEvent.subject = subject
-        testEvent.location.displayName = location
-        print("WAT IS HIER MIUJN FUCKING LOCATION???" + testEvent.location.displayName)
-        testEvent.body.content = content
+    
+        let contactToAdd = Contact(
+            firstName: firstName,
+            lastName: lastName,
+            displayName: displayName,
+            emailAddress: [EmailAddress(name: firstName + "" + lastName, address: email)],
+            telephoneNumber: telephoneNumber
+        )
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         
         // encode, convert to a String, and print it
         
-        if let jsonData = try? jsonEncoder.encode(testEvent),
+        if let jsonData = try? jsonEncoder.encode(contactToAdd),
             let jsonString = try? JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any] {
             print(jsonString)
             
-            self.service.postEvent(json: jsonString) {_ in
+            self.service.postContact(json: jsonString) {_ in
                 
             }
             
@@ -107,37 +108,12 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
         dismiss(animated: true, completion: nil)
     }
     
-    struct CalendarEvent : Codable {
-        var subject: String
-        var body: Body
-        var start: Time
-        var end: Time
-        var location: Location
-        var attendees: [String]
-    }
-    
-    struct Body : Codable {
-        var contentType: String
-        var content: String
-    }
-    
-    struct Time : Codable {
-        var dateTime: String
-        var timeZone: String
-    }
-    
-    struct Location : Codable {
+    struct Contact : Codable {
+        var firstName: String
+        var lastName: String
         var displayName: String
+        var emailAddress: [EmailAddress]
+        var telephoneNumber: String?
     }
-    
-    var testEvent = CalendarEvent(subject: "Let's go for lunch",
-                                  body: Body(contentType: "HTML",
-                                             content: "Does late morning work for you?"),
-                                  start: Time(dateTime:"2017-12-10T12:55:00",
-                                              timeZone: "W. Europe Standard Time"),
-                                  end: Time(dateTime:"2017-12-10T14:00:00",
-                                            timeZone: "W. Europe Standard Time"),
-                                  location: Location(displayName: "Antwerpen"),
-                                  attendees: [])
     
 }
