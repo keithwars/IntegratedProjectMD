@@ -12,20 +12,15 @@ import MessageUI
 
 class CalendarContentViewController: UIViewController {
     
-    @IBOutlet weak var creatorLabel: UILabel!
+    let service = OutlookService.shared()
     
     var event:Event?
-    let service = OutlookService.shared()
+    
+    @IBOutlet weak var creatorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         creatorLabel.text = event?.organizer?.emailAddress?.name
-        print("creatorlabel:" + "\(String(describing: creatorLabel.text))")
-        print("event subject:" + "\(String(describing: event?.organizer?.emailAddress?.name))")
-        
-//        var selectedEvent = self.service.getEvent(id: creatorLabel.text!) {_ in
-//        }
-        
     }
     
     override func didReceiveMemoryWarning() {

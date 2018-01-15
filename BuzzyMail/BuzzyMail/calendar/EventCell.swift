@@ -12,20 +12,6 @@ import SwiftyJSON
 let currentDate = Date()
 let service = OutlookService.shared()
 
-struct Event {
-    let subject: String?
-    let start: String?
-    let end: String?
-    let startTime: String?
-    let id: String?
-    let organizer: Organizer?
-}
-
-struct Organizer : Codable {
-    var emailAddress : EmailAddress?
-}
-
-
 class EventCell: UITableViewCell {
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var startLabel: UILabel!

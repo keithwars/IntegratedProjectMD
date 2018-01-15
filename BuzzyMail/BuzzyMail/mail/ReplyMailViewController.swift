@@ -12,9 +12,11 @@ import UIKit
 class ReplyMailViewController: UIViewController {
 
     let service = OutlookService.shared()
+    
+    var container: MailContentTableViewController?
+    
     var newEmail:Message?
     var isNewMail:Bool = false
-    var container: MailContentTableViewController?
 
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
@@ -22,6 +24,14 @@ class ReplyMailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "embeddedSegue") {
+            let childViewController = segue.destination as! MailContentTableViewController
+            childViewController.email = self.newEmail
+            self.container = (segue.destination as! MailContentTableViewController)
+        }
     }
 
     @IBAction func sendButtonPressed(_ sender: Any) {
@@ -66,56 +76,6 @@ class ReplyMailViewController: UIViewController {
                 self.performSegue(withIdentifier: "closeDraft", sender: sender)
             }
         }
-
-        /*
-        else {
-            var toRecipientsList = [EmailAddresses]()
-            for row in message["toRecipients"].arrayValue {
-                toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
-                                                                                  address: row["emailAddress"]["address"].stringValue)))
-            }
-            
-            var ccRecipientsList = [EmailAddresses]()
-            for row in message["ccRecipients"].arrayValue {
-                ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
-                                                                                  address: row["emailAddress"]["address"].stringValue)))
-            }
-            
-            var bccRecipientsList = [EmailAddresses]()
-            for row in message["bccRecipients"].arrayValue {
-                bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
-                                                                                   address: row["emailAddress"]["address"].stringValue)))
-            }
-            
-            //receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
-            let newMsg = Message(
-                id: message["id"].stringValue,
-                receivedDateTime: message["receivedDateTime"].stringValue,
-                hasAttachments: message["hasAttachments"].boolValue,
-                subject: message["subject"].stringValue,
-                bodyPreview: message["bodyPreview"].stringValue,
-                isRead: message["isRead"].boolValue,
-                isDraft: message["isDraft"].boolValue,
-                body: Body(contentType: message["body"]["contentType"].stringValue,
-                           content: message["body"]["content"].stringValue),
-                from: EmailAddresses(emailAddress: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
-                                                                address: message["from"]["emailAddress"]["address"].stringValue)),
-                toRecipients: toRecipientsList,
-                ccRecipients: ccRecipientsList,
-                bccRecipients: bccRecipientsList)
-
-        }
- */
-    }
-
-
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "embeddedSegue") {
-            let childViewController = segue.destination as! MailContentTableViewController
-            childViewController.email = self.newEmail
-            self.container = (segue.destination as! MailContentTableViewController)
-        }
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -156,7 +116,6 @@ class ReplyMailViewController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-
 
     func createMail() {
         NSLog("createMail called")

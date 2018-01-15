@@ -12,10 +12,10 @@ import SideMenu
 
 class SideMenuMailViewController: UITableViewController {
     
+    let service = OutlookService.shared()
+    
     var dataSource: MailFoldersDataSource?
     var mailFoldersList: [MailFolder]?
-    
-    let service = OutlookService.shared()
     
     override func viewDidLoad() {
         loadMailFolders()
@@ -46,7 +46,6 @@ class SideMenuMailViewController: UITableViewController {
         service.getMailFolders() {
             mailFolders in
             if let unwrappedMailFolders = mailFolders {
-                
                 self.dataSource = MailFoldersDataSource(mailFolders: unwrappedMailFolders["value"].arrayValue)
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()

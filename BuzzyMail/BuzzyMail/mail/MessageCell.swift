@@ -90,7 +90,6 @@ class MessagesDataSource: NSObject {
                                                           address: row["emailAddress"]["address"].stringValue)))
                 }
 
-                //receivedDateTime: Formatter.dateToString(date: message["receivedDateTime"]),
                 let newMsg = Message(
                     id: message["id"].stringValue,
                     receivedDateTime: message["receivedDateTime"].stringValue,

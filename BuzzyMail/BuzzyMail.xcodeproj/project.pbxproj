@@ -24,6 +24,8 @@
 		3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */; };
 		3F45553E2003E1940085BEF3 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553D2003E1940085BEF3 /* MenuCell.swift */; };
 		3F4555402003E2A00085BEF3 /* MailFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553F2003E2A00085BEF3 /* MailFolder.swift */; };
+		3FA6D036200CDFBC00298710 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6D035200CDFBC00298710 /* Event.swift */; };
+		3FA6D038200CDFE000298710 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6D037200CDFE000298710 /* Contact.swift */; };
 		3FB31B0B2003A37F003E8347 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0A2003A37F003E8347 /* Message.swift */; };
 		3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */; };
 		3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B132003A484003E8347 /* MailContentTableViewController.swift */; };
@@ -78,6 +80,8 @@
 		3F45553D2003E1940085BEF3 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		3F45553F2003E2A00085BEF3 /* MailFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailFolder.swift; sourceTree = "<group>"; };
 		3F663C1E1FD171F300FA9D66 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
+		3FA6D035200CDFBC00298710 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		3FA6D037200CDFE000298710 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		3FB31B0A2003A37F003E8347 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMailViewController.swift; sourceTree = "<group>"; };
 		3FB31B132003A484003E8347 /* MailContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentTableViewController.swift; sourceTree = "<group>"; };
@@ -153,32 +157,18 @@
 		3F0E273E1FC8373300049443 /* BuzzyMail */ = {
 			isa = PBXGroup;
 			children = (
+				3FA6D03B200CE02200298710 /* contacts */,
+				3FA6D03A200CE00B00298710 /* calendar */,
+				3FA6D039200CDFF500298710 /* mail */,
 				3FB31B0E2003A3A0003E8347 /* models */,
-				3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */,
-				3FB31B132003A484003E8347 /* MailContentTableViewController.swift */,
 				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
-				3F0E27411FC8373300049443 /* MailViewController.swift */,
-				2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */,
-				3F45553D2003E1940085BEF3 /* MenuCell.swift */,
-				2B96B8B81FD9448B0077EB08 /* MessageCell.swift */,
-				566B141C1FC85DB000C074C4 /* EventCell.swift */,
+				566B141A1FC85C3800C074C4 /* Formatter.swift */,
+				3F0E27651FC83D5300049443 /* OutlookService.swift */,
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
-				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
-				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
-				563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */,
-				563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */,
-				3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */,
 				3F0E27451FC8373300049443 /* Main.storyboard */,
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
 				3F0E27481FC8373300049443 /* Assets.xcassets */,
 				3F0E274D1FC8373300049443 /* Info.plist */,
-				3F0E27651FC83D5300049443 /* OutlookService.swift */,
-				566B141A1FC85C3800C074C4 /* Formatter.swift */,
-				3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */,
-				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
-				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
-				569B5A2B2003BED400C34193 /* ContactCell.swift */,
-				3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */,
 			);
 			path = BuzzyMail;
 			sourceTree = "<group>";
@@ -214,11 +204,51 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		3FA6D039200CDFF500298710 /* mail */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E27411FC8373300049443 /* MailViewController.swift */,
+				2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */,
+				3FB31B0F2003A435003E8347 /* ReplyMailViewController.swift */,
+				3FB31B132003A484003E8347 /* MailContentTableViewController.swift */,
+				3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */,
+				3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */,
+				3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */,
+				3F45553D2003E1940085BEF3 /* MenuCell.swift */,
+				2B96B8B81FD9448B0077EB08 /* MessageCell.swift */,
+			);
+			path = mail;
+			sourceTree = "<group>";
+		};
+		3FA6D03A200CE00B00298710 /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
+				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
+				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
+				566B141C1FC85DB000C074C4 /* EventCell.swift */,
+			);
+			path = calendar;
+			sourceTree = "<group>";
+		};
+		3FA6D03B200CE02200298710 /* contacts */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
+				563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */,
+				563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */,
+				569B5A2B2003BED400C34193 /* ContactCell.swift */,
+			);
+			path = contacts;
+			sourceTree = "<group>";
+		};
 		3FB31B0E2003A3A0003E8347 /* models */ = {
 			isa = PBXGroup;
 			children = (
 				3FB31B0A2003A37F003E8347 /* Message.swift */,
 				3F45553F2003E2A00085BEF3 /* MailFolder.swift */,
+				3FA6D035200CDFBC00298710 /* Event.swift */,
+				3FA6D037200CDFE000298710 /* Contact.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -455,6 +485,7 @@
 			files = (
 				569B5A2C2003BED400C34193 /* ContactCell.swift in Sources */,
 				3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */,
+				3FA6D038200CDFE000298710 /* Contact.swift in Sources */,
 				3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */,
 				3F4555402003E2A00085BEF3 /* MailFolder.swift in Sources */,
 				3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */,
@@ -469,6 +500,7 @@
 				566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */,
 				3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */,
 				566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */,
+				3FA6D036200CDFBC00298710 /* Event.swift in Sources */,
 				2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */,
 				3F0E27421FC8373300049443 /* MailViewController.swift in Sources */,
 				56B2823B1FD9793900329BEB /* CalendarAddEventViewController.swift in Sources */,

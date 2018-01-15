@@ -12,40 +12,16 @@ import Foundation
 class ContactsAddContactViewController: UITableViewController, UITextFieldDelegate {
     
     let service = OutlookService.shared()
+    
     @IBOutlet weak var textfieldFirstName: UITextField!
     @IBOutlet weak var textfieldLastName: UITextField!
-    
     @IBOutlet weak var textfieldEmail: UITextField!
-    
     @IBOutlet weak var textfieldTelephoneNumber: UITextField!
-    
-    var firstName : String = ""
-    var lastName : String = ""
-    var email : String = ""
-    var displayName : String = ""
-    var telephoneNumber : String = ""
     
     @objc func donePressed() {
         self.view.endEditing(true)
     }
-    
-    @IBAction func textfieldFirstNameEditor(_ sender: UITextField) {
-        firstName = textfieldFirstName.text!
-        print("firstname init test: " + "\(firstName)")
-    }
-    
-    @IBAction func textfieldLastNameEditor(_ sender: UITextField) {
-        lastName = textfieldLastName.text!
-        print("Wat is de lastname? " + lastName)
-    }
-    
-    @IBAction func textfieldEmailEditor(_ sender: UITextField) {
-        email = textfieldEmail.text!
-    }
-    
-    @IBAction func textfieldTelephoneNumberEditor(_ sender: UITextField) {
-       telephoneNumber = textfieldTelephoneNumber.text!
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,11 +53,11 @@ class ContactsAddContactViewController: UITableViewController, UITextFieldDelega
     @IBAction func onButtonPressed(_ sender: Any) {
     
         let contactToAdd = Contact(
-            GivenName: firstName,
-            SurName: lastName,
-            DisplayName: firstName + " " + lastName,
-            EmailAddresses: [EmailAddress(name: firstName + " " + lastName, address: email)],
-            BusinessPhones: [telephoneNumber]
+            GivenName: textfieldFirstName.text!,
+            SurName: textfieldLastName.text!,
+            DisplayName: textfieldFirstName.text! + " " + textfieldLastName.text!,
+            EmailAddresses: [EmailAddress(name: textfieldFirstName.text! + " " + textfieldLastName.text!, address: textfieldEmail.text!)],
+            BusinessPhones: [textfieldTelephoneNumber.text!]
         )
         
         let jsonEncoder = JSONEncoder()

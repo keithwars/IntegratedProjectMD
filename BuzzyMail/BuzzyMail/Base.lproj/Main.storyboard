@@ -411,6 +411,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Contacts" id="2G7-8J-M7Y">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1a8-Ow-2uC">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="R9x-Ro-49U" kind="show" identifier="addContact" id="p3H-Tj-KmG"/>
                             </connections>
@@ -443,7 +444,7 @@
         <scene sceneID="fwL-2X-1F2">
             <objects>
                 <tableViewController id="ETa-MH-KfA" customClass="ContactsAddContactViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rEY-xi-5dx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rEY-xi-5dx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -463,9 +464,6 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textfieldFirstNameEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="26m-im-ukv"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -483,9 +481,6 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textfieldLastNameEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="5C3-52-Gl8"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -507,9 +502,6 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textfieldEmailEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="p8j-DT-wog"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -531,9 +523,6 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textfieldTelephoneNumberEditor:" destination="ETa-MH-KfA" eventType="editingDidEnd" id="Ewk-Ic-tXF"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -577,22 +566,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LO-OV-qgq">
-                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
-                                <color key="backgroundColor" red="0.20116233829999999" green="0.46712833640000001" blue="0.76084405180000003" alpha="0.47709760273972601" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="AJb-8v-U4a"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="33"/>
-                                <state key="normal" title="Continue">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="49e-Tb-3d3" kind="show" id="0jH-xh-elS"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDi-vi-PlD">
-                                <rect key="frame" x="0.0" y="547" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="0.84562285958904104" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Xhh-qI-Kdw"/>
@@ -613,10 +588,24 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="59"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LO-OV-qgq">
+                                <rect key="frame" x="0.0" y="547" width="375" height="60"/>
+                                <color key="backgroundColor" red="0.20116233829999999" green="0.46712833640000001" blue="0.76084405180000003" alpha="0.47709760273972601" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="AJb-8v-U4a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="33"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="49e-Tb-3d3" kind="show" id="0jH-xh-elS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6LO-OV-qgq" firstAttribute="bottom" secondItem="0JV-EC-4BG" secondAttribute="bottom" id="1g3-dR-QG0"/>
+                            <constraint firstItem="6LO-OV-qgq" firstAttribute="bottom" secondItem="0JV-EC-4BG" secondAttribute="bottom" constant="-60" id="1g3-dR-QG0"/>
                             <constraint firstItem="3jE-ap-PHI" firstAttribute="leading" secondItem="0JV-EC-4BG" secondAttribute="leading" constant="35" id="7o8-Vb-C6g"/>
                             <constraint firstItem="sDi-vi-PlD" firstAttribute="leading" secondItem="0JV-EC-4BG" secondAttribute="leading" id="BDH-tp-dNF"/>
                             <constraint firstItem="6LO-OV-qgq" firstAttribute="trailing" secondItem="0JV-EC-4BG" secondAttribute="trailing" id="SA9-ak-0pS"/>
@@ -624,12 +613,13 @@
                             <constraint firstItem="0JV-EC-4BG" firstAttribute="trailing" secondItem="3jE-ap-PHI" secondAttribute="trailing" constant="35" id="b14-5Q-K8F"/>
                             <constraint firstItem="6LO-OV-qgq" firstAttribute="leading" secondItem="0JV-EC-4BG" secondAttribute="leading" id="d5F-78-B0r"/>
                             <constraint firstItem="sDi-vi-PlD" firstAttribute="trailing" secondItem="0JV-EC-4BG" secondAttribute="trailing" id="l8C-86-y4i"/>
-                            <constraint firstItem="6LO-OV-qgq" firstAttribute="top" secondItem="sDi-vi-PlD" secondAttribute="bottom" id="zAN-qj-1Do"/>
+                            <constraint firstItem="6LO-OV-qgq" firstAttribute="top" secondItem="sDi-vi-PlD" secondAttribute="bottom" constant="-120" id="zAN-qj-1Do"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0JV-EC-4BG"/>
                     </view>
                     <connections>
-                        <outlet property="logInButton" destination="sDi-vi-PlD" id="Ih9-eT-FyI"/>
+                        <outlet property="authenticateButton" destination="sDi-vi-PlD" id="Ih9-eT-FyI"/>
+                        <outlet property="continueButton" destination="6LO-OV-qgq" id="XeY-TF-c9m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="64O-XH-y4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -667,7 +657,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1222,6 +1212,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1304,7 +1295,7 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OkR-jx-5Xq"/>
+        <segue reference="zh0-ri-91Z"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <color key="tintColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

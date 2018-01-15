@@ -12,13 +12,12 @@ import WebKit
 
 class MailContentTableViewController: UITableViewController {
 
-    @IBOutlet var richTextEditor: RichTextEditorEditable!
+    var email:Message?
     
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var ccTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
-    
-    var email:Message?
+    @IBOutlet var richTextEditor: RichTextEditorEditable!
     
     override func viewDidLoad() {
         super.viewDidLoad()

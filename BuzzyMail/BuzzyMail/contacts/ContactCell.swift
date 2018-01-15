@@ -10,14 +10,6 @@ import UIKit
 import SwiftyJSON
 import Foundation
 
-struct Contact {
-    let id: String?
-    let displayName: String?
-    let givenName: String?
-    let surname: String?
-    let emailAddresses: [EmailAddress]?
-}
-
 class ContactCell: UITableViewCell {
     @IBOutlet weak var givenNameLabel: UILabel!
     @IBOutlet weak var initialsLabel: UILabel!

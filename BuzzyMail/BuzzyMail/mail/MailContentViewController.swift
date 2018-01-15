@@ -15,25 +15,20 @@ var messageHtml: Message?
 
 class MailContentViewController: UIViewController {
 
-    var email:Message?
-
     let service = OutlookService.shared()
-
-    @IBOutlet weak var fromLabel: UILabel!
-
-    @IBOutlet weak var subjectLabel: UILabel!
-
-    @IBOutlet weak var contentWebView: WKWebView!
-
-    @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
-
-    var unreadEmail: Message?
-    var newEmail:Message?
-
+    
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
+    
+    var email:Message?
+    var unreadEmail: Message?
+    var newEmail:Message?
 
+    @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var contentWebView: WKWebView!
+    @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
 
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .never
@@ -57,7 +52,7 @@ class MailContentViewController: UIViewController {
 
              updateIsReadStatusToRead(message: unreadEmail!)
 
-            }
+        }
 
         fromLabel.text = email!.from!.emailAddress.name
         richTextEditorNonEditable.text = email!.body!.content
@@ -122,9 +117,7 @@ class MailContentViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) {
-
-    }
+    @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) { }
 
 
     func createReply() {

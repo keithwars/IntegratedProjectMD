@@ -12,13 +12,12 @@ import SideMenu
 import SwiftVideoBackground
 
 class LoginViewController: UIViewController {
+    
+    let service = OutlookService.shared()
     private let videoBackground = VideoBackground()
 
-
-    @IBOutlet var logInButton: UIButton!
-
-    let service = OutlookService.shared()
-
+    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet var authenticateButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +28,14 @@ class LoginViewController: UIViewController {
                              isMuted: false,
                              alpha: 0.25,
                              willLoopVideo: true)
-
-        // Do any additional setup after loading the view, typically from a nib.
+        
         setLogInState(loggedIn: service.isLoggedIn)
+        if !service.isLoggedIn {
+            continueButton.isHidden = true
+        }
+        else {
+            continueButton.isHidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,10 +45,10 @@ class LoginViewController: UIViewController {
 
     func setLogInState(loggedIn: Bool) {
         if (loggedIn) {
-            logInButton.setTitle("Log Out", for: UIControlState.normal)
+            authenticateButton.setTitle("Log Out", for: UIControlState.normal)
         }
         else {
-            logInButton.setTitle("Authenticate", for: UIControlState.normal)
+            authenticateButton.setTitle("Authenticate", for: UIControlState.normal)
         }
     }
 
@@ -53,6 +57,7 @@ class LoginViewController: UIViewController {
             // Logout
             service.logout()
             setLogInState(loggedIn: false)
+            continueButton.isHidden = true
         } else {
             // Login
             service.login(from: self) {
@@ -62,6 +67,7 @@ class LoginViewController: UIViewController {
                 } else {
                     NSLog("Successfully logged in.")
                     self.setLogInState(loggedIn: true)
+                    self.continueButton.isHidden = false
                 }
             }
         }
