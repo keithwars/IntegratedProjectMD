@@ -124,6 +124,10 @@ class MailViewController: UIViewController/*, UITableViewDataSource, UITableView
             }
         }
     }
+    
+    @IBAction func cancelToMailContentViewController(_ segue: UIStoryboardSegue) {
+        
+    }
 
     func loadUserEmailsFolder(mailFolderId: String) {
         self.service.getMailFolderMessages(mailFolderId: mailFolderId) {

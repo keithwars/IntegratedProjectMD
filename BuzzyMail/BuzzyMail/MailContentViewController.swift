@@ -39,7 +39,7 @@ class MailContentViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
 
-        if (!email!.isRead){
+        if (!email!.isRead!){
             email!.isRead = true
             unreadEmail = Message(
                     id: email!.id,
