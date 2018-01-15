@@ -9,6 +9,7 @@ target 'BuzzyMail' do
   pod 'p2.OAuth2'
   pod 'SwiftyJSON'
   pod 'SwiftVideoBackground', '~> 2.0.0'
+  pod 'SideMenu'
 
   target 'BuzzyMailTests' do
     inherit! :search_paths
