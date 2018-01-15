@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T5b-MD-eEv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T5b-MD-eEv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -775,7 +775,7 @@
         <!--Mail View Controller-->
         <scene sceneID="9Wk-jU-K2g">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="bsh-YE-36o" customClass="MailViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bsh-YE-36o" customClass="MailViewController" customModule="BuzzyMail" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fFB-Vw-wIY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1298,6 +1298,6 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zh0-ri-91Z"/>
+        <segue reference="OkR-jx-5Xq"/>
     </inferredMetricsTieBreakers>
 </document>
