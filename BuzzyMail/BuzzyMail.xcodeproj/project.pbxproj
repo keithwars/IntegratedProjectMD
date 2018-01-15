@@ -154,6 +154,7 @@
 				3F0E27431FC8373300049443 /* CalendarViewController.swift */,
 				3F0E27631FC83C2D00049443 /* ContactsViewController.swift */,
 				563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */,
+				563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */,
 				3FB31B132003A484003E8347 /* MailContentTableViewController.swift */,
 				3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */,
 				3F0E27451FC8373300049443 /* Main.storyboard */,
@@ -167,7 +168,6 @@
 				56B2823A1FD9793900329BEB /* CalendarAddEventViewController.swift */,
 				56D7C0E11FE40F1B005DDDA3 /* CalendarContentViewController.swift */,
 				569B5A2B2003BED400C34193 /* ContactCell.swift */,
-				563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */,
 			);
 			path = BuzzyMail;
 			sourceTree = "<group>";

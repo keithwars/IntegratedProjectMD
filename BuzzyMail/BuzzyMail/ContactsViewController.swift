@@ -43,6 +43,11 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
                 destination.contact = contactsList![rowint]
             }
         }
+        else if segue.identifier == "addContact" {
+            if let destination = segue.destination as? ContactsAddContactViewController {
+                print(destination)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
