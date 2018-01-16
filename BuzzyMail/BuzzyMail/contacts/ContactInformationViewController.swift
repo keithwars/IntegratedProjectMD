@@ -15,8 +15,25 @@ class ContactInformationViewController: UIViewController {
     
     var contact:Contact?
     
+    @IBOutlet weak var circle: UIView!
+    @IBOutlet weak var initialsLabel: UILabel!
+    @IBOutlet weak var fullnameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        circle.layer.cornerRadius = 50
+        circle.clipsToBounds = true
+
+        initialsLabel.text = firstLetter(a: (contact?.givenName)!) + firstLetter(a: (contact?.surname)!)
+        
+        print(contact)
+        fullnameLabel.text = contact?.displayName
+        emailLabel.text = contact!.emailAddresses![0].address
+        emailLabel.adjustsFontSizeToFitWidth = true
+        emailLabel.minimumScaleFactor = 0.2
+        print("email" + emailLabel.text!)
     }
     
     override func didReceiveMemoryWarning() {
