@@ -462,6 +462,38 @@
                                 <color key="textColor" red="0.21999366579999999" green="0.28546470400000001" blue="0.35303756590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Agenda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOn-jG-vzv">
+                                <rect key="frame" x="28" y="251" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ew6-qt-auD">
+                                <rect key="frame" x="28" y="280" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.21999366579999999" green="0.28546470400000001" blue="0.35303756590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOA-hW-2UO">
+                                <rect key="frame" x="28" y="323" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Send email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cM-lg-XIH">
+                                <rect key="frame" x="28" y="352" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.21999366579999999" green="0.28546470400000001" blue="0.35303756590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eVl-Yd-W0B" appends="YES" id="7vx-9o-Lg7"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.21999366581439972" green="0.28546470403671265" blue="0.35303756594657898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -472,9 +504,15 @@
                         <outlet property="emailLabel" destination="Rog-2j-HdH" id="EbV-H1-NMn"/>
                         <outlet property="fullnameLabel" destination="3OT-8o-IY4" id="li1-y2-vcX"/>
                         <outlet property="initialsLabel" destination="32J-eM-bn7" id="p1o-gv-hel"/>
+                        <outlet property="sendEmailLabel" destination="8cM-lg-XIH" id="c5g-Vc-W5N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PDg-o4-Uwb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="eVl-Yd-W0B">
+                    <connections>
+                        <segue destination="KVH-nB-TOC" kind="show" identifier="sendEmailToContact" id="mTL-fD-IGD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2724" y="1456.8215892053975"/>
         </scene>
@@ -1077,6 +1115,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="lVO-vz-3Xa" kind="unwind" identifier="closeDraft" unwindAction="cancelToMailContentViewController:" id="YqZ-tK-lvG"/>
+                        <segue destination="lVO-vz-3Xa" kind="unwind" identifier="unwindToContactInformation" unwindAction="unwindToContactInformationWithSegue:" id="XHO-O2-kst"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l3-Sd-KOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1333,7 +1372,7 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zh0-ri-91Z"/>
+        <segue reference="mTL-fD-IGD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
