@@ -87,6 +87,8 @@ class Formatter {
         let toDateFormatter = DateFormatter()
         toDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss"
         toDateFormatter.timeZone = TimeZone(identifier: graphTimeZone)
+        print("tijdzone")
+        print(graphTimeZone)
 
         let dateObj = toDateFormatter.date(from: graphDateString)
         if (dateObj == nil) {
@@ -99,6 +101,21 @@ class Formatter {
         toStringFormatter.timeZone = TimeZone.current
 
         return toStringFormatter.string(from: dateObj!)
+    }
+    
+    class func timeToHourAndMin2(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss"
+        let dateFromString = dateFormatter.date(from: date)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateStyle = DateFormatter.Style.none
+        dateFormatter2.timeStyle = DateFormatter.Style.short
+        dateFormatter2.timeZone = TimeZone.current
+        
+        let stringFromDate = dateFormatter2.string(from: dateFromString!)
+        
+        return stringFromDate
     }
 
 }

@@ -27,24 +27,9 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     var startTime : String = ""
     var endDate : String = ""
     var endTime : String = ""
-    var content : String = ""
-    var location : String = ""
-    var subject : String = ""
     
     @objc func donePressed() {
         self.view.endEditing(true)
-    }
-
-    @IBAction func textfieldSubjectEditor(_ sender: UITextField) {
-        subject = textfieldSubject.text!
-    }
-    
-    @IBAction func textfieldLocationEditor(_ sender: UITextField) {
-        location = textfieldLocation.text!
-    }
-    
-    @IBAction func textfieldContentEditor(_ sender: UITextField) {
-        content = textfieldContent.text!
     }
     
     @IBAction func textfieldStartEditor(_ sender: UITextField) {
@@ -163,18 +148,27 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         let start : String = "\(self.startDate)" + "T" + "\(self.startTime)" + ":00"
         let end = "\(self.endDate)" + "T" + "\(self.endTime)" + ":00"
         
-        testEvent.start.dateTime = start
-        testEvent.end.dateTime = end
-        testEvent.subject = subject
-        testEvent.location.displayName = location
-        testEvent.body.content = content
+        let eventToAdd = CalendarEvent(
+            subject: textfieldSubject.text!,
+            body: Body(contentType: "HTML",
+                       content: textfieldContent.text!),
+            start: Time(dateTime: start,
+                        timeZone: "Europe/Paris"),
+            end: Time(dateTime: end,
+                      timeZone: "Europe/Paris"),
+            startTime: nil,
+            id: "",
+            location: Location(displayName: textfieldLocation.text!),
+            attendees: [],
+            organizer: Organizer()
+        )
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         
         // encode, convert to a String, and print it
         
-        if let jsonData = try? jsonEncoder.encode(testEvent),
+        if let jsonData = try? jsonEncoder.encode(eventToAdd),
             let jsonString = try? JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any] {
             print(jsonString)
             
@@ -187,37 +181,6 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         dismiss(animated: true, completion: nil)        
     }
     
-    struct CalendarEvent : Codable {
-        var subject: String
-        var body: Body
-        var start: Time
-        var end: Time
-        var location: Location
-        var attendees: [String]
-    }
     
-    struct Body : Codable {
-        var contentType: String
-        var content: String
-    }
     
-    struct Time : Codable {
-        var dateTime: String
-        var timeZone: String
-    }
-    
-    struct Location : Codable {
-        var displayName: String
-    }
-    
-    var testEvent = CalendarEvent(subject: "Let's go for lunch",
-                                  body: Body(contentType: "HTML",
-                                             content: "Does late morning work for you?"),
-                                  start: Time(dateTime:"2017-12-10T12:55:00",
-                                              timeZone: "W. Europe Standard Time"),
-                                  end: Time(dateTime:"2017-12-10T14:00:00",
-                                            timeZone: "W. Europe Standard Time"),
-                                  location: Location(displayName: "Antwerpen"),
-                                  attendees: [])
-
 }

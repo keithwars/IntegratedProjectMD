@@ -14,10 +14,12 @@ class CalendarContentViewController: UIViewController {
     
     let service = OutlookService.shared()
     
-    var event:Event?
+    var event:CalendarEvent?
 
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var creatorLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     @IBAction func unwindToCalendar(segue: UIStoryboardSegue) {
         
@@ -27,6 +29,8 @@ class CalendarContentViewController: UIViewController {
         super.viewDidLoad()
         creatorLabel.text = event?.organizer?.emailAddress?.name
         eventNameLabel.text = event?.subject
+//        durationLabel.text = ""
+//        locationLabel.text = ""
     }
     
     override func didReceiveMemoryWarning() {

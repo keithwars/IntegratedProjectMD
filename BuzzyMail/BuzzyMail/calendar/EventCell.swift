@@ -52,24 +52,44 @@ class EventCell: UITableViewCell {
 }
 
 class EventsDataSource: NSObject {
-    var events: [Event]
+    var events: [CalendarEvent]
     
     init(events: [JSON]?) {
-        var evtArray = [Event]()
+        var evtArray = [CalendarEvent]()
+        var eventAttendeesList = [Attendees]()
+        var startTimeEvent: String?
+        var startEvent: String?
+        var endEvent: String?
         
         if let unwrappedEvents = events {
             for (event) in unwrappedEvents {
                 //print("formatted:" + Formatter.deduceTime(start: currentDate))
                 
-                let newEvent = Event(
+                for i in event["attendees"].arrayValue {
+                    eventAttendeesList.append(Attendees(type: i["type"].stringValue, status: Status(response: i["status"]["response"].stringValue, time: i["status"]["time"].stringValue), emailAddress: EmailAddress(name: i["name"].stringValue, address: i["address"].stringValue)))
+                }
+                
+//                print("hahahahahha")
+//                startEvent = Formatter.dateTimeTimeZoneToString(date: event["start"])
+//                print(startEvent)
+//                startTimeEvent = Formatter.timeToHourAndMin(date: event["start"])
+//                endEvent = Formatter.dateTimeToTime(date: event["end"])
+//                print(startTimeEvent)
+//                print(endEvent)
+//                startEvent = Formatter.
+                
+                let newEvent = CalendarEvent(
                     subject: event["subject"].stringValue,
-                    start: Formatter.dateTimeTimeZoneToString(date: event["start"]),
-                    end: Formatter.dateTimeToTime(date: event["end"]),
+                    body: Body(contentType: event["body"]["contentType"].stringValue, content: event["body"]["content"].stringValue),
+                    start: Time(dateTime: Formatter.dateTimeTimeZoneToString(date: event["start"]), timeZone: "Europe/Paris"),
+                    end: Time(dateTime: Formatter.dateTimeToTime(date: event["end"]), timeZone: "Europe/Paris"),
                     startTime: Formatter.timeToHourAndMin(date: event["start"]),
                     id: event["id"].stringValue,
+                    location: Location(displayName: event["location"]["displayName"].stringValue),
+                    attendees: eventAttendeesList,
                     organizer: Organizer(emailAddress: EmailAddress(name: event["organizer"]["emailAddress"]["name"].stringValue, address: event["organizer"]["emailAddress"]["address"].stringValue))
                 )
-                
+            
                 evtArray.append(newEvent)
                 
             }
@@ -92,18 +112,16 @@ extension EventsDataSource: UITableViewDataSource {
         let event = events[indexPath.row]
         
         cell.subject = event.subject
-        cell.start = event.start
-        cell.end = "Ends at: \(event.end!)"
+        cell.start = event.start?.dateTime
+        cell.end = "Ends at: " + (event.end?.dateTime)!
         cell.startTime = event.startTime
         cell.id = event.id
-        
-        print("Organizer name: " + "\(event.organizer?.emailAddress?.address)")
         
         return cell
         
     }
     
-    func getEventsArray() -> [Event] {
+    func getEventsArray() -> [CalendarEvent] {
         return events
     }
     

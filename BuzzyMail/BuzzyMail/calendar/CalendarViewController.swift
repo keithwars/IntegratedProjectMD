@@ -13,7 +13,7 @@ class CalendarViewController: UIViewController {
     let service = OutlookService.shared()
     
     var dataSource:EventsDataSource?
-    var eventsList: [Event]?
+    var eventsList: [CalendarEvent]?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -42,7 +42,7 @@ class CalendarViewController: UIViewController {
             eventsList = dataSource?.getEventsArray()
         
             if let destination = segue.destination as? CalendarContentViewController {
-                destination.event = eventsList![rowint] as Event
+                destination.event = eventsList![rowint] as CalendarEvent
             }
         }
     }
