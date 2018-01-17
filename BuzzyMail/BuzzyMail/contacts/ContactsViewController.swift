@@ -55,8 +55,6 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
 
             if let destination = segue.destination as? ContactInformationViewController {
                 destination.contact = contactsList![rowint] as Contact
-                print("deze contact w doorgegeven")
-                print(contactsList![rowint])
             }
         }
     }

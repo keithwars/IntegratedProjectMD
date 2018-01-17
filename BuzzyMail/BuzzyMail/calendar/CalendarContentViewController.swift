@@ -15,21 +15,23 @@ class CalendarContentViewController: UIViewController {
     let service = OutlookService.shared()
     
     var event:Event?
-    
+
+    @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var creatorLabel: UILabel!
+    
+    @IBAction func unwindToCalendar(segue: UIStoryboardSegue) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         creatorLabel.text = event?.organizer?.emailAddress?.name
+        eventNameLabel.text = event?.subject
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func onCancelPressed(_ sender: Any){
-        dismiss(animated: true, completion: nil)
     }
     
 }
