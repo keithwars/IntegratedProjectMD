@@ -10,6 +10,7 @@ import UIKit
 import SideMenu
 
 var lastMessagesCount = 0
+var currentMailFolder: MailFolder?
 
 class MailViewController: UIViewController{
 
@@ -19,7 +20,6 @@ class MailViewController: UIViewController{
     
     var messagesList:[Message]?
     var dataSource: MessagesDataSource?
-    var currentMailFolder: MailFolder?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -137,12 +137,15 @@ class MailViewController: UIViewController{
 
     func loadUserEmailsFolder(mailFolderId: String) {
         NSLog("Pompernikkel83")
-        self.service.getMailFolderMessages(mailFolderId: mailFolderId) {
+        lastMessagesCount = 0
+        self.service.getMailFolderMessages(mailFolderId: mailFolderId, lastMessagesCount: lastMessagesCount) {
             messages in
             if let unwrappedMessages = messages {
                 self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()
+                lastMessagesCount = unwrappedMessages["value"].arrayValue.count
+                NSLog("POMPERNIKKEL4: " + String(lastMessagesCount))
             }
         }
         self.refreshControl.endRefreshing()

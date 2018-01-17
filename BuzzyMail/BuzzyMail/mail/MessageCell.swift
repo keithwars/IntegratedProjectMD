@@ -186,7 +186,12 @@ extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
             if alreadyRunning == false {
                 alreadyRunning = true
                 dispatchGroup.enter()
-                loadUserEmails()
+                if let currentMailFolder = currentMailFolder {
+                    loadUserEmailsFolder(mailFolderId: currentMailFolder.id)
+                }
+                else {
+                    loadUserEmails()
+                }
                 self.dispatchGroup.notify(queue: .main) {
                     tableView.reloadData()
                     alreadyRunning = false
@@ -289,6 +294,56 @@ extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
                 NSLog("POMPERNIKKEL3: " + String(lastMessagesCount))
                 self.dispatchGroup.leave()
                 
+            }
+        }
+    }
+    
+    func loadUserEmailsFolder(mailFolderId: String) {
+        service.getMailFolderMessages(mailFolderId: mailFolderId, lastMessagesCount: lastMessagesCount) {
+            messages2 in
+            if let unwrappedMessages = messages2 {
+                for message in unwrappedMessages["value"].arrayValue {
+                    
+                    var toRecipientsList = [EmailAddresses]()
+                    for row in message["toRecipients"].arrayValue {
+                        toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                          address: row["emailAddress"]["address"].stringValue)))
+                    }
+                    
+                    var ccRecipientsList = [EmailAddresses]()
+                    for row in message["ccRecipients"].arrayValue {
+                        ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                          address: row["emailAddress"]["address"].stringValue)))
+                    }
+                    
+                    var bccRecipientsList = [EmailAddresses]()
+                    for row in message["bccRecipients"].arrayValue {
+                        bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
+                                                                                           address: row["emailAddress"]["address"].stringValue)))
+                    }
+                    
+                    let newMsg = Message(
+                        id: message["id"].stringValue,
+                        receivedDateTime: message["receivedDateTime"].stringValue,
+                        hasAttachments: message["hasAttachments"].boolValue,
+                        subject: message["subject"].stringValue,
+                        bodyPreview: message["bodyPreview"].stringValue,
+                        isRead: message["isRead"].boolValue,
+                        isDraft: message["isDraft"].boolValue,
+                        body: Body(contentType: message["body"]["contentType"].stringValue,
+                                   content: message["body"]["content"].stringValue),
+                        from: EmailAddresses(emailAddress: EmailAddress(name: message["from"]["emailAddress"]["name"].stringValue,
+                                                                        address: message["from"]["emailAddress"]["address"].stringValue)),
+                        toRecipients: toRecipientsList,
+                        ccRecipients: ccRecipientsList,
+                        bccRecipients: bccRecipientsList)
+                    
+                    self.messages.append(newMsg)
+                }
+                
+                lastMessagesCount += unwrappedMessages["value"].arrayValue.count
+                NSLog("POMPERNIKKEL3: " + String(lastMessagesCount))
+                self.dispatchGroup.leave()
             }
         }
     }

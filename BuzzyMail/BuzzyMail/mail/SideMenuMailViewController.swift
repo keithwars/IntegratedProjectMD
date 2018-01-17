@@ -36,7 +36,7 @@ class SideMenuMailViewController: UITableViewController {
             if let selected = selectedIndex {
                 mailFoldersList = dataSource?.getMailFoldersArray()
                 if let destination = segue.destination as? MailViewController {
-                    destination.currentMailFolder = mailFoldersList![selected.row]
+                    currentMailFolder = mailFoldersList![selected.row]
                 }
             }
         }
