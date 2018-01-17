@@ -891,7 +891,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="wZb-Zc-p6B">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="KVH-nB-TOC" kind="show" id="OkR-jx-5Xq"/>
+                                <segue destination="5CA-sp-WDI" kind="presentation" id="OkR-jx-5Xq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -993,7 +993,7 @@
                         <outlet property="fromLabel" destination="wle-AM-Tvf" id="4qd-x1-jFG"/>
                         <outlet property="richTextEditorNonEditable" destination="JDO-vm-BX7" id="UGA-jq-9lq"/>
                         <outlet property="subjectLabel" destination="aSU-9d-yCX" id="jbT-l4-0aq"/>
-                        <segue destination="KVH-nB-TOC" kind="show" identifier="replyTo" id="zh0-ri-91Z"/>
+                        <segue destination="5CA-sp-WDI" kind="show" identifier="answerMail" id="zh0-ri-91Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJu-Pn-WKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1044,7 +1044,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l3-Sd-KOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lVO-vz-3Xa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3772" y="-1766"/>
+            <point key="canvasLocation" x="4458" y="-1766"/>
         </scene>
         <!--Mail Content Table View Controller-->
         <scene sceneID="5fZ-u4-n90">
@@ -1173,7 +1173,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3K-aI-44h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4550" y="-1766"/>
+            <point key="canvasLocation" x="5260" y="-1766"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="42b-Xd-neC">
@@ -1283,6 +1283,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="knB-gN-0Zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2724" y="2224"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yz0-Ul-Dij">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5CA-sp-WDI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Obo-mA-Lzl">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KVH-nB-TOC" kind="relationship" relationship="rootViewController" id="Kyd-Tk-PRv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yS7-ay-xCv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3641" y="-1766"/>
         </scene>
     </scenes>
     <resources>

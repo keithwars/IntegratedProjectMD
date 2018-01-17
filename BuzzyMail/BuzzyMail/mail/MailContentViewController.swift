@@ -63,6 +63,14 @@ class MailContentViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "answerMail") {
+            let viewController = segue.destination as! UINavigationController
+            let childViewController = viewController.topViewController as! ReplyMailViewController
+            childViewController.newEmail = self.newEmail
+        }
+    }
 
     @IBAction func replyButtonPressed(_ sender: Any) {
 
@@ -70,11 +78,7 @@ class MailContentViewController: UIViewController {
             self.dispatchGroup.enter()
             self.createReply()
             self.dispatchGroup.notify(queue: .main) {
-                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-                let navigationController = UINavigationController(rootViewController: popup)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-                popup.newEmail = self.newEmail
-                self.present(navigationController, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "answerMail", sender: self)
             }
         }
         
@@ -82,11 +86,7 @@ class MailContentViewController: UIViewController {
             self.dispatchGroup3.enter()
             self.createReplyAll()
             self.dispatchGroup3.notify(queue: .main) {
-                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-                let navigationController = UINavigationController(rootViewController: popup)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-                popup.newEmail = self.newEmail
-                self.present(navigationController, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "answerMail", sender: self)
             }
         }
 
@@ -94,14 +94,9 @@ class MailContentViewController: UIViewController {
             self.dispatchGroup2.enter()
             self.createForward()
             self.dispatchGroup2.notify(queue: .main) {
-                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-                let navigationController = UINavigationController(rootViewController: popup)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-                popup.newEmail = self.newEmail
-                self.present(navigationController, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "answerMail", sender: self)
             }
         }
-
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
