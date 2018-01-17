@@ -150,8 +150,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
         let eventToAdd = CalendarEvent(
             subject: textfieldSubject.text!,
-            body: Body(contentType: "HTML",
-                       content: textfieldContent.text!),
+            bodyPreview: textfieldContent.text!,
             start: Time(dateTime: start,
                         timeZone: "Europe/Paris"),
             end: Time(dateTime: end,

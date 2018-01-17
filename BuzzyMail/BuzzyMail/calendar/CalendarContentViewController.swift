@@ -20,6 +20,9 @@ class CalendarContentViewController: UIViewController {
     @IBOutlet weak var creatorLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var contentTextview: UITextView!
+    @IBOutlet weak var attendeesLabel: UILabel!
+    @IBOutlet weak var attendeesListTextView: UITextView!
     
     @IBAction func unwindToCalendar(segue: UIStoryboardSegue) {
         
@@ -33,6 +36,24 @@ class CalendarContentViewController: UIViewController {
         durationLabel.numberOfLines = 2
         durationLabel.text = (Formatter.convertDateFormater(date: (event?.start?.dateTime)!)) + " at " + (event?.startTime)! + " until " + (event?.end?.dateTime)!
         locationLabel.text = event?.location?.displayName
+        contentTextview.text = event?.bodyPreview
+        self.contentTextview.textContainer.lineFragmentPadding = 0;
+
+        if (event?.attendees?.count != 0) {
+            attendeesLabel.isHidden = false
+            attendeesListTextView.isHidden = false
+            
+            for i in (event?.attendees)! {
+                attendeesListTextView.text! += i.emailAddress.address + "\n"
+            }
+            
+            self.contentTextview.textContainer.lineFragmentPadding = 0;
+        } else {
+            attendeesLabel.isHidden = true
+            self.attendeesLabel.isEnabled = false
+            self.attendeesListTextView.isHidden = true
+        }
+
     }
     
     override func didReceiveMemoryWarning() {

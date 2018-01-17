@@ -63,12 +63,15 @@ class EventsDataSource: NSObject {
                 //print("formatted:" + Formatter.deduceTime(start: currentDate))
                 
                 for i in event["attendees"].arrayValue {
-                    eventAttendeesList.append(Attendees(type: i["type"].stringValue, status: Status(response: i["status"]["response"].stringValue, time: i["status"]["time"].stringValue), emailAddress: EmailAddress(name: i["name"].stringValue, address: i["address"].stringValue)))
+                    eventAttendeesList.append(Attendees(type: i["type"].stringValue, status: Status(response: i["status"]["response"].stringValue, time: i["status"]["time"].stringValue), emailAddress: EmailAddress(name: i["emailAddress"]["name"].stringValue, address: i["emailAddress"]["address"].stringValue)))
+                    print("hihihih"
+                    )
+                    print(eventAttendeesList)
                 }
                 
                 let newEvent = CalendarEvent(
                     subject: event["subject"].stringValue,
-                    body: Body(contentType: event["body"]["contentType"].stringValue, content: event["body"]["content"].stringValue),
+                    bodyPreview: event["bodyPreview"].stringValue,
                     start: Time(dateTime: Formatter.dateTimeTimeZoneToString(date: event["start"]), timeZone: "Europe/Paris"),
                     end: Time(dateTime: Formatter.dateTimeToTime(date: event["end"]), timeZone: "Europe/Paris"),
                     startTime: Formatter.timeToHourAndMin(date: event["start"]),
@@ -79,6 +82,7 @@ class EventsDataSource: NSObject {
                 )
             
                 evtArray.append(newEvent)
+                eventAttendeesList.removeAll()
                 
             }
         }

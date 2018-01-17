@@ -103,36 +103,18 @@ class Formatter {
         return toStringFormatter.string(from: dateObj!)
     }
     
-    class func dateTimeToTime2(date: String) -> String {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss"
-        let dateFromString = dateFormatter.date(from: date)
-        
-        let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss"
-        dateFormatter2.dateStyle = DateFormatter.Style.none
-        dateFormatter2.timeStyle = DateFormatter.Style.short
-        dateFormatter2.timeZone = TimeZone.current
-        
-        let stringFromDate = dateFormatter2.string(from: dateFromString!)
-        
-        return stringFromDate
-    }
-    
     class func convertDateFormater(date: String) -> String
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let dateum = dateFormatter.date(from: date)
-        print("hehehehe")
-        print(dateum)
+     
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss z"
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.none
         dateFormatter.timeZone = TimeZone.current
         let newString = dateFormatter.string(from: dateum!)
-        print("hahahahha" + newString)
+
         return newString
         
     }
