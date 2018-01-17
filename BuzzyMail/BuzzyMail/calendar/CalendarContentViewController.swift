@@ -29,8 +29,10 @@ class CalendarContentViewController: UIViewController {
         super.viewDidLoad()
         creatorLabel.text = event?.organizer?.emailAddress?.name
         eventNameLabel.text = event?.subject
-//        durationLabel.text = ""
-//        locationLabel.text = ""
+        durationLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        durationLabel.numberOfLines = 2
+        durationLabel.text = (Formatter.convertDateFormater(date: (event?.start?.dateTime)!)) + " at " + (event?.startTime)! + " until " + (event?.end?.dateTime)!
+        locationLabel.text = event?.location?.displayName
     }
     
     override func didReceiveMemoryWarning() {

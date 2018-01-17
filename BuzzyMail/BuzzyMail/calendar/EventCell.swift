@@ -57,9 +57,6 @@ class EventsDataSource: NSObject {
     init(events: [JSON]?) {
         var evtArray = [CalendarEvent]()
         var eventAttendeesList = [Attendees]()
-        var startTimeEvent: String?
-        var startEvent: String?
-        var endEvent: String?
         
         if let unwrappedEvents = events {
             for (event) in unwrappedEvents {
@@ -68,15 +65,6 @@ class EventsDataSource: NSObject {
                 for i in event["attendees"].arrayValue {
                     eventAttendeesList.append(Attendees(type: i["type"].stringValue, status: Status(response: i["status"]["response"].stringValue, time: i["status"]["time"].stringValue), emailAddress: EmailAddress(name: i["name"].stringValue, address: i["address"].stringValue)))
                 }
-                
-//                print("hahahahahha")
-//                startEvent = Formatter.dateTimeTimeZoneToString(date: event["start"])
-//                print(startEvent)
-//                startTimeEvent = Formatter.timeToHourAndMin(date: event["start"])
-//                endEvent = Formatter.dateTimeToTime(date: event["end"])
-//                print(startTimeEvent)
-//                print(endEvent)
-//                startEvent = Formatter.
                 
                 let newEvent = CalendarEvent(
                     subject: event["subject"].stringValue,
@@ -102,7 +90,6 @@ class EventsDataSource: NSObject {
 extension EventsDataSource: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        NSLog("total of events:" +  "\(events.count)")
 
         return events.count
     }
@@ -171,22 +158,6 @@ extension EventsDataSource: UITableViewDataSource {
         }
         
     }
-    
-//    func confirmDelete(event: String) {
-//        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure you want to permanently delete this event?", preferredStyle: .actionSheet)
-//
-//        //let DeleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteEvent)
-//        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteEvent)
-//
-//        //alert.addAction(DeleteAction)
-//        alert.addAction(CancelAction)
-//
-//        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-//    }
-//
-//    func cancelDeleteEvent(alertAction: UIAlertAction!) {
-//        print("cancel clicked")
-//    }
     
     func getVisibleViewController(_ rootViewController: UIViewController?) -> UIViewController? {
         

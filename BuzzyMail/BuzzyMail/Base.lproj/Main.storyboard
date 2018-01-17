@@ -1108,7 +1108,9 @@
                     </view>
                     <connections>
                         <outlet property="creatorLabel" destination="aib-su-In8" id="MRc-aH-TtH"/>
+                        <outlet property="durationLabel" destination="6d8-t2-bar" id="1BW-kX-mTh"/>
                         <outlet property="eventNameLabel" destination="3Hf-tJ-QQC" id="JFG-Hy-fAg"/>
+                        <outlet property="locationLabel" destination="45t-sy-6BQ" id="rTc-nY-TI6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAD-6U-wzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
