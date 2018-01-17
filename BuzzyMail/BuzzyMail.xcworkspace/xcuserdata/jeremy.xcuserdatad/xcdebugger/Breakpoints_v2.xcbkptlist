@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BuzzyMail/mail/MailViewController.swift"
+            timestampString = "537878618.971801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "loadUserEmails()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BuzzyMail.MailViewController.loadUserEmails() -&gt; ()"
+                  moduleName = "BuzzyMail"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeremy/Desktop/Integrated%20Project%20MD/IntegratedProjectMD/BuzzyMail/BuzzyMail/mail/MailViewController.swift"
+                  timestampString = "537828221.731488"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "149">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;SwiftyJSON.JSON&gt;) -&gt; () in BuzzyMail.MailViewController.loadUserEmails() -&gt; ()"
+                  moduleName = "BuzzyMail"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeremy/Desktop/Integrated%20Project%20MD/IntegratedProjectMD/BuzzyMail/BuzzyMail/mail/MailViewController.swift"
+                  timestampString = "537828221.734393"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "115">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

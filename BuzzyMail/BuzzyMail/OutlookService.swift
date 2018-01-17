@@ -176,10 +176,12 @@ class OutlookService {
         }
     }
 
-    func getInboxMessages(callback: @escaping (JSON?) -> Void) -> Void {
+    func getInboxMessages(lastMessagesCount: Int, callback: @escaping (JSON?) -> Void) -> Void {
+        NSLog("Pompernikkel2" + String(lastMessagesCount))
         let apiParams = [
             "$orderby": "receivedDateTime DESC",
-            "$top": "50"
+            "$top": "20",
+            "$skip": String(lastMessagesCount)
         ]
 
         makeApiCall(api: "/v1.0/me/mailfolders/inbox/messages", requestType: RequestTypes.get, params: apiParams) {
@@ -191,7 +193,7 @@ class OutlookService {
     func getMailFolderMessages(mailFolderId: String, callback: @escaping (JSON?) -> Void) -> Void {
         let apiParams = [
             "$orderby": "receivedDateTime DESC",
-            "$top": "10"
+            "$top": "20"
         ]
         
         makeApiCall(api: "/v1.0/me/mailfolders/" + mailFolderId + "/messages", requestType: RequestTypes.get, params: apiParams) {

@@ -9,6 +9,8 @@
 import UIKit
 import SideMenu
 
+var lastMessagesCount = 0
+
 class MailViewController: UIViewController{
 
     let service = OutlookService.shared()
@@ -26,7 +28,7 @@ class MailViewController: UIViewController{
         super.viewDidLoad()
         
         self.tableView.rowHeight = 80;
-        loadUserData()
+        //loadUserData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,10 +84,10 @@ class MailViewController: UIViewController{
     }
     
     @IBAction func closeSideMenu(_ segue: UIStoryboardSegue) {
-        if let currentMailFolder = currentMailFolder {
+        /*if let currentMailFolder = currentMailFolder {
             NSLog("Loading New Mail Folder: " + currentMailFolder.displayName)
             self.loadUserEmailsFolder(mailFolderId: currentMailFolder.id)
-        }
+        }*/
         self.title = currentMailFolder!.displayName
     }
     
@@ -116,20 +118,25 @@ class MailViewController: UIViewController{
             }
         }
     }
-
+    
     func loadUserEmails() {
+        NSLog("Pompernikkel123")
         loadInboxMailFolderName()
-        self.service.getInboxMessages() {
+        lastMessagesCount = 0
+        self.service.getInboxMessages(lastMessagesCount: lastMessagesCount) {
             messages in
             if let unwrappedMessages = messages {
                 self.dataSource = MessagesDataSource(messages: unwrappedMessages["value"].arrayValue)
                 self.tableView.dataSource = self.dataSource
                 self.tableView.reloadData()
+                lastMessagesCount = unwrappedMessages["value"].arrayValue.count
+                NSLog("POMPERNIKKEL3: " + String(lastMessagesCount))
             }
         }
     }
 
     func loadUserEmailsFolder(mailFolderId: String) {
+        NSLog("Pompernikkel83")
         self.service.getMailFolderMessages(mailFolderId: mailFolderId) {
             messages in
             if let unwrappedMessages = messages {
