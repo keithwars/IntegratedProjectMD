@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T5b-MD-eEv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T5b-MD-eEv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -727,6 +727,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Hi!" id="eih-sh-ITm">
+                        <barButtonItem key="leftBarButtonItem" title="Exit" image="exit" id="55F-4e-yOK">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="IGo-5z-lB4" id="wet-Z2-XM2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" image="settings" id="eaV-pv-a0l">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
@@ -1287,6 +1293,7 @@
     </scenes>
     <resources>
         <image name="attachment" width="12" height="12"/>
+        <image name="exit" width="30" height="30"/>
         <image name="first" width="30" height="30"/>
         <image name="menu" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
@@ -1295,7 +1302,7 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zh0-ri-91Z"/>
+        <segue reference="OkR-jx-5Xq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
