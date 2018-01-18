@@ -26,6 +26,8 @@ class MailContentViewController: UIViewController {
     var newEmail:Message?
 
     @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var ccLabel: UILabel!
+    @IBOutlet weak var ccBox: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var contentWebView: WKWebView!
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
@@ -54,10 +56,36 @@ class MailContentViewController: UIViewController {
 
         }
 
-        fromLabel.text = email!.from!.emailAddress.name
+        //fromLabel.text = email!.from!.emailAddress.name
         richTextEditorNonEditable.text = email!.body!.content
         subjectLabel.text = email!.subject
         richTextEditorNonEditable.text = email!.body!.content
+        ccLabel.text = ""
+        fromLabel.text = ""
+        //NSLog("Pompernikkel: " + String(email!.ccRecipients!.count))
+        for emailAddress in email!.toRecipients! {
+            if (fromLabel.text != "") {
+                fromLabel.text?.append(", ")
+            }
+            fromLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
+        }
+        if email!.ccRecipients!.count > 0 {
+            for emailAddress in email!.ccRecipients! {
+                if (ccLabel.text != "") {
+                    ccLabel.text?.append(", ")
+                }
+                ccLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
+            }
+        }
+        else {
+            ccBox.isHidden = true
+            for constraint in self.view.constraints {
+                if constraint.identifier == "RichTextEditorTopMargin" {
+                    constraint.constant = 0
+                }
+            }
+            self.view.layoutIfNeeded()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,8 +130,10 @@ class MailContentViewController: UIViewController {
 
         let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
         alertController.addAction(replyAction)
-        let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
-        alertController.addAction(replyAllAction)
+        if (email!.ccRecipients!.count > 1 || email!.toRecipients!.count > 1) {
+            let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
+            alertController.addAction(replyAllAction)
+        }
         let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: forwardActionHandler)
         alertController.addAction(forwardAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
