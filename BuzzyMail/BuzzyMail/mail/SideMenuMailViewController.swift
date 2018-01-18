@@ -21,7 +21,7 @@ class SideMenuMailViewController: UITableViewController {
         loadMailFolders()
         setUserGivenName()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
     }
     
@@ -39,6 +39,8 @@ class SideMenuMailViewController: UITableViewController {
                     currentMailFolder = mailFoldersList![selected.row]
                 }
             }
+        } else if segue.identifier == "logout" {
+            service.logout()
         }
     }
     
@@ -55,6 +57,14 @@ class SideMenuMailViewController: UITableViewController {
     
     func setUserGivenName () {
         self.title = "Hi " + service.userGivenName
+    }
+    
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+    
+        let ct = self.view.window?.rootViewController
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        service.logout()
+        ct?.viewDidLoad()
     }
     
 }
