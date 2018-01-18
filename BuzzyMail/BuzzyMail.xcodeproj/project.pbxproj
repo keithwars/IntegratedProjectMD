@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1059B58C43A6AE2BB0916545 /* Pods_BuzzyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */; };
 		2B30B51E200E52060085029B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B30B51D200E52060085029B /* GoogleService-Info.plist */; };
+		2B5B7D822010B11A00663C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D812010B11A00663C92 /* Assets.xcassets */; };
 		2B80F28E2006C12F006C6544 /* loginvideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B80F28D2006C12F006C6544 /* loginvideo.mp4 */; };
 		2B96B8B91FD9448B0077EB08 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B8B81FD9448B0077EB08 /* MessageCell.swift */; };
 		2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */; };
@@ -16,7 +17,6 @@
 		3F0E27421FC8373300049443 /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27411FC8373300049443 /* MailViewController.swift */; };
 		3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27431FC8373300049443 /* CalendarViewController.swift */; };
 		3F0E27471FC8373300049443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E27451FC8373300049443 /* Main.storyboard */; };
-		3F0E27491FC8373300049443 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E27481FC8373300049443 /* Assets.xcassets */; };
 		3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */; };
 		3F0E27571FC8373300049443 /* BuzzyMailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27561FC8373300049443 /* BuzzyMailTests.swift */; };
 		3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27611FC839EC00049443 /* LoginViewController.swift */; };
@@ -56,6 +56,7 @@
 /* Begin PBXFileReference section */
 		20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B30B51D200E52060085029B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2B5B7D812010B11A00663C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B80F28D2006C12F006C6544 /* loginvideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo.mp4; sourceTree = "<group>"; };
 		2B96B8B81FD9448B0077EB08 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentViewController.swift; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		3F0E27411FC8373300049443 /* MailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		3F0E27431FC8373300049443 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		3F0E27461FC8373300049443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3F0E27481FC8373300049443 /* Assets.xcassets */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F0E274B1FC8373300049443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F0E274D1FC8373300049443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F0E27521FC8373300049443 /* BuzzyMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuzzyMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,9 +169,9 @@
 				566B141A1FC85C3800C074C4 /* Formatter.swift */,
 				3F0E27651FC83D5300049443 /* OutlookService.swift */,
 				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
+				2B5B7D812010B11A00663C92 /* Assets.xcassets */,
 				3F0E27451FC8373300049443 /* Main.storyboard */,
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
-				3F0E27481FC8373300049443 /* Assets.xcassets */,
 				3F0E274D1FC8373300049443 /* Info.plist */,
 				2B30B51D200E52060085029B /* GoogleService-Info.plist */,
 			);
@@ -365,9 +365,9 @@
 			files = (
 				2B80F28E2006C12F006C6544 /* loginvideo.mp4 in Resources */,
 				3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */,
-				3F0E27491FC8373300049443 /* Assets.xcassets in Resources */,
 				3F0E27471FC8373300049443 /* Main.storyboard in Resources */,
 				3FF0F3931FE407560055B34C /* Resources.bundle in Resources */,
+				2B5B7D822010B11A00663C92 /* Assets.xcassets in Resources */,
 				2B30B51E200E52060085029B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
