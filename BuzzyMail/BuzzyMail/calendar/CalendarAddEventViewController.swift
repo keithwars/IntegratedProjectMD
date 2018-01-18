@@ -15,7 +15,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     
     @IBOutlet weak var textfieldSubject: UITextField!
     @IBOutlet weak var textfieldLocation: UITextField!
-    @IBOutlet weak var textfieldContent: UITextField!
+    @IBOutlet weak var textViewContent: UITextView!
     
     @IBOutlet weak var textfieldStart: UITextField!
     @IBOutlet weak var textfieldStartTime: UITextField!
@@ -23,10 +23,14 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     @IBOutlet weak var textfieldEnd: UITextField!
     @IBOutlet weak var textfieldEndTime: UITextField!
     
+    @IBOutlet weak var textfieldAttendees: UITextField!
+    
     var startDate : String = ""
     var startTime : String = ""
     var endDate : String = ""
     var endTime : String = ""
+    
+    var selectedUser: String?
     
     @objc func donePressed() {
         self.view.endEditing(true)
@@ -125,11 +129,15 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
         textfieldSubject.inputAccessoryView = toolbar
         textfieldLocation.inputAccessoryView = toolbar
-        textfieldContent.inputAccessoryView = toolbar
+        textViewContent.inputAccessoryView = toolbar
         textfieldStart.inputAccessoryView = toolbar
         textfieldStartTime.inputAccessoryView = toolbar
         textfieldEnd.inputAccessoryView = toolbar
         textfieldEndTime.inputAccessoryView = toolbar
+        
+        if (selectedUser != nil) {
+            textfieldAttendees.text = selectedUser
+        }
         // Do any additional setup after loading the view, typically from a nib.
         
     }
@@ -147,10 +155,20 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
         let start : String = "\(self.startDate)" + "T" + "\(self.startTime)" + ":00"
         let end = "\(self.endDate)" + "T" + "\(self.endTime)" + ":00"
+        var eventAttendeesList = [Attendees]()
+        
+        if (selectedUser == nil) {
+            let forTextFieldArray = textfieldAttendees.text!.components(separatedBy: ", ")
+            for forTextField in forTextFieldArray {
+                eventAttendeesList.append(Attendees(type: "required", status: Status(response: "none", time: "0001-01-01T00:00:00Z"), emailAddress: EmailAddress(name: "", address: forTextField)))
+            }
+        } else {
+            eventAttendeesList.append(Attendees(type: "required", status: Status(response: "none", time: "0001-01-01T00:00:00Z"), emailAddress: EmailAddress(name: "", address: selectedUser!)))
+        }
         
         let eventToAdd = CalendarEvent(
             subject: textfieldSubject.text!,
-            bodyPreview: textfieldContent.text!,
+            bodyPreview: textViewContent.text!,
             start: Time(dateTime: start,
                         timeZone: "Europe/Paris"),
             end: Time(dateTime: end,
@@ -158,7 +176,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
             startTime: nil,
             id: "",
             location: Location(displayName: textfieldLocation.text!),
-            attendees: [],
+            attendees: eventAttendeesList,
             organizer: Organizer()
         )
         
@@ -179,7 +197,5 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         }
         dismiss(animated: true, completion: nil)        
     }
-    
-    
     
 }

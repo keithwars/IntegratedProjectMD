@@ -275,6 +275,31 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Attendees" id="Nxl-kF-0Ib">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Zpq-Vg-eD8">
+                                        <rect key="frame" x="0.0" y="387.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zpq-Vg-eD8" id="Ssc-Tw-cAH">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Attendees (seperated with comma's)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lRs-Mp-Uah">
+                                                    <rect key="frame" x="16" y="7" width="343" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldStartEditor:" destination="Pei-hT-PLz" eventType="editingDidBegin" id="gOo-mK-JMc"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="Pei-hT-PLz" id="CVb-4k-Pq5"/>
@@ -296,6 +321,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="textfieldAttendees" destination="lRs-Mp-Uah" id="3k8-3a-BJi"/>
                         <outlet property="textfieldContent" destination="Qz6-ch-Erw" id="DWH-yI-SMG"/>
                         <outlet property="textfieldEnd" destination="5TT-Yt-etX" id="Cyx-7F-cSV"/>
                         <outlet property="textfieldEndTime" destination="vx2-iq-SNd" id="gxz-c9-H4u"/>
@@ -307,7 +333,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QGQ-f3-L9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3641" y="484"/>
+            <point key="canvasLocation" x="3640.8000000000002" y="483.50824587706148"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="Tyb-9Q-WW5">
@@ -385,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NA6-fI-qCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1725.5999999999999" y="1456.8215892053975"/>
+            <point key="canvasLocation" x="1793" y="1457"/>
         </scene>
         <!--Contact Information View Controller-->
         <scene sceneID="cWQ-GC-Bbm">
@@ -426,6 +452,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Agenda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOn-jG-vzv">
                                 <rect key="frame" x="28" y="251" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -433,9 +460,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ew6-qt-auD">
                                 <rect key="frame" x="28" y="280" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.21999366579999999" green="0.28546470400000001" blue="0.35303756590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ZFa-8Y-aNy" appends="YES" id="QPx-QE-81F"/>
+                                </connections>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOA-hW-2UO">
                                 <rect key="frame" x="28" y="323" width="343" height="21"/>
@@ -472,6 +503,11 @@
                 <tapGestureRecognizer cancelsTouchesInView="NO" id="eVl-Yd-W0B">
                     <connections>
                         <segue destination="KVH-nB-TOC" kind="show" identifier="sendEmailToContact" id="mTL-fD-IGD"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="ZFa-8Y-aNy">
+                    <connections>
+                        <segue destination="Pei-hT-PLz" kind="show" identifier="planEventWithUser" id="VpA-Wk-BGY"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1461,6 +1497,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mTL-fD-IGD"/>
+        <segue reference="VpA-Wk-BGY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.99998784070000002" blue="0.99999213220000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

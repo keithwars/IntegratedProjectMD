@@ -14,7 +14,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
     
     var dataSource: ContactsDataSource?
     var contactsList: [Contact]?
-    
+        
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {

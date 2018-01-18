@@ -15,6 +15,8 @@ class CalendarViewController: UIViewController {
     var dataSource:EventsDataSource?
     var eventsList: [CalendarEvent]?
     
+    var selectedUser: String?
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
