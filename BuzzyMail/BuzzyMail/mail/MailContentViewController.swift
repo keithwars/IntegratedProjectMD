@@ -10,26 +10,40 @@ import UIKit
 
 import MessageUI
 import WebKit
+import QuickLook
 
 var messageHtml: Message?
 
-class MailContentViewController: UIViewController {
+class MailContentViewController: UIViewController, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
 
     let service = OutlookService.shared()
+    
+    let quickLookController = QLPreviewController()
     
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
     
+    let dispatchGroupAttachments1 = DispatchGroup()
+    
     var email:Message?
     var unreadEmail: Message?
     var newEmail:Message?
+    
+    var attachment: Attachment?
 
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var contentWebView: WKWebView!
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
 
+    @IBOutlet weak var previewAttachmentButton: UIButton!
+    @IBAction func previewAttachmentButtonPressed(_ sender: UIButton) {
+        let viewPDF = QLPreviewController()
+        viewPDF.dataSource = self
+        
+        self.present(viewPDF, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
@@ -51,19 +65,67 @@ class MailContentViewController: UIViewController {
                     bccRecipients: nil)
 
              updateIsReadStatusToRead(message: unreadEmail!)
-
         }
 
         fromLabel.text = email!.from!.emailAddress.name
         richTextEditorNonEditable.text = email!.body!.content
         subjectLabel.text = email!.subject
         richTextEditorNonEditable.text = email!.body!.content
+        
+        if (email!.hasAttachments!) {
+            NSLog("Pompernikkel Attachments")
+            var attachmentsList = [Attachment]()
+            dispatchGroupAttachments1.enter()
+            service.listAttachments(message: email!) {
+                attachments in
+                if let unwrappedAttachments = attachments {
+                    NSLog("Pompernikkel 4 " + unwrappedAttachments["value"].arrayValue[0]["name"].stringValue)
+                    for (attachment) in unwrappedAttachments["value"].arrayValue {
+                        NSLog("Run!")
+                        let newAttachment = Attachment(id: attachment["id"].stringValue, name: attachment["name"].stringValue, contentType: attachment["contentType"].stringValue, size: attachment["size"].intValue, contentBytes: attachment["contentBytes"].stringValue)
+                        attachmentsList.append(newAttachment)
+                    }
+                    self.dispatchGroupAttachments1.leave()
+                } else {
+                    NSLog("Fail")
+                    self.dispatchGroupAttachments1.leave()
+                }
+            }
+            self.dispatchGroupAttachments1.notify(queue: .main) {
+                NSLog("Number of attachments: " + String(attachmentsList.count))
+                for attachment in attachmentsList {
+                    NSLog("Name of attachment: " + attachment.name)
+                    self.saveBase64StringToPDF(attachment.contentBytes, fileName: attachment.name)
+                    self.attachment = attachment
+                    self.richTextEditorNonEditable.text! += attachment.name
+                }
+            }
+        }
+        else {
+            previewAttachmentButton.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
 
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        var pdfURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last! as URL
+        pdfURL = pdfURL.appendingPathComponent(attachment!.name) as URL
+        
+        return pdfURL as QLPreviewItem
+    }
+
+    
+    func previewControllerWillDismiss(_ controller: QLPreviewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func replyButtonPressed(_ sender: Any) {
 
         let replyActionHandler = { (action:UIAlertAction!) -> Void in
@@ -265,6 +327,32 @@ class MailContentViewController: UIViewController {
             }
         }
     }
+        
+    func saveBase64StringToPDF(_ base64String: String, fileName: String) {
+        
+        guard
+            var documentsURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last,
+            let convertedData = Data(base64Encoded: base64String)
+            else {
+                //handle error when getting documents URL
+                return
+        }
+        
+        //name your file however you prefer
+        documentsURL.appendPathComponent(fileName)
+        
+        do {
+            try convertedData.write(to: documentsURL)
+        } catch {
+            //handle write error here
+        }
+        
+        //if you want to get a quick output of where your
+        //file was saved from the simulator on your machine
+        //just print the documentsURL and go there in Finder
+        print(documentsURL)
+    }
+        
 
 
 }

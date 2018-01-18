@@ -70,6 +70,13 @@ class MailViewController: UIViewController{
             let row = self.tableView.indexPathForSelectedRow
             let rowint = Int(row![1])
             messagesList = dataSource?.getMessagesArray()
+            /*
+            if let navController = segue.destination as? UINavigationController {
+                if let childVC = navController.topViewController as? MailContentViewController {
+                    childVC.email = messagesList![rowint]
+                }
+            }
+            */
             
             if let destination = segue.destination as? MailContentViewController {
                 destination.email = messagesList![rowint]

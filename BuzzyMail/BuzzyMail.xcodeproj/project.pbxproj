@@ -31,6 +31,7 @@
 		3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B132003A484003E8347 /* MailContentTableViewController.swift */; };
 		3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */; };
 		3FB31B182003A51F003E8347 /* RichTextEditorNonEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */; };
+		3FC332942010CF1700E6B4E3 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC332932010CF1700E6B4E3 /* Attachment.swift */; };
 		3FF0F3931FE407560055B34C /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FF0F3921FE407560055B34C /* Resources.bundle */; };
 		563FEEA4200BC76B000965FD /* ContactInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563FEEA3200BC76B000965FD /* ContactInformationViewController.swift */; };
 		563FEEA6200BDBB7000965FD /* ContactsAddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563FEEA5200BDBB7000965FD /* ContactsAddContactViewController.swift */; };
@@ -87,6 +88,7 @@
 		3FB31B132003A484003E8347 /* MailContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentTableViewController.swift; sourceTree = "<group>"; };
 		3FB31B152003A4D4003E8347 /* RichTextEditorEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorEditable.swift; sourceTree = "<group>"; };
 		3FB31B172003A51E003E8347 /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
+		3FC332932010CF1700E6B4E3 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		3FF0F38E1FE405D90055B34C /* RichTextEditorNonEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextEditorNonEditable.swift; sourceTree = "<group>"; };
 		3FF0F3921FE407560055B34C /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		4DBD452035A0C8E67B017707 /* Pods-BuzzyMailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuzzyMailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuzzyMailTests/Pods-BuzzyMailTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				3F45553F2003E2A00085BEF3 /* MailFolder.swift */,
 				3FA6D035200CDFBC00298710 /* Event.swift */,
 				3FA6D037200CDFE000298710 /* Contact.swift */,
+				3FC332932010CF1700E6B4E3 /* Attachment.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				3FB31B162003A4D5003E8347 /* RichTextEditorEditable.swift in Sources */,
 				3F4555402003E2A00085BEF3 /* MailFolder.swift in Sources */,
 				3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */,
+				3FC332942010CF1700E6B4E3 /* Attachment.swift in Sources */,
 				3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */,
 				3FB31B0B2003A37F003E8347 /* Message.swift in Sources */,
 				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
