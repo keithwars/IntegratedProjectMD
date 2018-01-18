@@ -17,6 +17,9 @@ class CalendarViewController: UIViewController {
     
     var selectedUser: String?
     
+    private let refreshControl = UIRefreshControl()
+    let dispatchGroup = DispatchGroup()
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func cancelToCalendar(segue: UIStoryboardSegue) {
@@ -24,11 +27,27 @@ class CalendarViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
         tableView.beginUpdates()
         tableView.reloadData()
         tableView.endUpdates()
         
-        super.viewWillAppear(true)
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        
+        // Configure Refresh Control
+        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        let attributedTitle = NSAttributedString(string: "Refreshing your contacts ...", attributes: attributes)
+        
+        refreshControl.addTarget(self, action: #selector(refreshCalendarData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        refreshControl.attributedTitle = attributedTitle
+
         
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
@@ -56,6 +75,15 @@ class CalendarViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func refreshCalendarData(_ sender: Any) {
+        self.dispatchGroup.enter()
+        loadUserData()
+        self.dispatchGroup.leave()
+        self.dispatchGroup.notify(queue: .main) {
+            self.refreshControl.endRefreshing()
+        }
     }
     
     func loadUserData() {
