@@ -14,7 +14,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
     
     var dataSource: ContactsDataSource?
     var contactsList: [Contact]?
-    
+        
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -37,6 +37,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
         
         loadUserData()
         tableView.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,9 +51,10 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
             let rowint = Int(row![1])
             
             contactsList = dataSource?.getContactsArray()
-            
+            print(contactsList![rowint].emailAddresses![0])
+
             if let destination = segue.destination as? ContactInformationViewController {
-                destination.contact = contactsList![rowint]
+                destination.contact = contactsList![rowint] as Contact
             }
         }
     }

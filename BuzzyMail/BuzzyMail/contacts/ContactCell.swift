@@ -33,21 +33,26 @@ class ContactsDataSource: NSObject {
     
     init(contacts: [JSON]?) {
         var contactsArray = [Contact]()
+        var emailAddressesList = [EmailAddress]()
         
         if let unwrappedContacts = contacts {
             for (contact) in unwrappedContacts {
                 //print("formatted:" + Formatter.deduceTime(start: currentDate))
+                
+                for i in contact["emailAddresses"].arrayValue {
+                   emailAddressesList.append(EmailAddress(name: i["name"].stringValue, address: i["address"].stringValue))
+                }
                 
                 let newContact = Contact(
                     id: contact["id"].stringValue,
                     displayName: contact["displayName"].stringValue,
                     givenName: contact["givenName"].stringValue,
                     surname: contact["surname"].stringValue,
-                    emailAddresses: [EmailAddress(name: contact["emailAddress"]["name"].stringValue, address: contact["emailAddress"]["address"].stringValue)]
+                    emailAddresses: emailAddressesList
                 )
                 
                 contactsArray.append(newContact)
-                
+                emailAddressesList.removeAll()
             }
         }
         

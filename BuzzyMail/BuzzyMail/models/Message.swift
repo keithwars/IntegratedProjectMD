@@ -24,8 +24,8 @@ struct Message: Codable {
 }
 
 struct Body: Codable {
-    var contentType: String
-    var content: String
+    var contentType: String?
+    var content: String?
 }
 
 struct EmailAddresses: Codable {

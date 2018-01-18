@@ -18,12 +18,17 @@ class ReplyMailViewController: UIViewController {
     var newEmail:Message?
     var isNewMail:Bool = false
 
+    var email: String?
+    
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (self.email != nil) {
+            self.container?.toTextField.text = self.email!
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,9 +56,13 @@ class ReplyMailViewController: UIViewController {
             self.newEmail?.subject = container!.subjectTextField.text!
             
             self.newEmail?.toRecipients = [EmailAddresses]()
-            let toTextFieldArray = container!.toTextField.text!.components(separatedBy: ", ")
-            for toTextField in toTextFieldArray {
-                self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: toTextField)))
+            if email == nil {
+                let toTextFieldArray = container!.toTextField.text!.components(separatedBy: ", ")
+                for toTextField in toTextFieldArray {
+                    self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: toTextField)))
+                }
+            } else {
+                self.newEmail?.toRecipients?.append(EmailAddresses(emailAddress: EmailAddress(name: "", address: email!)))
             }
             
             self.newEmail?.ccRecipients = [EmailAddresses]()
@@ -73,7 +82,12 @@ class ReplyMailViewController: UIViewController {
             }
             self.dispatchGroup2.notify(queue: .main) {
                 self.sendReply()
-                self.performSegue(withIdentifier: "closeDraft", sender: sender)
+                if self.email == nil {
+                    self.performSegue(withIdentifier: "closeDraft", sender: sender)
+                } else {
+                    self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+                }
+                
             }
         }
     }
@@ -84,7 +98,11 @@ class ReplyMailViewController: UIViewController {
             if (self.newEmail != nil) {
                 self.service.deleteMessage(message: self.newEmail!) {_ in }
             }
-            self.performSegue(withIdentifier: "closeDraft", sender: action)
+            if self.email == nil {
+                self.performSegue(withIdentifier: "closeDraft", sender: action)
+            } else {
+                self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+            }
         }
 
         let saveDraftActionHandler = { (action:UIAlertAction!) -> Void in
@@ -97,11 +115,19 @@ class ReplyMailViewController: UIViewController {
                 }
                 self.dispatchGroup3.notify(queue: .main) {
                     self.service.updateReply(message: self.newEmail!) {_ in }
-                    self.performSegue(withIdentifier: "closeDraft", sender: action)
+                    if self.email == nil {
+                        self.performSegue(withIdentifier: "closeDraft", sender: action)
+                    } else {
+                        self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+                    }
                 }
             }
             else {
-                self.performSegue(withIdentifier: "closeDraft", sender: action)
+                if self.email == nil {
+                    self.performSegue(withIdentifier: "closeDraft", sender: action)
+                } else {
+                    self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+                }
             }
         }
 

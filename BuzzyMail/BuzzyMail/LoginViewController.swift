@@ -118,5 +118,4 @@ class LoginViewController: UIViewController {
             self.present(ac, animated: true)
         }
     }
-
 }
