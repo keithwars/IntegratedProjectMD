@@ -76,14 +76,7 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
 
 
         ccLabel.text = ""
-        fromLabel.text = ""
-        //NSLog("Pompernikkel: " + String(email!.ccRecipients!.count))
-        for emailAddress in email!.toRecipients! {
-            if (fromLabel.text != "") {
-                fromLabel.text?.append(", ")
-            }
-            fromLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
-        }
+        fromLabel.text = email!.from?.emailAddress.name
         if email!.ccRecipients!.count > 0 {
             for emailAddress in email!.ccRecipients! {
                 if (ccLabel.text != "") {
