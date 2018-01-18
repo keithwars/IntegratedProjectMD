@@ -23,28 +23,18 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     @IBOutlet weak var textfieldEnd: UITextField!
     @IBOutlet weak var textfieldEndTime: UITextField!
     
+    @IBOutlet weak var textfieldAttendees: UITextField!
+    
     var startDate : String = ""
     var startTime : String = ""
     var endDate : String = ""
     var endTime : String = ""
-    var content : String = ""
-    var location : String = ""
-    var subject : String = ""
+    var content: String = ""
+    
+    var selectedUser: String?
     
     @objc func donePressed() {
         self.view.endEditing(true)
-    }
-
-    @IBAction func textfieldSubjectEditor(_ sender: UITextField) {
-        subject = textfieldSubject.text!
-    }
-    
-    @IBAction func textfieldLocationEditor(_ sender: UITextField) {
-        location = textfieldLocation.text!
-    }
-    
-    @IBAction func textfieldContentEditor(_ sender: UITextField) {
-        content = textfieldContent.text!
     }
     
     @IBAction func textfieldStartEditor(_ sender: UITextField) {
@@ -84,6 +74,10 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         datePickerView.addTarget(self, action: #selector(handleDatePickerEndDay(sender:)), for: .valueChanged)
     }
     
+    @IBAction func textfieldContentEditor(_ sender: UITextField) {
+        content = textfieldContent.text!
+        print("dit is de fucking content" + content)
+    }
     
     @IBAction func textfieldEndTime(_ sender: UITextField) {
         let datePickerView = UIDatePicker()
@@ -145,6 +139,10 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         textfieldStartTime.inputAccessoryView = toolbar
         textfieldEnd.inputAccessoryView = toolbar
         textfieldEndTime.inputAccessoryView = toolbar
+        
+        if (selectedUser != nil) {
+            textfieldAttendees.text = selectedUser
+        }
         // Do any additional setup after loading the view, typically from a nib.
         
     }
@@ -155,26 +153,52 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     }
     
     @IBAction func onCancelPressed(_ sender: Any){
-        dismiss(animated: true, completion: nil)
+        if (selectedUser != nil) {
+            self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+        } else {
+            self.performSegue(withIdentifier: "cancelToCalendar", sender: sender)
+        }
+        
     }
     
     @IBAction func onButtonPressed(_ sender: Any) {
         
         let start : String = "\(self.startDate)" + "T" + "\(self.startTime)" + ":00"
         let end = "\(self.endDate)" + "T" + "\(self.endTime)" + ":00"
+        var eventAttendeesList = [Attendees]()
         
-        testEvent.start.dateTime = start
-        testEvent.end.dateTime = end
-        testEvent.subject = subject
-        testEvent.location.displayName = location
-        testEvent.body.content = content
+        if (selectedUser == nil) {
+            let forTextFieldArray = textfieldAttendees.text!.components(separatedBy: ", ")
+            for forTextField in forTextFieldArray {
+                eventAttendeesList.append(Attendees(type: "required", status: Status(response: "none", time: "0001-01-01T00:00:00Z"), emailAddress: EmailAddress(name: "", address: forTextField)))
+            }
+        } else {
+            eventAttendeesList.append(Attendees(type: "required", status: Status(response: "none", time: "0001-01-01T00:00:00Z"), emailAddress: EmailAddress(name: "", address: selectedUser!)))
+        }
+        
+        let eventToAdd = CalendarEvent(
+            subject: textfieldSubject.text!,
+            bodyPreview: nil,
+            body: Body(contentType: "html", content: textfieldContent.text),
+            start: Time(dateTime: start,
+                        timeZone: "Europe/Paris"),
+            end: Time(dateTime: end,
+                      timeZone: "Europe/Paris"),
+            startTime: nil,
+            id: "",
+            location: Location(displayName: textfieldLocation.text!),
+            attendees: eventAttendeesList,
+            organizer: Organizer()
+        )
+        print("fucking event")
+        print(eventToAdd)
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         
         // encode, convert to a String, and print it
         
-        if let jsonData = try? jsonEncoder.encode(testEvent),
+        if let jsonData = try? jsonEncoder.encode(eventToAdd),
             let jsonString = try? JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any] {
             print(jsonString)
             
@@ -184,40 +208,14 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
                     
         }
-        dismiss(animated: true, completion: nil)        
+        if (selectedUser != nil) {
+            self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+        } else {
+            self.performSegue(withIdentifier: "cancelToCalendar", sender: sender)
+        }
+        
+        dismiss(animated: true, completion: nil)
+     
     }
     
-    struct CalendarEvent : Codable {
-        var subject: String
-        var body: Body
-        var start: Time
-        var end: Time
-        var location: Location
-        var attendees: [String]
-    }
-    
-    struct Body : Codable {
-        var contentType: String
-        var content: String
-    }
-    
-    struct Time : Codable {
-        var dateTime: String
-        var timeZone: String
-    }
-    
-    struct Location : Codable {
-        var displayName: String
-    }
-    
-    var testEvent = CalendarEvent(subject: "Let's go for lunch",
-                                  body: Body(contentType: "HTML",
-                                             content: "Does late morning work for you?"),
-                                  start: Time(dateTime:"2017-12-10T12:55:00",
-                                              timeZone: "W. Europe Standard Time"),
-                                  end: Time(dateTime:"2017-12-10T14:00:00",
-                                            timeZone: "W. Europe Standard Time"),
-                                  location: Location(displayName: "Antwerpen"),
-                                  attendees: [])
-
 }

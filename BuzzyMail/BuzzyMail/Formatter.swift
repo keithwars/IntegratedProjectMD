@@ -138,6 +138,8 @@ class Formatter {
         let toDateFormatter = DateFormatter()
         toDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss"
         toDateFormatter.timeZone = TimeZone(identifier: graphTimeZone)
+        print("tijdzone")
+        print(graphTimeZone)
 
         let dateObj = toDateFormatter.date(from: graphDateString)
         if (dateObj == nil) {
@@ -151,5 +153,20 @@ class Formatter {
 
         return toStringFormatter.string(from: dateObj!)
     }
+    
+    class func convertDateFormater(date: String) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let dateum = dateFormatter.date(from: date)
+     
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss z"
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateFormatter.timeZone = TimeZone.current
+        let newString = dateFormatter.string(from: dateum!)
 
+        return newString
+        
+    }
 }

@@ -134,7 +134,7 @@ class MailContentViewController: UIViewController {
             printInfo.jobName = "print Job"
             printController.printInfo = printInfo
             
-            let formatter = UIMarkupTextPrintFormatter(markupText: self.email!.body!.content)
+            let formatter = UIMarkupTextPrintFormatter(markupText: self.email!.body!.content!)
             formatter.perPageContentInsets = UIEdgeInsets(top: 72, left: 72, bottom: 72, right: 72)
             printController.printFormatter = formatter
             

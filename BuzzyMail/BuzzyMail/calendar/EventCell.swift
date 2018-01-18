@@ -52,25 +52,38 @@ class EventCell: UITableViewCell {
 }
 
 class EventsDataSource: NSObject {
-    var events: [Event]
+    var events: [CalendarEvent]
     
     init(events: [JSON]?) {
-        var evtArray = [Event]()
+        var evtArray = [CalendarEvent]()
+        var eventAttendeesList = [Attendees]()
         
         if let unwrappedEvents = events {
             for (event) in unwrappedEvents {
                 //print("formatted:" + Formatter.deduceTime(start: currentDate))
                 
-                let newEvent = Event(
+                for i in event["attendees"].arrayValue {
+                    eventAttendeesList.append(Attendees(type: i["type"].stringValue, status: Status(response: i["status"]["response"].stringValue, time: i["status"]["time"].stringValue), emailAddress: EmailAddress(name: i["emailAddress"]["name"].stringValue, address: i["emailAddress"]["address"].stringValue)))
+                    print("hihihih"
+                    )
+                    print(eventAttendeesList)
+                }
+                
+                let newEvent = CalendarEvent(
                     subject: event["subject"].stringValue,
-                    start: Formatter.dateTimeTimeZoneToString(date: event["start"]),
-                    end: Formatter.dateTimeToTime(date: event["end"]),
+                    bodyPreview: event["bodyPreview"].stringValue,
+                    body: Body(contentType: event["body"]["contentType"].stringValue, content: event["body"]["content"].stringValue),
+                    start: Time(dateTime: Formatter.dateTimeTimeZoneToString(date: event["start"]), timeZone: "Europe/Paris"),
+                    end: Time(dateTime: Formatter.dateTimeToTime(date: event["end"]), timeZone: "Europe/Paris"),
                     startTime: Formatter.timeToHourAndMin(date: event["start"]),
                     id: event["id"].stringValue,
+                    location: Location(displayName: event["location"]["displayName"].stringValue),
+                    attendees: eventAttendeesList,
                     organizer: Organizer(emailAddress: EmailAddress(name: event["organizer"]["emailAddress"]["name"].stringValue, address: event["organizer"]["emailAddress"]["address"].stringValue))
                 )
-                
+            
                 evtArray.append(newEvent)
+                eventAttendeesList.removeAll()
                 
             }
         }
@@ -82,7 +95,6 @@ class EventsDataSource: NSObject {
 extension EventsDataSource: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        NSLog("total of events:" +  "\(events.count)")
 
         return events.count
     }
@@ -92,18 +104,16 @@ extension EventsDataSource: UITableViewDataSource {
         let event = events[indexPath.row]
         
         cell.subject = event.subject
-        cell.start = event.start
-        cell.end = "Ends at: \(event.end!)"
+        cell.start = event.start?.dateTime
+        cell.end = "Ends at: " + (event.end?.dateTime)!
         cell.startTime = event.startTime
         cell.id = event.id
-        
-        print("Organizer name: " + "\(event.organizer?.emailAddress?.address)")
         
         return cell
         
     }
     
-    func getEventsArray() -> [Event] {
+    func getEventsArray() -> [CalendarEvent] {
         return events
     }
     
@@ -153,22 +163,6 @@ extension EventsDataSource: UITableViewDataSource {
         }
         
     }
-    
-//    func confirmDelete(event: String) {
-//        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure you want to permanently delete this event?", preferredStyle: .actionSheet)
-//
-//        //let DeleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeleteEvent)
-//        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeleteEvent)
-//
-//        //alert.addAction(DeleteAction)
-//        alert.addAction(CancelAction)
-//
-//        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-//    }
-//
-//    func cancelDeleteEvent(alertAction: UIAlertAction!) {
-//        print("cancel clicked")
-//    }
     
     func getVisibleViewController(_ rootViewController: UIViewController?) -> UIViewController? {
         
