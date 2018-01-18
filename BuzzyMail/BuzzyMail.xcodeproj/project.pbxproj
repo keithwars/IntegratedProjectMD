@@ -10,6 +10,14 @@
 		1059B58C43A6AE2BB0916545 /* Pods_BuzzyMailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA0DA9CCB414CBC2B0883A8 /* Pods_BuzzyMailTests.framework */; };
 		2B30B51E200E52060085029B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B30B51D200E52060085029B /* GoogleService-Info.plist */; };
 		2B5B7D822010B11A00663C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D812010B11A00663C92 /* Assets.xcassets */; };
+		2B5B7D842010CBA300663C92 /* loginvideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D832010CBA200663C92 /* loginvideo1.mp4 */; };
+		2B5B7D862010CC8C00663C92 /* loginvideo2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D852010CC8C00663C92 /* loginvideo2.mp4 */; };
+		2B5B7D882010CDBD00663C92 /* loginvideo4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D872010CDBD00663C92 /* loginvideo4.mp4 */; };
+		2B5B7D8A2010CE2200663C92 /* loginvideo3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D892010CE2200663C92 /* loginvideo3.mp4 */; };
+		2B5B7D8C2010D14000663C92 /* loginvideo5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D8B2010D14000663C92 /* loginvideo5.mp4 */; };
+		2B5B7D8E2010D17100663C92 /* loginvideo6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D8D2010D17100663C92 /* loginvideo6.mp4 */; };
+		2B5B7D902010D20800663C92 /* loginvideo7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B7D8F2010D20800663C92 /* loginvideo7.mp4 */; };
+		2B5B7D922010D83700663C92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D912010D83700663C92 /* LoginViewController.swift */; };
 		2B80F28E2006C12F006C6544 /* loginvideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B80F28D2006C12F006C6544 /* loginvideo.mp4 */; };
 		2B96B8B91FD9448B0077EB08 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B8B81FD9448B0077EB08 /* MessageCell.swift */; };
 		2B9B4CCE1FCC347D0076BC4B /* MailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */; };
@@ -19,7 +27,6 @@
 		3F0E27471FC8373300049443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E27451FC8373300049443 /* Main.storyboard */; };
 		3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */; };
 		3F0E27571FC8373300049443 /* BuzzyMailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27561FC8373300049443 /* BuzzyMailTests.swift */; };
-		3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27611FC839EC00049443 /* LoginViewController.swift */; };
 		3F0E27641FC83C2D00049443 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27631FC83C2D00049443 /* ContactsViewController.swift */; };
 		3F0E27661FC83D5300049443 /* OutlookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E27651FC83D5300049443 /* OutlookService.swift */; };
 		3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45553B2003C1D80085BEF3 /* SideMenuMailViewController.swift */; };
@@ -57,6 +64,14 @@
 		20A0C70FF0E753213786CCFB /* Pods_BuzzyMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuzzyMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B30B51D200E52060085029B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B5B7D812010B11A00663C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B5B7D832010CBA200663C92 /* loginvideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo1.mp4; sourceTree = "<group>"; };
+		2B5B7D852010CC8C00663C92 /* loginvideo2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo2.mp4; sourceTree = "<group>"; };
+		2B5B7D872010CDBD00663C92 /* loginvideo4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo4.mp4; sourceTree = "<group>"; };
+		2B5B7D892010CE2200663C92 /* loginvideo3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo3.mp4; sourceTree = "<group>"; };
+		2B5B7D8B2010D14000663C92 /* loginvideo5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo5.mp4; sourceTree = "<group>"; };
+		2B5B7D8D2010D17100663C92 /* loginvideo6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo6.mp4; sourceTree = "<group>"; };
+		2B5B7D8F2010D20800663C92 /* loginvideo7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo7.mp4; sourceTree = "<group>"; };
+		2B5B7D912010D83700663C92 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2B80F28D2006C12F006C6544 /* loginvideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginvideo.mp4; sourceTree = "<group>"; };
 		2B96B8B81FD9448B0077EB08 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		2B9B4CCD1FCC347D0076BC4B /* MailContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +87,6 @@
 		3F0E27521FC8373300049443 /* BuzzyMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuzzyMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0E27561FC8373300049443 /* BuzzyMailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuzzyMailTests.swift; sourceTree = "<group>"; };
 		3F0E27581FC8373300049443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F0E27611FC839EC00049443 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3F0E27631FC83C2D00049443 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		3F0E27651FC83D5300049443 /* OutlookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookService.swift; sourceTree = "<group>"; };
 		3F196DA41FD980AB0002287C /* MailContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContentTableViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +151,13 @@
 		3F0E27331FC8373300049443 = {
 			isa = PBXGroup;
 			children = (
+				2B5B7D8F2010D20800663C92 /* loginvideo7.mp4 */,
+				2B5B7D8D2010D17100663C92 /* loginvideo6.mp4 */,
+				2B5B7D8B2010D14000663C92 /* loginvideo5.mp4 */,
+				2B5B7D892010CE2200663C92 /* loginvideo3.mp4 */,
+				2B5B7D872010CDBD00663C92 /* loginvideo4.mp4 */,
+				2B5B7D852010CC8C00663C92 /* loginvideo2.mp4 */,
+				2B5B7D832010CBA200663C92 /* loginvideo1.mp4 */,
 				2B80F28D2006C12F006C6544 /* loginvideo.mp4 */,
 				3FF0F3921FE407560055B34C /* Resources.bundle */,
 				3F0E273E1FC8373300049443 /* BuzzyMail */,
@@ -167,8 +188,8 @@
 				3FB31B0E2003A3A0003E8347 /* models */,
 				3F0E273F1FC8373300049443 /* AppDelegate.swift */,
 				566B141A1FC85C3800C074C4 /* Formatter.swift */,
+				2B5B7D912010D83700663C92 /* LoginViewController.swift */,
 				3F0E27651FC83D5300049443 /* OutlookService.swift */,
-				3F0E27611FC839EC00049443 /* LoginViewController.swift */,
 				2B5B7D812010B11A00663C92 /* Assets.xcassets */,
 				3F0E27451FC8373300049443 /* Main.storyboard */,
 				3F0E274A1FC8373300049443 /* LaunchScreen.storyboard */,
@@ -363,12 +384,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B5B7D8E2010D17100663C92 /* loginvideo6.mp4 in Resources */,
+				2B5B7D8C2010D14000663C92 /* loginvideo5.mp4 in Resources */,
 				2B80F28E2006C12F006C6544 /* loginvideo.mp4 in Resources */,
 				3F0E274C1FC8373300049443 /* LaunchScreen.storyboard in Resources */,
+				2B5B7D902010D20800663C92 /* loginvideo7.mp4 in Resources */,
 				3F0E27471FC8373300049443 /* Main.storyboard in Resources */,
+				2B5B7D8A2010CE2200663C92 /* loginvideo3.mp4 in Resources */,
+				2B5B7D882010CDBD00663C92 /* loginvideo4.mp4 in Resources */,
 				3FF0F3931FE407560055B34C /* Resources.bundle in Resources */,
 				2B5B7D822010B11A00663C92 /* Assets.xcassets in Resources */,
+				2B5B7D862010CC8C00663C92 /* loginvideo2.mp4 in Resources */,
 				2B30B51E200E52060085029B /* GoogleService-Info.plist in Resources */,
+				2B5B7D842010CBA300663C92 /* loginvideo1.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,12 +536,12 @@
 				3FB31B142003A484003E8347 /* MailContentTableViewController.swift in Sources */,
 				3FB31B102003A435003E8347 /* ReplyMailViewController.swift in Sources */,
 				3FB31B0B2003A37F003E8347 /* Message.swift in Sources */,
-				3F0E27621FC839EC00049443 /* LoginViewController.swift in Sources */,
 				3F45553E2003E1940085BEF3 /* MenuCell.swift in Sources */,
 				3F0E27441FC8373300049443 /* CalendarViewController.swift in Sources */,
 				56D7C0E21FE40F1B005DDDA3 /* CalendarContentViewController.swift in Sources */,
 				3F0E27401FC8373300049443 /* AppDelegate.swift in Sources */,
 				563FEEA4200BC76B000965FD /* ContactInformationViewController.swift in Sources */,
+				2B5B7D922010D83700663C92 /* LoginViewController.swift in Sources */,
 				566B141B1FC85C3800C074C4 /* Formatter.swift in Sources */,
 				3F45553C2003C1D80085BEF3 /* SideMenuMailViewController.swift in Sources */,
 				566B141D1FC85DB000C074C4 /* EventCell.swift in Sources */,

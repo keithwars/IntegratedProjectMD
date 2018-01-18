@@ -599,7 +599,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="49e-Tb-3d3" kind="show" id="0jH-xh-elS"/>
+                                    <action selector="continueButtonTapped:" destination="T5b-MD-eEv" eventType="touchUpInside" id="t5L-6y-Xhb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -620,6 +620,7 @@
                     <connections>
                         <outlet property="authenticateButton" destination="sDi-vi-PlD" id="Ih9-eT-FyI"/>
                         <outlet property="continueButton" destination="6LO-OV-qgq" id="XeY-TF-c9m"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="continueToApp" id="mom-YF-U7W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="64O-XH-y4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
