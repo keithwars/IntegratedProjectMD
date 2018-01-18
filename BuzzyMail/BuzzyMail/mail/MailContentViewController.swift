@@ -18,8 +18,6 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
 
     let service = OutlookService.shared()
 
-    let quickLookController = QLPreviewController()
-
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
@@ -40,12 +38,14 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
 
     @IBOutlet weak var previewAttachmentButton: UIButton!
+    
     @IBAction func previewAttachmentButtonPressed(_ sender: UIButton) {
         let viewPDF = QLPreviewController()
         viewPDF.dataSource = self
 
         self.present(viewPDF, animated: true, completion: nil)
     }
+    
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .never
         super.viewDidLoad()
@@ -127,6 +127,11 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
         else {
             previewAttachmentButton.isHidden = true
       }
+        //UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).is
+        //UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).isTranslucent = false
+        //UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).barTintColor = UIColor.blue
+        //UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).tintColor = UIColor.blue
+        //UINavigationBar.appearance(whenContainedInInstancesOf: [QLPreviewController.self]).titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.red]
     }
 
     override func didReceiveMemoryWarning() {
