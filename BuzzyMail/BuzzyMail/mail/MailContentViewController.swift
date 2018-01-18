@@ -26,6 +26,8 @@ class MailContentViewController: UIViewController {
     var newEmail:Message?
 
     @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var ccLabel: UILabel!
+    @IBOutlet weak var ccBox: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var contentWebView: WKWebView!
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
@@ -58,6 +60,26 @@ class MailContentViewController: UIViewController {
         richTextEditorNonEditable.text = email!.body!.content
         subjectLabel.text = email!.subject
         richTextEditorNonEditable.text = email!.body!.content
+        ccLabel.text = ""
+        //NSLog("Pompernikkel: " + String(email!.ccRecipients!.count))
+        if email!.ccRecipients!.count > 0 {
+            for emailAddress in email!.ccRecipients! {
+                if (ccLabel.text != "") {
+                    ccLabel.text?.append(", ")
+                }
+                ccLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
+            }
+        }
+        else {
+            ccBox.isHidden = true
+            for constraint in self.view.constraints {
+                if constraint.identifier == "RichTextEditorTopMargin" {
+                    constraint.constant = 0
+                }
+            }
+            self.view.layoutIfNeeded()
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
