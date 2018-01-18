@@ -102,18 +102,37 @@ class MailContentViewController: UIViewController {
             }
         }
 
-
+        let printActionHandler = { (action:UIAlertAction!) -> Void in
+            let printController = UIPrintInteractionController.shared
+            
+            let printInfo = UIPrintInfo(dictionary:nil)
+            printInfo.outputType = UIPrintInfoOutputType.general
+            printInfo.jobName = "print Job"
+            printController.printInfo = printInfo
+            
+            let formatter = UIMarkupTextPrintFormatter(markupText: self.email!.body!.content)
+            formatter.perPageContentInsets = UIEdgeInsets(top: 72, left: 72, bottom: 72, right: 72)
+            printController.printFormatter = formatter
+            
+            printController.present(animated: true, completionHandler: nil)
+        }
+        
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
         alertController.addAction(replyAction)
-        let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
-        alertController.addAction(replyAllAction)
+        if (email!.ccRecipients!.count > 1 || email!.toRecipients!.count > 1) {
+            let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
+            alertController.addAction(replyAllAction)
+        }
         let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: forwardActionHandler)
         alertController.addAction(forwardAction)
+        let printAction = UIAlertAction(title: "Print", style: .default, handler: printActionHandler)
+        alertController.addAction(printAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-
+        
         present(alertController, animated: true, completion: nil)
     }
 
