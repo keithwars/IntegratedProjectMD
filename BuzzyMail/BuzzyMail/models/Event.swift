@@ -20,6 +20,7 @@ import Foundation
 struct CalendarEvent : Encodable {
     var subject: String?
     var bodyPreview: String?
+    var body: Body?
     var start: Time?
     var end: Time?
     var startTime: String?

@@ -15,7 +15,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     
     @IBOutlet weak var textfieldSubject: UITextField!
     @IBOutlet weak var textfieldLocation: UITextField!
-    @IBOutlet weak var textViewContent: UITextView!
+    @IBOutlet weak var textfieldContent: UITextField!
     
     @IBOutlet weak var textfieldStart: UITextField!
     @IBOutlet weak var textfieldStartTime: UITextField!
@@ -29,6 +29,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     var startTime : String = ""
     var endDate : String = ""
     var endTime : String = ""
+    var content: String = ""
     
     var selectedUser: String?
     
@@ -73,6 +74,10 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         datePickerView.addTarget(self, action: #selector(handleDatePickerEndDay(sender:)), for: .valueChanged)
     }
     
+    @IBAction func textfieldContentEditor(_ sender: UITextField) {
+        content = textfieldContent.text!
+        print("dit is de fucking content" + content)
+    }
     
     @IBAction func textfieldEndTime(_ sender: UITextField) {
         let datePickerView = UIDatePicker()
@@ -129,7 +134,7 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
         textfieldSubject.inputAccessoryView = toolbar
         textfieldLocation.inputAccessoryView = toolbar
-        textViewContent.inputAccessoryView = toolbar
+        textfieldContent.inputAccessoryView = toolbar
         textfieldStart.inputAccessoryView = toolbar
         textfieldStartTime.inputAccessoryView = toolbar
         textfieldEnd.inputAccessoryView = toolbar
@@ -168,7 +173,8 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
         let eventToAdd = CalendarEvent(
             subject: textfieldSubject.text!,
-            bodyPreview: textViewContent.text!,
+            bodyPreview: nil,
+            body: Body(contentType: "html", content: textfieldContent.text),
             start: Time(dateTime: start,
                         timeZone: "Europe/Paris"),
             end: Time(dateTime: end,
@@ -179,6 +185,8 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
             attendees: eventAttendeesList,
             organizer: Organizer()
         )
+        print("fucking event")
+        print(eventToAdd)
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]

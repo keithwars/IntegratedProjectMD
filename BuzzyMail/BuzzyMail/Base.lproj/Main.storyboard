@@ -201,6 +201,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textfieldContentEditor:" destination="Pei-hT-PLz" eventType="editingDidEnd" id="LNh-4f-QdF"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -457,17 +460,6 @@
                                 <color key="textColor" red="0.066666666669999999" green="0.16862745100000001" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ew6-qt-auD">
-                                <rect key="frame" x="28" y="280" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" red="0.21999366579999999" green="0.28546470400000001" blue="0.35303756590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ZFa-8Y-aNy" appends="YES" id="QPx-QE-81F"/>
-                                </connections>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOA-hW-2UO">
                                 <rect key="frame" x="28" y="323" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -486,6 +478,17 @@
                                     <outletCollection property="gestureRecognizers" destination="eVl-Yd-W0B" appends="YES" id="7vx-9o-Lg7"/>
                                 </connections>
                             </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1R-AG-kMK" userLabel="Plan event Label">
+                                <rect key="frame" x="28" y="280" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.21999366579999999" green="0.28546470400000001" blue="0.35303756590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eQX-Ak-I4K" appends="YES" id="k7l-aU-Awt"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.21999366581439972" green="0.28546470403671265" blue="0.35303756594657898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -496,6 +499,7 @@
                         <outlet property="emailLabel" destination="Rog-2j-HdH" id="EbV-H1-NMn"/>
                         <outlet property="fullnameLabel" destination="3OT-8o-IY4" id="li1-y2-vcX"/>
                         <outlet property="initialsLabel" destination="32J-eM-bn7" id="p1o-gv-hel"/>
+                        <outlet property="planEventLabel" destination="f1R-AG-kMK" id="JCm-xo-tC3"/>
                         <outlet property="sendEmailLabel" destination="8cM-lg-XIH" id="c5g-Vc-W5N"/>
                     </connections>
                 </viewController>
@@ -505,11 +509,7 @@
                         <segue destination="KVH-nB-TOC" kind="show" identifier="sendEmailToContact" id="mTL-fD-IGD"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer cancelsTouchesInView="NO" id="ZFa-8Y-aNy">
-                    <connections>
-                        <segue destination="Pei-hT-PLz" kind="show" identifier="planEventWithUser" id="VpA-Wk-BGY"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="eQX-Ak-I4K"/>
             </objects>
             <point key="canvasLocation" x="2724" y="1456.8215892053975"/>
         </scene>
@@ -1497,7 +1497,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mTL-fD-IGD"/>
-        <segue reference="VpA-Wk-BGY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.99998784070000002" blue="0.99999213220000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

@@ -72,6 +72,7 @@ class EventsDataSource: NSObject {
                 let newEvent = CalendarEvent(
                     subject: event["subject"].stringValue,
                     bodyPreview: event["bodyPreview"].stringValue,
+                    body: Body(contentType: event["body"]["contentType"].stringValue, content: event["body"]["content"].stringValue),
                     start: Time(dateTime: Formatter.dateTimeTimeZoneToString(date: event["start"]), timeZone: "Europe/Paris"),
                     end: Time(dateTime: Formatter.dateTimeToTime(date: event["end"]), timeZone: "Europe/Paris"),
                     startTime: Formatter.timeToHourAndMin(date: event["start"]),

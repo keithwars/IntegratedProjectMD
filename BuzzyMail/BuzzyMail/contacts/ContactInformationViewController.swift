@@ -20,6 +20,7 @@ class ContactInformationViewController: UIViewController {
     @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var sendEmailLabel: UILabel!
+    @IBOutlet weak var planEventLabel: UILabel!
     
     @IBAction func unwindToContactInformation(segue: UIStoryboardSegue) {
         
