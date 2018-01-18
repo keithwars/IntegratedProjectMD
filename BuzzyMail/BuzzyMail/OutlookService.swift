@@ -135,7 +135,7 @@ class OutlookService {
 
         // Uncomment this line to get verbose request/response info in
         // Xcode output window
-        loader.logger = OAuth2DebugLogger(.trace)
+        //loader.logger = OAuth2DebugLogger(.trace)
 
         loader.perform(request: req) {
             response in
@@ -245,6 +245,17 @@ class OutlookService {
 
     func createForward(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
         makeApiCall(api: "/v1.0/me/messages/" + message.id! + "/createForward", requestType: RequestTypes.post) {
+            result in
+            if let unwrappedResult = result {
+                callback(unwrappedResult)
+            } else {
+                callback(nil)
+            }
+        }
+    }
+    
+    func listAttachments(message: Message, callback: @escaping (JSON?) -> Void) -> Void {
+        makeApiCall(api: "/v1.0/me/messages/" + message.id! + "/attachments", requestType: RequestTypes.get) {
             result in
             if let unwrappedResult = result {
                 callback(unwrappedResult)
