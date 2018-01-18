@@ -19,6 +19,10 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func cancelToCalendar(segue: UIStoryboardSegue) {
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         tableView.beginUpdates()
         tableView.reloadData()

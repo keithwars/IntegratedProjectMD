@@ -45,9 +45,11 @@ class ContactInformationViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "planEventWithUser" {
-            if let destination = segue.destination as? CalendarAddEventViewController {
-                destination.selectedUser = emailLabel.text
-                print("hahah" + emailLabel.text!)
+            if let navCT = segue.destination as? UINavigationController {
+                if let destination = navCT.topViewController as? CalendarAddEventViewController {
+                    destination.selectedUser = emailLabel.text
+                    print("hahah" + emailLabel.text!)
+                }
             }
         }
         else if segue.identifier == "sendEmailToContact" {

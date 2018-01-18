@@ -153,7 +153,12 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
     }
     
     @IBAction func onCancelPressed(_ sender: Any){
-        dismiss(animated: true, completion: nil)
+        if (selectedUser != nil) {
+            self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+        } else {
+            self.performSegue(withIdentifier: "cancelToCalendar", sender: sender)
+        }
+        
     }
     
     @IBAction func onButtonPressed(_ sender: Any) {
@@ -203,7 +208,14 @@ class CalendarAddEventViewController: UITableViewController, UITextFieldDelegate
         
                     
         }
-        dismiss(animated: true, completion: nil)        
+        if (selectedUser != nil) {
+            self.performSegue(withIdentifier: "unwindToContactInformation", sender: sender)
+        } else {
+            self.performSegue(withIdentifier: "cancelToCalendar", sender: sender)
+        }
+        
+        dismiss(animated: true, completion: nil)
+     
     }
     
 }
