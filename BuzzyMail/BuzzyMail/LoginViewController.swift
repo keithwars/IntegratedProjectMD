@@ -6,6 +6,7 @@
 //  Copyright © 2017 Jérémy Keusters. All rights reserved.
 //
 
+import LocalAuthentication
 import UIKit
 import WebKit
 import SideMenu
@@ -13,23 +14,33 @@ import SwiftVideoBackground
 
 class LoginViewController: UIViewController {
     
-    let service = OutlookService.shared()
-    private let videoBackground = VideoBackground()
-
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all //return the value as per the required orientation
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet var authenticateButton: UIButton!
+    
+    var context = LAContext()
+    let service = OutlookService.shared()
+    let videoBackground = VideoBackground()
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
         videoBackground.play(view: view,
-                             videoName: "loginvideo",
+                             videoName: "loginvideo2",
                              videoType: "mp4",
                              isMuted: false,
-                             alpha: 0.25,
+                             alpha: 0.45,
                              willLoopVideo: true)
         
-        setLogInState(loggedIn: service.isLoggedIn)
+        doCheck()
+
         if !service.isLoggedIn {
             continueButton.isHidden = true
         }
@@ -37,12 +48,16 @@ class LoginViewController: UIViewController {
             continueButton.isHidden = false
         }
     }
-
+    
+    func doCheck(){
+        setLogInState(loggedIn: service.isLoggedIn)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func setLogInState(loggedIn: Bool) {
         if (loggedIn) {
             authenticateButton.setTitle("Log Out", for: UIControlState.normal)
@@ -51,8 +66,12 @@ class LoginViewController: UIViewController {
             authenticateButton.setTitle("Authenticate", for: UIControlState.normal)
         }
     }
-
+    
+    @IBAction func continueButtonTapped(_ sender: Any) {
+        authenticateTapped()
+    }
     @IBAction func loginButtonTapped(sender: AnyObject) {
+       
         if (service.isLoggedIn) {
             // Logout
             service.logout()
@@ -73,4 +92,30 @@ class LoginViewController: UIViewController {
         }
     }
 
+    @IBAction func authenticateTapped() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Use Touch ID to continue"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                [unowned self] (success, authenticationError) in
+                
+                DispatchQueue.main.async {
+                    if success {
+                        self.performSegue(withIdentifier: "continueToApp", sender: self)
+                    } else {
+                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(ac, animated: true)
+                    }
+                }
+            }
+        } else {
+            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        }
+    }
 }

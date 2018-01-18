@@ -10,6 +10,8 @@ target 'BuzzyMail' do
   pod 'SwiftyJSON'
   pod 'SwiftVideoBackground', '~> 2.0.0'
   pod 'SideMenu'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 
   target 'BuzzyMailTests' do
     inherit! :search_paths

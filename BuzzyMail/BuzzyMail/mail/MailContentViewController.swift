@@ -17,22 +17,24 @@ var messageHtml: Message?
 class MailContentViewController: UIViewController, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
 
     let service = OutlookService.shared()
-    
+
     let quickLookController = QLPreviewController()
-    
+
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
     let dispatchGroup3 = DispatchGroup()
-    
+
     let dispatchGroupAttachments1 = DispatchGroup()
-    
+
     var email:Message?
     var unreadEmail: Message?
     var newEmail:Message?
-    
+
     var attachment: Attachment?
 
     @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var ccLabel: UILabel!
+    @IBOutlet weak var ccBox: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var contentWebView: WKWebView!
     @IBOutlet weak var richTextEditorNonEditable: RichTextEditorNonEditable!
@@ -41,7 +43,7 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
     @IBAction func previewAttachmentButtonPressed(_ sender: UIButton) {
         let viewPDF = QLPreviewController()
         viewPDF.dataSource = self
-        
+
         self.present(viewPDF, animated: true, completion: nil)
     }
     override func viewDidLoad() {
@@ -67,11 +69,40 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
              updateIsReadStatusToRead(message: unreadEmail!)
         }
 
-        fromLabel.text = email!.from!.emailAddress.name
+        //fromLabel.text = email!.from!.emailAddress.name
         richTextEditorNonEditable.text = email!.body!.content
         subjectLabel.text = email!.subject
         richTextEditorNonEditable.text = email!.body!.content
-        
+
+
+        ccLabel.text = ""
+        fromLabel.text = ""
+        //NSLog("Pompernikkel: " + String(email!.ccRecipients!.count))
+        for emailAddress in email!.toRecipients! {
+            if (fromLabel.text != "") {
+                fromLabel.text?.append(", ")
+            }
+            fromLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
+        }
+        if email!.ccRecipients!.count > 0 {
+            for emailAddress in email!.ccRecipients! {
+                if (ccLabel.text != "") {
+                    ccLabel.text?.append(", ")
+                }
+                ccLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
+            }
+        }
+        else {
+            ccBox.isHidden = true
+            for constraint in self.view.constraints {
+                if constraint.identifier == "RichTextEditorTopMargin" {
+                    constraint.constant = 0
+                }
+            }
+            self.view.layoutIfNeeded()
+        }
+
+
         if (email!.hasAttachments!) {
             NSLog("Pompernikkel Attachments")
             var attachmentsList = [Attachment]()
@@ -103,52 +134,52 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
         }
         else {
             previewAttachmentButton.isHidden = true
-        }
+      }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return 1
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "answerMail") {
+            let viewController = segue.destination as! UINavigationController
+            let childViewController = viewController.topViewController as! ReplyMailViewController
+            childViewController.newEmail = self.newEmail
+        }
     }
 
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         var pdfURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last! as URL
         pdfURL = pdfURL.appendingPathComponent(attachment!.name) as URL
-        
+
         return pdfURL as QLPreviewItem
     }
 
-    
+
     func previewControllerWillDismiss(_ controller: QLPreviewController) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func replyButtonPressed(_ sender: Any) {
 
         let replyActionHandler = { (action:UIAlertAction!) -> Void in
             self.dispatchGroup.enter()
             self.createReply()
             self.dispatchGroup.notify(queue: .main) {
-                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-                let navigationController = UINavigationController(rootViewController: popup)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-                popup.newEmail = self.newEmail
-                self.present(navigationController, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "answerMail", sender: self)
             }
         }
-        
+
         let replyAllActionHandler = { (action:UIAlertAction!) -> Void in
             self.dispatchGroup3.enter()
             self.createReplyAll()
             self.dispatchGroup3.notify(queue: .main) {
-                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-                let navigationController = UINavigationController(rootViewController: popup)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-                popup.newEmail = self.newEmail
-                self.present(navigationController, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "answerMail", sender: self)
             }
         }
 
@@ -156,23 +187,37 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
             self.dispatchGroup2.enter()
             self.createForward()
             self.dispatchGroup2.notify(queue: .main) {
-                let popup : ReplyMailViewController = self.storyboard?.instantiateViewController(withIdentifier: "ReplyMailViewController") as! ReplyMailViewController
-                let navigationController = UINavigationController(rootViewController: popup)
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
-                popup.newEmail = self.newEmail
-                self.present(navigationController, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "answerMail", sender: self)
             }
         }
 
+        let printActionHandler = { (action:UIAlertAction!) -> Void in
+            let printController = UIPrintInteractionController.shared
+
+            let printInfo = UIPrintInfo(dictionary:nil)
+            printInfo.outputType = UIPrintInfoOutputType.general
+            printInfo.jobName = "print Job"
+            printController.printInfo = printInfo
+
+            let formatter = UIMarkupTextPrintFormatter(markupText: self.email!.body!.content!)
+            formatter.perPageContentInsets = UIEdgeInsets(top: 72, left: 72, bottom: 72, right: 72)
+            printController.printFormatter = formatter
+
+            printController.present(animated: true, completionHandler: nil)
+        }
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
         alertController.addAction(replyAction)
-        let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
-        alertController.addAction(replyAllAction)
+        if (email!.ccRecipients!.count > 1 || email!.toRecipients!.count > 1) {
+            let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
+            alertController.addAction(replyAllAction)
+        }
         let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: forwardActionHandler)
         alertController.addAction(forwardAction)
+        let printAction = UIAlertAction(title: "Print", style: .default, handler: printActionHandler)
+        alertController.addAction(printAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
 
@@ -226,7 +271,7 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
             }
         }
     }
-    
+
     func createReplyAll() {
         NSLog("createMessage called")
         service.createReplyAll(message: email!) {
@@ -237,19 +282,19 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
                     toRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
                                                                                       address: row["emailAddress"]["address"].stringValue)))
                 }
-                
+
                 var ccRecipientsList = [EmailAddresses]()
                 for row in message["ccRecipients"].arrayValue {
                     ccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
                                                                                       address: row["emailAddress"]["address"].stringValue)))
                 }
-                
+
                 var bccRecipientsList = [EmailAddresses]()
                 for row in message["bccRecipients"].arrayValue {
                     bccRecipientsList.append(EmailAddresses(emailAddress: EmailAddress(name: row["emailAddress"]["name"].stringValue,
                                                                                        address: row["emailAddress"]["address"].stringValue)))
                 }
-                
+
                 self.newEmail = Message(
                     id: message["id"].stringValue,
                     receivedDateTime: message["receivedDateTime"].stringValue,
@@ -327,9 +372,9 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
             }
         }
     }
-        
+
     func saveBase64StringToPDF(_ base64String: String, fileName: String) {
-        
+
         guard
             var documentsURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last,
             let convertedData = Data(base64Encoded: base64String)
@@ -337,22 +382,22 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
                 //handle error when getting documents URL
                 return
         }
-        
+
         //name your file however you prefer
         documentsURL.appendPathComponent(fileName)
-        
+
         do {
             try convertedData.write(to: documentsURL)
         } catch {
             //handle write error here
         }
-        
+
         //if you want to get a quick output of where your
         //file was saved from the simulator on your machine
         //just print the documentsURL and go there in Finder
         print(documentsURL)
     }
-        
+
 
 
 }
