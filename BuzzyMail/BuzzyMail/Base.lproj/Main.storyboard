@@ -1055,7 +1055,7 @@
                                 <color key="barTintColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDO-vm-BX7" customClass="RichTextEditorNonEditable" customModule="BuzzyMail" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="209" width="375" height="414"/>
+                                <rect key="frame" x="0.0" y="251" width="375" height="372"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjZ-hp-eaK">
@@ -1067,6 +1067,23 @@
                                     <action selector="previewAttachmentButtonPressed:" destination="BC4-VU-rc1" eventType="touchUpInside" id="tPH-6k-AHM"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   CC:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDZ-Ow-Z09">
+                                <rect key="frame" x="0.0" y="210" width="375" height="40"/>
+                                <color key="backgroundColor" red="0.067765779789999994" green="0.1689791679" blue="0.25413358209999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Vvw-rl-3Je"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gZ-Aw-lf3">
+                                <rect key="frame" x="48" y="218.5" width="311" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1075,13 +1092,18 @@
                             <constraint firstItem="3fN-Du-Z5B" firstAttribute="trailing" secondItem="aSU-9d-yCX" secondAttribute="trailing" constant="61" id="5LQ-EO-SG8"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="trailing" secondItem="Nah-A9-V6O" secondAttribute="trailingMargin" id="8yN-mx-QKg"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="trailing" secondItem="aSU-9d-yCX" secondAttribute="trailing" constant="61" id="9Dq-yz-oH6"/>
+                            <constraint firstItem="3gZ-Aw-lf3" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" constant="48" id="9qd-hP-ul2"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" constant="16" id="FOD-pJ-vUf"/>
                             <constraint firstItem="JDO-vm-BX7" firstAttribute="trailing" secondItem="FsT-Rn-ugG" secondAttribute="trailing" id="HnT-Ok-zKu"/>
-                            <constraint firstItem="JDO-vm-BX7" firstAttribute="top" secondItem="wle-AM-Tvf" secondAttribute="bottom" constant="8" symbolic="YES" id="KRg-QK-RZm"/>
+                            <constraint firstItem="VDZ-Ow-Z09" firstAttribute="centerY" secondItem="3gZ-Aw-lf3" secondAttribute="centerY" constant="1" id="IbW-9H-Cbd"/>
+                            <constraint firstItem="JDO-vm-BX7" firstAttribute="top" secondItem="FsT-Rn-ugG" secondAttribute="bottom" constant="40" identifier="RichTextEditorTopMargin" id="KRg-QK-RZm"/>
+                            <constraint firstItem="VDZ-Ow-Z09" firstAttribute="trailing" secondItem="FsT-Rn-ugG" secondAttribute="trailing" id="NN1-sf-B13"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="trailing" secondItem="3fN-Du-Z5B" secondAttribute="trailing" constant="-61" id="OfD-B8-HUv"/>
+                            <constraint firstItem="VDZ-Ow-Z09" firstAttribute="leading" secondItem="FsT-Rn-ugG" secondAttribute="leading" id="Ogw-CV-h6o"/>
                             <constraint firstItem="mjZ-hp-eaK" firstAttribute="leading" secondItem="aSU-9d-yCX" secondAttribute="trailing" constant="12" id="QF1-hT-Mas"/>
                             <constraint firstItem="3n6-Vt-svq" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" id="WRb-bv-CIp"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="top" secondItem="3fN-Du-Z5B" secondAttribute="top" id="YYb-pO-1HP"/>
+                            <constraint firstItem="VDZ-Ow-Z09" firstAttribute="top" secondItem="wle-AM-Tvf" secondAttribute="bottom" constant="9" id="ZC0-9f-5X0"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="top" secondItem="mjZ-hp-eaK" secondAttribute="bottom" constant="12" id="Zlo-Bb-8aJ"/>
                             <constraint firstItem="3n6-Vt-svq" firstAttribute="trailing" secondItem="3fN-Du-Z5B" secondAttribute="trailing" id="a6A-hx-LTg"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" constant="62" id="b8r-jm-iib"/>
@@ -1090,6 +1112,7 @@
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aSU-9d-yCX" secondAttribute="bottomMargin" id="hky-13-NO5"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="top" secondItem="aSU-9d-yCX" secondAttribute="bottom" constant="10" id="qhf-Gh-FqN"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="centerY" secondItem="wle-AM-Tvf" secondAttribute="centerY" id="r1O-Fj-rl9"/>
+                            <constraint firstItem="3gZ-Aw-lf3" firstAttribute="trailing" secondItem="wle-AM-Tvf" secondAttribute="trailing" id="v7l-QG-0lf"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="leading" secondItem="aSU-9d-yCX" secondAttribute="leading" constant="-16" id="vaC-1V-Qk7"/>
                             <constraint firstItem="JDO-vm-BX7" firstAttribute="bottom" secondItem="3n6-Vt-svq" secondAttribute="top" id="vbe-AI-WzY"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" constant="16" id="x5M-z3-aGa"/>
@@ -1100,6 +1123,8 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="ccBox" destination="VDZ-Ow-Z09" id="qcp-bm-mMp"/>
+                        <outlet property="ccLabel" destination="3gZ-Aw-lf3" id="7IJ-72-B6u"/>
                         <outlet property="fromLabel" destination="wle-AM-Tvf" id="4qd-x1-jFG"/>
                         <outlet property="previewAttachmentButton" destination="mjZ-hp-eaK" id="sSn-qp-kig"/>
                         <outlet property="richTextEditorNonEditable" destination="JDO-vm-BX7" id="UGA-jq-9lq"/>
@@ -1562,7 +1587,7 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OkR-jx-5Xq"/>
+        <segue reference="zh0-ri-91Z"/>
         <segue reference="crh-TU-X0O"/>
         <segue reference="mTL-fD-IGD"/>
     </inferredMetricsTieBreakers>

@@ -128,7 +128,6 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
                     NSLog("Name of attachment: " + attachment.name)
                     self.saveBase64StringToPDF(attachment.contentBytes, fileName: attachment.name)
                     self.attachment = attachment
-                    self.richTextEditorNonEditable.text! += attachment.name
                 }
             }
         }
