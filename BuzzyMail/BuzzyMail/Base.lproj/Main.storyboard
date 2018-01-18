@@ -1342,6 +1342,7 @@
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Wo-S5-b8S">
                                                     <rect key="frame" x="57" y="11" width="302" height="20"/>
+                                                    <color key="tintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -1371,6 +1372,7 @@
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g40-9D-3HW">
                                                     <rect key="frame" x="62" y="11" width="297" height="20"/>
+                                                    <color key="tintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -1400,6 +1402,7 @@
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subject" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-ck-okY">
                                                     <rect key="frame" x="16" y="11" width="343" height="20"/>
+                                                    <color key="tintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1422,6 +1425,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cU-wV-Y8w" customClass="RichTextEditorEditable" customModule="BuzzyMail" customModuleProvider="target">
                                                     <rect key="frame" x="1" y="31" width="373" height="408"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -1587,9 +1591,9 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zh0-ri-91Z"/>
+        <segue reference="OkR-jx-5Xq"/>
         <segue reference="crh-TU-X0O"/>
-        <segue reference="mTL-fD-IGD"/>
+        <segue reference="Kyd-Tk-PRv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.99998784070000002" blue="0.99999213220000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
