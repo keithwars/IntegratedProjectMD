@@ -14,6 +14,9 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
     
     var dataSource: ContactsDataSource?
     var contactsList: [Contact]?
+    
+    private let refreshControl = UIRefreshControl()
+    let dispatchGroup = DispatchGroup()
         
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,11 +25,27 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
         tableView.beginUpdates()
         tableView.reloadData()
         tableView.endUpdates()
         
-        super.viewWillAppear(true)
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        
+        // Configure Refresh Control
+        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        let attributedTitle = NSAttributedString(string: "Refreshing your contacts ...", attributes: attributes)
+        
+        refreshControl.addTarget(self, action: #selector(refreshContactData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        refreshControl.attributedTitle = attributedTitle
+
         
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
@@ -56,6 +75,15 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
             if let destination = segue.destination as? ContactInformationViewController {
                 destination.contact = contactsList![rowint] as Contact
             }
+        }
+    }
+    
+    @objc func refreshContactData(_ sender: Any) {
+        self.dispatchGroup.enter()
+        loadUserData()
+        self.dispatchGroup.leave()
+        self.dispatchGroup.notify(queue: .main) {
+            self.refreshControl.endRefreshing()
         }
     }
     
