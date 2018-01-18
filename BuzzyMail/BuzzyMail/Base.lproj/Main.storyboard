@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T5b-MD-eEv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T5b-MD-eEv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -786,7 +786,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgq-b6-bYZ">
                                             <rect key="frame" x="136" y="14" width="20" height="15.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.18823529411764706" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -813,6 +813,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Hi!" id="eih-sh-ITm">
+                        <barButtonItem key="leftBarButtonItem" title="Exit" image="exit" id="55F-4e-yOK">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="IGo-5z-lB4" id="wet-Z2-XM2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" image="settings" id="eaV-pv-a0l">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
@@ -977,7 +983,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="wZb-Zc-p6B">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="KVH-nB-TOC" kind="show" id="OkR-jx-5Xq"/>
+                                <segue destination="5CA-sp-WDI" kind="presentation" id="OkR-jx-5Xq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1044,19 +1050,40 @@
                                 <color key="barTintColor" red="0.067765779793262482" green="0.16897916793823242" blue="0.25413358211517334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDO-vm-BX7" customClass="RichTextEditorNonEditable" customModule="BuzzyMail" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="208.5" width="375" height="414.5"/>
+                                <rect key="frame" x="0.0" y="248" width="375" height="375"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   CC:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewi-xP-X4C">
+                                <rect key="frame" x="0.0" y="208" width="375" height="40"/>
+                                <color key="backgroundColor" red="0.067765779789999994" green="0.1689791679" blue="0.25413358209999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Z8g-zr-1P8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-Ke-fPr">
+                                <rect key="frame" x="46" y="218" width="313" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Ud4-Ke-fPr" firstAttribute="leading" secondItem="wle-AM-Tvf" secondAttribute="leading" constant="-16" id="2nT-s0-CBN"/>
                             <constraint firstItem="3fN-Du-Z5B" firstAttribute="trailing" secondItem="aSU-9d-yCX" secondAttribute="trailing" id="5LQ-EO-SG8"/>
+                            <constraint firstItem="Ud4-Ke-fPr" firstAttribute="trailing" secondItem="wle-AM-Tvf" secondAttribute="trailing" id="8WY-Iy-0RZ"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="trailing" secondItem="Nah-A9-V6O" secondAttribute="trailingMargin" id="8yN-mx-QKg"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="trailing" secondItem="aSU-9d-yCX" secondAttribute="trailing" id="9Dq-yz-oH6"/>
+                            <constraint firstItem="Ud4-Ke-fPr" firstAttribute="top" secondItem="FsT-Rn-ugG" secondAttribute="bottom" constant="7" id="CGD-uv-6uT"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" id="FOD-pJ-vUf"/>
                             <constraint firstItem="JDO-vm-BX7" firstAttribute="trailing" secondItem="FsT-Rn-ugG" secondAttribute="trailing" id="HnT-Ok-zKu"/>
-                            <constraint firstItem="JDO-vm-BX7" firstAttribute="top" secondItem="wle-AM-Tvf" secondAttribute="bottom" constant="8" symbolic="YES" id="KRg-QK-RZm"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="trailing" secondItem="3fN-Du-Z5B" secondAttribute="trailing" id="OfD-B8-HUv"/>
+                            <constraint firstItem="ewi-xP-X4C" firstAttribute="centerY" secondItem="Ud4-Ke-fPr" secondAttribute="centerY" id="REU-eU-WTM"/>
+                            <constraint firstItem="ewi-xP-X4C" firstAttribute="leading" secondItem="FsT-Rn-ugG" secondAttribute="leading" id="W1b-Il-vuZ"/>
                             <constraint firstItem="3n6-Vt-svq" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" id="WRb-bv-CIp"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="top" secondItem="3fN-Du-Z5B" secondAttribute="top" id="YYb-pO-1HP"/>
                             <constraint firstItem="3n6-Vt-svq" firstAttribute="trailing" secondItem="3fN-Du-Z5B" secondAttribute="trailing" id="a6A-hx-LTg"/>
@@ -1066,9 +1093,11 @@
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aSU-9d-yCX" secondAttribute="bottomMargin" id="hky-13-NO5"/>
                             <constraint firstItem="wle-AM-Tvf" firstAttribute="top" secondItem="aSU-9d-yCX" secondAttribute="bottom" constant="9" id="qhf-Gh-FqN"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="centerY" secondItem="wle-AM-Tvf" secondAttribute="centerY" id="r1O-Fj-rl9"/>
+                            <constraint firstItem="JDO-vm-BX7" firstAttribute="top" secondItem="FsT-Rn-ugG" secondAttribute="bottom" constant="37.5" identifier="RichTextEditorTopMargin" id="v0u-OB-awa"/>
                             <constraint firstItem="FsT-Rn-ugG" firstAttribute="leading" secondItem="aSU-9d-yCX" secondAttribute="leading" id="vaC-1V-Qk7"/>
                             <constraint firstItem="JDO-vm-BX7" firstAttribute="bottom" secondItem="3n6-Vt-svq" secondAttribute="top" id="vbe-AI-WzY"/>
                             <constraint firstItem="aSU-9d-yCX" firstAttribute="leading" secondItem="3fN-Du-Z5B" secondAttribute="leading" id="x5M-z3-aGa"/>
+                            <constraint firstItem="ewi-xP-X4C" firstAttribute="trailing" secondItem="FsT-Rn-ugG" secondAttribute="trailing" id="ygP-8z-btt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3fN-Du-Z5B"/>
                     </view>
@@ -1076,15 +1105,17 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="ccBox" destination="ewi-xP-X4C" id="dwt-2j-wbR"/>
+                        <outlet property="ccLabel" destination="Ud4-Ke-fPr" id="Ded-Gw-M0y"/>
                         <outlet property="fromLabel" destination="wle-AM-Tvf" id="4qd-x1-jFG"/>
                         <outlet property="richTextEditorNonEditable" destination="JDO-vm-BX7" id="UGA-jq-9lq"/>
                         <outlet property="subjectLabel" destination="aSU-9d-yCX" id="jbT-l4-0aq"/>
-                        <segue destination="KVH-nB-TOC" kind="show" identifier="replyTo" id="zh0-ri-91Z"/>
+                        <segue destination="5CA-sp-WDI" kind="show" identifier="answerMail" id="zh0-ri-91Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJu-Pn-WKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2724" y="-1022"/>
+            <point key="canvasLocation" x="2724" y="-1022.3388305847077"/>
         </scene>
         <!--Calendar Content View Controller-->
         <scene sceneID="jf4-Q1-yqY">
@@ -1270,7 +1301,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l3-Sd-KOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lVO-vz-3Xa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3772" y="-1766"/>
+            <point key="canvasLocation" x="4458" y="-1766"/>
         </scene>
         <!--Mail Content Table View Controller-->
         <scene sceneID="5fZ-u4-n90">
@@ -1348,7 +1379,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-ck-okY">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subject" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-ck-okY">
                                                     <rect key="frame" x="16" y="11" width="343" height="20"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1399,7 +1430,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3K-aI-44h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4550" y="-1766"/>
+            <point key="canvasLocation" x="5260" y="-1766"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="42b-Xd-neC">
@@ -1504,9 +1535,30 @@
             </objects>
             <point key="canvasLocation" x="2724" y="2224"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yz0-Ul-Dij">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5CA-sp-WDI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Obo-mA-Lzl">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.066666666666666666" green="0.16862745098039217" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KVH-nB-TOC" kind="relationship" relationship="rootViewController" id="Kyd-Tk-PRv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yS7-ay-xCv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3641" y="-1766"/>
+        </scene>
     </scenes>
     <resources>
         <image name="attachment" width="12" height="12"/>
+        <image name="exit" width="30" height="30"/>
         <image name="first" width="30" height="30"/>
         <image name="menu" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
@@ -1515,6 +1567,7 @@
         <image name="unRead" width="19" height="299"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="OkR-jx-5Xq"/>
         <segue reference="crh-TU-X0O"/>
         <segue reference="mTL-fD-IGD"/>
     </inferredMetricsTieBreakers>
