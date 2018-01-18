@@ -148,8 +148,8 @@ extension MessagesDataSource: UITableViewDataSource, UITableViewDelegate{
         else {
             cell.from = message.from!.emailAddress.name
         }
-
-        cell.received = message.receivedDateTime
+        
+        cell.received = Formatter.dateToString2(date: message.receivedDateTime!)
 
 
         if (message.hasAttachments == true){
