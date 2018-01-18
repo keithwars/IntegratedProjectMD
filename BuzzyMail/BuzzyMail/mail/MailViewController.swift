@@ -115,13 +115,15 @@ class MailViewController: UIViewController{
     }
 
     func loadUserData() {
-        loadInboxMailFolderName()
-        service.getUserEmail() {
-            email in
-            if let unwrappedEmail = email {
-                self.loadUserEmails()
-                self.refreshControl.endRefreshing()
-                //self.activityIndicatorView.stopAnimating()
+        if service.isLoggedIn {
+            loadInboxMailFolderName()
+            service.getUserEmail() {
+                email in
+                if let unwrappedEmail = email {
+                    self.loadUserEmails()
+                    self.refreshControl.endRefreshing()
+                    //self.activityIndicatorView.stopAnimating()
+                }
             }
         }
     }
