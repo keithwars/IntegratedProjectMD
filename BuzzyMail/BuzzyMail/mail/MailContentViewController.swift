@@ -56,12 +56,19 @@ class MailContentViewController: UIViewController {
 
         }
 
-        fromLabel.text = email!.from!.emailAddress.name
+        //fromLabel.text = email!.from!.emailAddress.name
         richTextEditorNonEditable.text = email!.body!.content
         subjectLabel.text = email!.subject
         richTextEditorNonEditable.text = email!.body!.content
         ccLabel.text = ""
+        fromLabel.text = ""
         //NSLog("Pompernikkel: " + String(email!.ccRecipients!.count))
+        for emailAddress in email!.toRecipients! {
+            if (fromLabel.text != "") {
+                fromLabel.text?.append(", ")
+            }
+            fromLabel.text?.append(contentsOf: emailAddress.emailAddress.name)
+        }
         if email!.ccRecipients!.count > 0 {
             for emailAddress in email!.ccRecipients! {
                 if (ccLabel.text != "") {
@@ -78,7 +85,6 @@ class MailContentViewController: UIViewController {
                 }
             }
             self.view.layoutIfNeeded()
-            
         }
     }
 
@@ -129,8 +135,10 @@ class MailContentViewController: UIViewController {
 
         let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
         alertController.addAction(replyAction)
-        let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
-        alertController.addAction(replyAllAction)
+        if (email!.ccRecipients!.count > 1 || email!.toRecipients!.count > 1) {
+            let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
+            alertController.addAction(replyAllAction)
+        }
         let forwardAction = UIAlertAction(title: "Forward", style: .default, handler: forwardActionHandler)
         alertController.addAction(forwardAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
