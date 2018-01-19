@@ -207,7 +207,7 @@ class MailContentViewController: UIViewController, QLPreviewControllerDataSource
 
         let replyAction = UIAlertAction(title: "Reply", style: .default, handler: replyActionHandler)
         alertController.addAction(replyAction)
-        if (email!.ccRecipients!.count > 1 || email!.toRecipients!.count > 1) {
+        if (email!.ccRecipients!.count > 0 || email!.toRecipients!.count > 1) {
             let replyAllAction = UIAlertAction(title: "Reply All", style: .default, handler: replyAllActionHandler)
             alertController.addAction(replyAllAction)
         }
